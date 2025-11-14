@@ -1,6 +1,6 @@
 {
   "name": "@lancedb/arrow-flight-sql-client",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "A native typescript project for querying Flight SQL endpoints",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
