@@ -46,3 +46,16 @@ interface FlightRecord {
 const flights = (await result.collectToObjects()) as FlightRecord[];
 console.log(flights);
 ```
+
+## Arrow Integration
+
+The client can return query results as an Arrow table. Transferring Arrow data across JavaScript API boundaries
+is tricky because the Arrow package uses a number of `instanceof` checks to determine the type of objects. For
+these to work correctly, the Arrow package your application is using must be the exact same version
+used by this package. In addition, the Arrow package must be loaded in the same context as this package.
+This process can often fail in the presence of bundlers like Webpack or Rollup.
+
+If you are using a bundler, it is recommended to use `collectToObjects` instead.
+
+If you would like to improve this situation I encourage you to make a stab at
+[this Github issue](https://github.com/lancedb/flight-sql-js-client/issues/11).

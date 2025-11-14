@@ -68,4 +68,13 @@ describe("with a client we can", () => {
     expect(result[0].l_orderkey).toBeGreaterThan(0);
     expect(result[1].l_returnflag.length).toBeGreaterThan(0);
   });
+
+  test("return query results as an Arrow table", async () => {
+    const queryResult = await client.query("SELECT * FROM lineitem LIMIT 10");
+    const result = await queryResult.collectToArrow();
+    expect(result).toBeDefined();
+    expect(result.length).toBe(1);
+    const batch = result[0];
+    expect(batch.numRows).toBe(10);
+  });
 });
