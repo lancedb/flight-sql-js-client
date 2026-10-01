@@ -11,6 +11,6 @@ export default tseslint.config(
     plugins: { tsdoc: tsdoclint },
   },
   {
-    ignores: ["src/generated/**", "**/jest.config.js"],
+    ignores: ["src/generated/**", "**/jest.config.js", "dist/**"],
   },
 );

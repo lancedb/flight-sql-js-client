@@ -10,6 +10,20 @@ of the project and that you are not duplicating work that is already in progress
 
 The project is divided into several components.
 
+### Generated Protobuf Code
+
+The files in `src/generated/` are produced from the `.proto` files in `protos/` by `protobufjs-cli`. Do not edit them
+by hand. If you update the `.proto` files or bump `protobufjs-cli`, regenerate them with:
+
+```bash
+npm run generate-protos
+```
+
+The script generates `flightsql.js` into a separate protobuf root (`-r fsql`). This is required: `flight.js` and
+`flightsql.js` both define the `arrow` namespace, and if they shared the default root the second one loaded would
+overwrite the first and messages such as `HandshakeRequest` would be missing at runtime. Run the integration tests
+after regenerating, since that failure is not caught by the build, type check, or unit tests.
+
 ### Flight Client
 
 Unlike other language implementations, JavaScript's arrow package does not yet have utilities for working with Flight.
@@ -76,3 +90,11 @@ npx jest
 ```
 
 The integration tests should automatically detect a local server on port 31337 and run against it.
+
+Note for Docker Desktop on macOS: the `local_server` service uses `network_mode: host`, which Docker Desktop
+does not pass through to the host, so port 31337 will not be reachable and the tests will fall back to the
+containerized `server` hostname and fail. In that case, start the server with an explicit port mapping instead:
+
+```bash
+docker run --rm -p 31337:31337 -e TLS_ENABLED=0 -e SQLFLITE_USERNAME=lancedb -e SQLFLITE_PASSWORD=password voltrondata/sqlflite:latest
+```
