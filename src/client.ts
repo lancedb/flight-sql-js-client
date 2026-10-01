@@ -26,6 +26,8 @@ export interface ClientOptions {
   defaultDatabase?: string;
   /**
    * Is the server using TLS?  If not, this must be set to true.
+   *
+   * Defaults to false, meaning the connection is made with TLS.
    */
   insecure?: boolean;
 }
@@ -127,6 +129,7 @@ export class Client {
       options.username,
       options.password,
       options.defaultDatabase,
+      options.insecure,
     );
     return new Client(sql);
   }

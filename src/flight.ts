@@ -117,8 +117,9 @@ export class FlightClient {
    * No actual messages are sent yet.
    *
    * @param host The hostname / port of the server, separated by a colon
+   * @param insecure If true, connect without TLS.  Defaults to false (TLS is used).
    */
-  public constructor(host: string) {
+  public constructor(host: string, insecure: boolean = false) {
     const packageDefinition = loadSync("Flight.proto", {
       longs: String,
       enums: String,
@@ -132,11 +133,8 @@ export class FlightClient {
     const flight = arrow.flight as GrpcObject;
     const flight_protocol = flight.protocol as GrpcObject;
     const flight_service = flight_protocol.FlightService as ServiceClientConstructor;
-    this.client = new flight_service(
-      host,
-      credentials.createInsecure(),
-      {},
-    ) as unknown as arrow.flight.protocol.FlightService;
+    const channelCredentials = insecure ? credentials.createInsecure() : credentials.createSsl();
+    this.client = new flight_service(host, channelCredentials, {}) as unknown as arrow.flight.protocol.FlightService;
   }
 
   // Merges any call-specific metadata with the client's default metadata
@@ -192,6 +190,7 @@ export class FlightClient {
         (err: unknown, info: arrow.flight.protocol.IFlightInfo) => {
           if (err) {
             reject(err);
+            return;
           }
           resolve(new FlightInfo(info));
         },
