@@ -52,7 +52,7 @@ export class FlightSqlClient {
       // wait for the next message.  We can optimize this later if we see it in the wild.
       const helloRsp = await firstValueFrom(call.responses);
 
-      const defaultMetadata = {};
+      const defaultMetadata: Record<string, string> = {};
       if (defaultDatabase) {
         defaultMetadata["database"] = defaultDatabase;
       }

@@ -1,10 +1,11 @@
-/*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
+/*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-mixed-operators, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars, default-case, jsdoc/require-param*/
 "use strict";
 
 var $protobuf = require("protobufjs/minimal");
 
 // Common aliases
 var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
+var $Object = $util.global.Object, $undefined = $util.global.undefined, $Error = $util.global.Error, $RangeError = $util.global.RangeError, $TypeError = $util.global.TypeError, $Number = $util.global.Number, $parseInt = $util.global.parseInt, $String = $util.global.String, $BigInt = $util.global.BigInt, $Array = $util.global.Array, $Boolean = $util.global.Boolean, $isFinite = $util.global.isFinite;
 
 // Exported root namespace
 var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
@@ -48,11 +49,11 @@ $root.arrow = (function() {
                  * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
                  * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
                  */
-                function FlightService(rpcImpl, requestDelimited, responseDelimited) {
+                var FlightService = function(rpcImpl, requestDelimited, responseDelimited) {
                     $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
-                }
+                };
 
-                (FlightService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = FlightService;
+                $Object.defineProperty(FlightService.prototype = $Object.create($protobuf.rpc.Service.prototype), "constructor", { value: FlightService, writable: true, enumerable: false, configurable: true });
 
                 /**
                  * Creates new FlightService service using the specified rpc implementation.
@@ -64,7 +65,7 @@ $root.arrow = (function() {
                  * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
                  * @returns {FlightService} RPC service. Useful where requests and/or responses are streamed.
                  */
-                FlightService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                FlightService.create = function(rpcImpl, requestDelimited, responseDelimited) {
                     return new this(rpcImpl, requestDelimited, responseDelimited);
                 };
 
@@ -79,27 +80,35 @@ $root.arrow = (function() {
 
                 /**
                  * Calls Handshake.
-                 * @function handshake
                  * @memberof arrow.flight.protocol.FlightService
-                 * @instance
-                 * @param {arrow.flight.protocol.IHandshakeRequest} request HandshakeRequest message or plain object
-                 * @param {arrow.flight.protocol.FlightService.HandshakeCallback} callback Node-style callback called with the error, if any, and HandshakeResponse
-                 * @returns {undefined}
-                 * @variation 1
+                 * @typedef Handshake
+                 * @type {{
+                 *   (request: arrow.flight.protocol.IHandshakeRequest, callback: arrow.flight.protocol.FlightService.HandshakeCallback): void;
+                 *   (request: arrow.flight.protocol.IHandshakeRequest): Promise<arrow.flight.protocol.HandshakeResponse>;
+                 *   readonly name: "Handshake";
+                 *   readonly path: "/arrow.flight.protocol.FlightService/Handshake";
+                 *   readonly requestType: "HandshakeRequest";
+                 *   readonly responseType: "HandshakeResponse";
+                 *   readonly requestStream: true;
+                 *   readonly responseStream: true;
+                 * }}
                  */
-                Object.defineProperty(FlightService.prototype.handshake = function handshake(request, callback) {
-                    return this.rpcCall(handshake, $root.arrow.flight.protocol.HandshakeRequest, $root.arrow.flight.protocol.HandshakeResponse, request, callback);
-                }, "name", { value: "Handshake" });
 
                 /**
                  * Calls Handshake.
-                 * @function handshake
-                 * @memberof arrow.flight.protocol.FlightService
-                 * @instance
-                 * @param {arrow.flight.protocol.IHandshakeRequest} request HandshakeRequest message or plain object
-                 * @returns {Promise<arrow.flight.protocol.HandshakeResponse>} Promise
-                 * @variation 2
+                 * @name arrow.flight.protocol.FlightService#handshake
+                 * @type {arrow.flight.protocol.FlightService.Handshake}
                  */
+                $Object.defineProperties(FlightService.prototype.handshake = function(request, callback) {
+                    return $protobuf.rpc.Service.prototype.rpcCall.call(this, FlightService.prototype.handshake, $root.arrow.flight.protocol.HandshakeRequest, $root.arrow.flight.protocol.HandshakeResponse, request, callback);
+                }, {
+                    name: { value: "Handshake" },
+                    path: { value: "/arrow.flight.protocol.FlightService/Handshake" },
+                    requestType: { value: "HandshakeRequest" },
+                    responseType: { value: "HandshakeResponse" },
+                    requestStream: { value: true },
+                    responseStream: { value: true }
+                });
 
                 /**
                  * Callback as used by {@link arrow.flight.protocol.FlightService#listFlights}.
@@ -112,27 +121,35 @@ $root.arrow = (function() {
 
                 /**
                  * Calls ListFlights.
-                 * @function listFlights
                  * @memberof arrow.flight.protocol.FlightService
-                 * @instance
-                 * @param {arrow.flight.protocol.ICriteria} request Criteria message or plain object
-                 * @param {arrow.flight.protocol.FlightService.ListFlightsCallback} callback Node-style callback called with the error, if any, and FlightInfo
-                 * @returns {undefined}
-                 * @variation 1
+                 * @typedef ListFlights
+                 * @type {{
+                 *   (request: arrow.flight.protocol.ICriteria, callback: arrow.flight.protocol.FlightService.ListFlightsCallback): void;
+                 *   (request: arrow.flight.protocol.ICriteria): Promise<arrow.flight.protocol.FlightInfo>;
+                 *   readonly name: "ListFlights";
+                 *   readonly path: "/arrow.flight.protocol.FlightService/ListFlights";
+                 *   readonly requestType: "Criteria";
+                 *   readonly responseType: "FlightInfo";
+                 *   readonly requestStream: undefined;
+                 *   readonly responseStream: true;
+                 * }}
                  */
-                Object.defineProperty(FlightService.prototype.listFlights = function listFlights(request, callback) {
-                    return this.rpcCall(listFlights, $root.arrow.flight.protocol.Criteria, $root.arrow.flight.protocol.FlightInfo, request, callback);
-                }, "name", { value: "ListFlights" });
 
                 /**
                  * Calls ListFlights.
-                 * @function listFlights
-                 * @memberof arrow.flight.protocol.FlightService
-                 * @instance
-                 * @param {arrow.flight.protocol.ICriteria} request Criteria message or plain object
-                 * @returns {Promise<arrow.flight.protocol.FlightInfo>} Promise
-                 * @variation 2
+                 * @name arrow.flight.protocol.FlightService#listFlights
+                 * @type {arrow.flight.protocol.FlightService.ListFlights}
                  */
+                $Object.defineProperties(FlightService.prototype.listFlights = function(request, callback) {
+                    return $protobuf.rpc.Service.prototype.rpcCall.call(this, FlightService.prototype.listFlights, $root.arrow.flight.protocol.Criteria, $root.arrow.flight.protocol.FlightInfo, request, callback);
+                }, {
+                    name: { value: "ListFlights" },
+                    path: { value: "/arrow.flight.protocol.FlightService/ListFlights" },
+                    requestType: { value: "Criteria" },
+                    responseType: { value: "FlightInfo" },
+                    requestStream: { value: $undefined },
+                    responseStream: { value: true }
+                });
 
                 /**
                  * Callback as used by {@link arrow.flight.protocol.FlightService#getFlightInfo}.
@@ -145,27 +162,35 @@ $root.arrow = (function() {
 
                 /**
                  * Calls GetFlightInfo.
-                 * @function getFlightInfo
                  * @memberof arrow.flight.protocol.FlightService
-                 * @instance
-                 * @param {arrow.flight.protocol.IFlightDescriptor} request FlightDescriptor message or plain object
-                 * @param {arrow.flight.protocol.FlightService.GetFlightInfoCallback} callback Node-style callback called with the error, if any, and FlightInfo
-                 * @returns {undefined}
-                 * @variation 1
+                 * @typedef GetFlightInfo
+                 * @type {{
+                 *   (request: arrow.flight.protocol.IFlightDescriptor, callback: arrow.flight.protocol.FlightService.GetFlightInfoCallback): void;
+                 *   (request: arrow.flight.protocol.IFlightDescriptor): Promise<arrow.flight.protocol.FlightInfo>;
+                 *   readonly name: "GetFlightInfo";
+                 *   readonly path: "/arrow.flight.protocol.FlightService/GetFlightInfo";
+                 *   readonly requestType: "FlightDescriptor";
+                 *   readonly responseType: "FlightInfo";
+                 *   readonly requestStream: undefined;
+                 *   readonly responseStream: undefined;
+                 * }}
                  */
-                Object.defineProperty(FlightService.prototype.getFlightInfo = function getFlightInfo(request, callback) {
-                    return this.rpcCall(getFlightInfo, $root.arrow.flight.protocol.FlightDescriptor, $root.arrow.flight.protocol.FlightInfo, request, callback);
-                }, "name", { value: "GetFlightInfo" });
 
                 /**
                  * Calls GetFlightInfo.
-                 * @function getFlightInfo
-                 * @memberof arrow.flight.protocol.FlightService
-                 * @instance
-                 * @param {arrow.flight.protocol.IFlightDescriptor} request FlightDescriptor message or plain object
-                 * @returns {Promise<arrow.flight.protocol.FlightInfo>} Promise
-                 * @variation 2
+                 * @name arrow.flight.protocol.FlightService#getFlightInfo
+                 * @type {arrow.flight.protocol.FlightService.GetFlightInfo}
                  */
+                $Object.defineProperties(FlightService.prototype.getFlightInfo = function(request, callback) {
+                    return $protobuf.rpc.Service.prototype.rpcCall.call(this, FlightService.prototype.getFlightInfo, $root.arrow.flight.protocol.FlightDescriptor, $root.arrow.flight.protocol.FlightInfo, request, callback);
+                }, {
+                    name: { value: "GetFlightInfo" },
+                    path: { value: "/arrow.flight.protocol.FlightService/GetFlightInfo" },
+                    requestType: { value: "FlightDescriptor" },
+                    responseType: { value: "FlightInfo" },
+                    requestStream: { value: $undefined },
+                    responseStream: { value: $undefined }
+                });
 
                 /**
                  * Callback as used by {@link arrow.flight.protocol.FlightService#pollFlightInfo}.
@@ -178,27 +203,35 @@ $root.arrow = (function() {
 
                 /**
                  * Calls PollFlightInfo.
-                 * @function pollFlightInfo
                  * @memberof arrow.flight.protocol.FlightService
-                 * @instance
-                 * @param {arrow.flight.protocol.IFlightDescriptor} request FlightDescriptor message or plain object
-                 * @param {arrow.flight.protocol.FlightService.PollFlightInfoCallback} callback Node-style callback called with the error, if any, and PollInfo
-                 * @returns {undefined}
-                 * @variation 1
+                 * @typedef PollFlightInfo
+                 * @type {{
+                 *   (request: arrow.flight.protocol.IFlightDescriptor, callback: arrow.flight.protocol.FlightService.PollFlightInfoCallback): void;
+                 *   (request: arrow.flight.protocol.IFlightDescriptor): Promise<arrow.flight.protocol.PollInfo>;
+                 *   readonly name: "PollFlightInfo";
+                 *   readonly path: "/arrow.flight.protocol.FlightService/PollFlightInfo";
+                 *   readonly requestType: "FlightDescriptor";
+                 *   readonly responseType: "PollInfo";
+                 *   readonly requestStream: undefined;
+                 *   readonly responseStream: undefined;
+                 * }}
                  */
-                Object.defineProperty(FlightService.prototype.pollFlightInfo = function pollFlightInfo(request, callback) {
-                    return this.rpcCall(pollFlightInfo, $root.arrow.flight.protocol.FlightDescriptor, $root.arrow.flight.protocol.PollInfo, request, callback);
-                }, "name", { value: "PollFlightInfo" });
 
                 /**
                  * Calls PollFlightInfo.
-                 * @function pollFlightInfo
-                 * @memberof arrow.flight.protocol.FlightService
-                 * @instance
-                 * @param {arrow.flight.protocol.IFlightDescriptor} request FlightDescriptor message or plain object
-                 * @returns {Promise<arrow.flight.protocol.PollInfo>} Promise
-                 * @variation 2
+                 * @name arrow.flight.protocol.FlightService#pollFlightInfo
+                 * @type {arrow.flight.protocol.FlightService.PollFlightInfo}
                  */
+                $Object.defineProperties(FlightService.prototype.pollFlightInfo = function(request, callback) {
+                    return $protobuf.rpc.Service.prototype.rpcCall.call(this, FlightService.prototype.pollFlightInfo, $root.arrow.flight.protocol.FlightDescriptor, $root.arrow.flight.protocol.PollInfo, request, callback);
+                }, {
+                    name: { value: "PollFlightInfo" },
+                    path: { value: "/arrow.flight.protocol.FlightService/PollFlightInfo" },
+                    requestType: { value: "FlightDescriptor" },
+                    responseType: { value: "PollInfo" },
+                    requestStream: { value: $undefined },
+                    responseStream: { value: $undefined }
+                });
 
                 /**
                  * Callback as used by {@link arrow.flight.protocol.FlightService#getSchema}.
@@ -211,27 +244,35 @@ $root.arrow = (function() {
 
                 /**
                  * Calls GetSchema.
-                 * @function getSchema
                  * @memberof arrow.flight.protocol.FlightService
-                 * @instance
-                 * @param {arrow.flight.protocol.IFlightDescriptor} request FlightDescriptor message or plain object
-                 * @param {arrow.flight.protocol.FlightService.GetSchemaCallback} callback Node-style callback called with the error, if any, and SchemaResult
-                 * @returns {undefined}
-                 * @variation 1
+                 * @typedef GetSchema
+                 * @type {{
+                 *   (request: arrow.flight.protocol.IFlightDescriptor, callback: arrow.flight.protocol.FlightService.GetSchemaCallback): void;
+                 *   (request: arrow.flight.protocol.IFlightDescriptor): Promise<arrow.flight.protocol.SchemaResult>;
+                 *   readonly name: "GetSchema";
+                 *   readonly path: "/arrow.flight.protocol.FlightService/GetSchema";
+                 *   readonly requestType: "FlightDescriptor";
+                 *   readonly responseType: "SchemaResult";
+                 *   readonly requestStream: undefined;
+                 *   readonly responseStream: undefined;
+                 * }}
                  */
-                Object.defineProperty(FlightService.prototype.getSchema = function getSchema(request, callback) {
-                    return this.rpcCall(getSchema, $root.arrow.flight.protocol.FlightDescriptor, $root.arrow.flight.protocol.SchemaResult, request, callback);
-                }, "name", { value: "GetSchema" });
 
                 /**
                  * Calls GetSchema.
-                 * @function getSchema
-                 * @memberof arrow.flight.protocol.FlightService
-                 * @instance
-                 * @param {arrow.flight.protocol.IFlightDescriptor} request FlightDescriptor message or plain object
-                 * @returns {Promise<arrow.flight.protocol.SchemaResult>} Promise
-                 * @variation 2
+                 * @name arrow.flight.protocol.FlightService#getSchema
+                 * @type {arrow.flight.protocol.FlightService.GetSchema}
                  */
+                $Object.defineProperties(FlightService.prototype.getSchema = function(request, callback) {
+                    return $protobuf.rpc.Service.prototype.rpcCall.call(this, FlightService.prototype.getSchema, $root.arrow.flight.protocol.FlightDescriptor, $root.arrow.flight.protocol.SchemaResult, request, callback);
+                }, {
+                    name: { value: "GetSchema" },
+                    path: { value: "/arrow.flight.protocol.FlightService/GetSchema" },
+                    requestType: { value: "FlightDescriptor" },
+                    responseType: { value: "SchemaResult" },
+                    requestStream: { value: $undefined },
+                    responseStream: { value: $undefined }
+                });
 
                 /**
                  * Callback as used by {@link arrow.flight.protocol.FlightService#doGet}.
@@ -244,27 +285,35 @@ $root.arrow = (function() {
 
                 /**
                  * Calls DoGet.
-                 * @function doGet
                  * @memberof arrow.flight.protocol.FlightService
-                 * @instance
-                 * @param {arrow.flight.protocol.ITicket} request Ticket message or plain object
-                 * @param {arrow.flight.protocol.FlightService.DoGetCallback} callback Node-style callback called with the error, if any, and FlightData
-                 * @returns {undefined}
-                 * @variation 1
+                 * @typedef DoGet
+                 * @type {{
+                 *   (request: arrow.flight.protocol.ITicket, callback: arrow.flight.protocol.FlightService.DoGetCallback): void;
+                 *   (request: arrow.flight.protocol.ITicket): Promise<arrow.flight.protocol.FlightData>;
+                 *   readonly name: "DoGet";
+                 *   readonly path: "/arrow.flight.protocol.FlightService/DoGet";
+                 *   readonly requestType: "Ticket";
+                 *   readonly responseType: "FlightData";
+                 *   readonly requestStream: undefined;
+                 *   readonly responseStream: true;
+                 * }}
                  */
-                Object.defineProperty(FlightService.prototype.doGet = function doGet(request, callback) {
-                    return this.rpcCall(doGet, $root.arrow.flight.protocol.Ticket, $root.arrow.flight.protocol.FlightData, request, callback);
-                }, "name", { value: "DoGet" });
 
                 /**
                  * Calls DoGet.
-                 * @function doGet
-                 * @memberof arrow.flight.protocol.FlightService
-                 * @instance
-                 * @param {arrow.flight.protocol.ITicket} request Ticket message or plain object
-                 * @returns {Promise<arrow.flight.protocol.FlightData>} Promise
-                 * @variation 2
+                 * @name arrow.flight.protocol.FlightService#doGet
+                 * @type {arrow.flight.protocol.FlightService.DoGet}
                  */
+                $Object.defineProperties(FlightService.prototype.doGet = function(request, callback) {
+                    return $protobuf.rpc.Service.prototype.rpcCall.call(this, FlightService.prototype.doGet, $root.arrow.flight.protocol.Ticket, $root.arrow.flight.protocol.FlightData, request, callback);
+                }, {
+                    name: { value: "DoGet" },
+                    path: { value: "/arrow.flight.protocol.FlightService/DoGet" },
+                    requestType: { value: "Ticket" },
+                    responseType: { value: "FlightData" },
+                    requestStream: { value: $undefined },
+                    responseStream: { value: true }
+                });
 
                 /**
                  * Callback as used by {@link arrow.flight.protocol.FlightService#doPut}.
@@ -277,27 +326,35 @@ $root.arrow = (function() {
 
                 /**
                  * Calls DoPut.
-                 * @function doPut
                  * @memberof arrow.flight.protocol.FlightService
-                 * @instance
-                 * @param {arrow.flight.protocol.IFlightData} request FlightData message or plain object
-                 * @param {arrow.flight.protocol.FlightService.DoPutCallback} callback Node-style callback called with the error, if any, and PutResult
-                 * @returns {undefined}
-                 * @variation 1
+                 * @typedef DoPut
+                 * @type {{
+                 *   (request: arrow.flight.protocol.IFlightData, callback: arrow.flight.protocol.FlightService.DoPutCallback): void;
+                 *   (request: arrow.flight.protocol.IFlightData): Promise<arrow.flight.protocol.PutResult>;
+                 *   readonly name: "DoPut";
+                 *   readonly path: "/arrow.flight.protocol.FlightService/DoPut";
+                 *   readonly requestType: "FlightData";
+                 *   readonly responseType: "PutResult";
+                 *   readonly requestStream: true;
+                 *   readonly responseStream: true;
+                 * }}
                  */
-                Object.defineProperty(FlightService.prototype.doPut = function doPut(request, callback) {
-                    return this.rpcCall(doPut, $root.arrow.flight.protocol.FlightData, $root.arrow.flight.protocol.PutResult, request, callback);
-                }, "name", { value: "DoPut" });
 
                 /**
                  * Calls DoPut.
-                 * @function doPut
-                 * @memberof arrow.flight.protocol.FlightService
-                 * @instance
-                 * @param {arrow.flight.protocol.IFlightData} request FlightData message or plain object
-                 * @returns {Promise<arrow.flight.protocol.PutResult>} Promise
-                 * @variation 2
+                 * @name arrow.flight.protocol.FlightService#doPut
+                 * @type {arrow.flight.protocol.FlightService.DoPut}
                  */
+                $Object.defineProperties(FlightService.prototype.doPut = function(request, callback) {
+                    return $protobuf.rpc.Service.prototype.rpcCall.call(this, FlightService.prototype.doPut, $root.arrow.flight.protocol.FlightData, $root.arrow.flight.protocol.PutResult, request, callback);
+                }, {
+                    name: { value: "DoPut" },
+                    path: { value: "/arrow.flight.protocol.FlightService/DoPut" },
+                    requestType: { value: "FlightData" },
+                    responseType: { value: "PutResult" },
+                    requestStream: { value: true },
+                    responseStream: { value: true }
+                });
 
                 /**
                  * Callback as used by {@link arrow.flight.protocol.FlightService#doExchange}.
@@ -310,27 +367,35 @@ $root.arrow = (function() {
 
                 /**
                  * Calls DoExchange.
-                 * @function doExchange
                  * @memberof arrow.flight.protocol.FlightService
-                 * @instance
-                 * @param {arrow.flight.protocol.IFlightData} request FlightData message or plain object
-                 * @param {arrow.flight.protocol.FlightService.DoExchangeCallback} callback Node-style callback called with the error, if any, and FlightData
-                 * @returns {undefined}
-                 * @variation 1
+                 * @typedef DoExchange
+                 * @type {{
+                 *   (request: arrow.flight.protocol.IFlightData, callback: arrow.flight.protocol.FlightService.DoExchangeCallback): void;
+                 *   (request: arrow.flight.protocol.IFlightData): Promise<arrow.flight.protocol.FlightData>;
+                 *   readonly name: "DoExchange";
+                 *   readonly path: "/arrow.flight.protocol.FlightService/DoExchange";
+                 *   readonly requestType: "FlightData";
+                 *   readonly responseType: "FlightData";
+                 *   readonly requestStream: true;
+                 *   readonly responseStream: true;
+                 * }}
                  */
-                Object.defineProperty(FlightService.prototype.doExchange = function doExchange(request, callback) {
-                    return this.rpcCall(doExchange, $root.arrow.flight.protocol.FlightData, $root.arrow.flight.protocol.FlightData, request, callback);
-                }, "name", { value: "DoExchange" });
 
                 /**
                  * Calls DoExchange.
-                 * @function doExchange
-                 * @memberof arrow.flight.protocol.FlightService
-                 * @instance
-                 * @param {arrow.flight.protocol.IFlightData} request FlightData message or plain object
-                 * @returns {Promise<arrow.flight.protocol.FlightData>} Promise
-                 * @variation 2
+                 * @name arrow.flight.protocol.FlightService#doExchange
+                 * @type {arrow.flight.protocol.FlightService.DoExchange}
                  */
+                $Object.defineProperties(FlightService.prototype.doExchange = function(request, callback) {
+                    return $protobuf.rpc.Service.prototype.rpcCall.call(this, FlightService.prototype.doExchange, $root.arrow.flight.protocol.FlightData, $root.arrow.flight.protocol.FlightData, request, callback);
+                }, {
+                    name: { value: "DoExchange" },
+                    path: { value: "/arrow.flight.protocol.FlightService/DoExchange" },
+                    requestType: { value: "FlightData" },
+                    responseType: { value: "FlightData" },
+                    requestStream: { value: true },
+                    responseStream: { value: true }
+                });
 
                 /**
                  * Callback as used by {@link arrow.flight.protocol.FlightService#doAction}.
@@ -343,27 +408,35 @@ $root.arrow = (function() {
 
                 /**
                  * Calls DoAction.
-                 * @function doAction
                  * @memberof arrow.flight.protocol.FlightService
-                 * @instance
-                 * @param {arrow.flight.protocol.IAction} request Action message or plain object
-                 * @param {arrow.flight.protocol.FlightService.DoActionCallback} callback Node-style callback called with the error, if any, and Result
-                 * @returns {undefined}
-                 * @variation 1
+                 * @typedef DoAction
+                 * @type {{
+                 *   (request: arrow.flight.protocol.IAction, callback: arrow.flight.protocol.FlightService.DoActionCallback): void;
+                 *   (request: arrow.flight.protocol.IAction): Promise<arrow.flight.protocol.Result>;
+                 *   readonly name: "DoAction";
+                 *   readonly path: "/arrow.flight.protocol.FlightService/DoAction";
+                 *   readonly requestType: "Action";
+                 *   readonly responseType: "Result";
+                 *   readonly requestStream: undefined;
+                 *   readonly responseStream: true;
+                 * }}
                  */
-                Object.defineProperty(FlightService.prototype.doAction = function doAction(request, callback) {
-                    return this.rpcCall(doAction, $root.arrow.flight.protocol.Action, $root.arrow.flight.protocol.Result, request, callback);
-                }, "name", { value: "DoAction" });
 
                 /**
                  * Calls DoAction.
-                 * @function doAction
-                 * @memberof arrow.flight.protocol.FlightService
-                 * @instance
-                 * @param {arrow.flight.protocol.IAction} request Action message or plain object
-                 * @returns {Promise<arrow.flight.protocol.Result>} Promise
-                 * @variation 2
+                 * @name arrow.flight.protocol.FlightService#doAction
+                 * @type {arrow.flight.protocol.FlightService.DoAction}
                  */
+                $Object.defineProperties(FlightService.prototype.doAction = function(request, callback) {
+                    return $protobuf.rpc.Service.prototype.rpcCall.call(this, FlightService.prototype.doAction, $root.arrow.flight.protocol.Action, $root.arrow.flight.protocol.Result, request, callback);
+                }, {
+                    name: { value: "DoAction" },
+                    path: { value: "/arrow.flight.protocol.FlightService/DoAction" },
+                    requestType: { value: "Action" },
+                    responseType: { value: "Result" },
+                    requestStream: { value: $undefined },
+                    responseStream: { value: true }
+                });
 
                 /**
                  * Callback as used by {@link arrow.flight.protocol.FlightService#listActions}.
@@ -376,27 +449,35 @@ $root.arrow = (function() {
 
                 /**
                  * Calls ListActions.
-                 * @function listActions
                  * @memberof arrow.flight.protocol.FlightService
-                 * @instance
-                 * @param {arrow.flight.protocol.IEmpty} request Empty message or plain object
-                 * @param {arrow.flight.protocol.FlightService.ListActionsCallback} callback Node-style callback called with the error, if any, and ActionType
-                 * @returns {undefined}
-                 * @variation 1
+                 * @typedef ListActions
+                 * @type {{
+                 *   (request: arrow.flight.protocol.IEmpty, callback: arrow.flight.protocol.FlightService.ListActionsCallback): void;
+                 *   (request: arrow.flight.protocol.IEmpty): Promise<arrow.flight.protocol.ActionType>;
+                 *   readonly name: "ListActions";
+                 *   readonly path: "/arrow.flight.protocol.FlightService/ListActions";
+                 *   readonly requestType: "Empty";
+                 *   readonly responseType: "ActionType";
+                 *   readonly requestStream: undefined;
+                 *   readonly responseStream: true;
+                 * }}
                  */
-                Object.defineProperty(FlightService.prototype.listActions = function listActions(request, callback) {
-                    return this.rpcCall(listActions, $root.arrow.flight.protocol.Empty, $root.arrow.flight.protocol.ActionType, request, callback);
-                }, "name", { value: "ListActions" });
 
                 /**
                  * Calls ListActions.
-                 * @function listActions
-                 * @memberof arrow.flight.protocol.FlightService
-                 * @instance
-                 * @param {arrow.flight.protocol.IEmpty} request Empty message or plain object
-                 * @returns {Promise<arrow.flight.protocol.ActionType>} Promise
-                 * @variation 2
+                 * @name arrow.flight.protocol.FlightService#listActions
+                 * @type {arrow.flight.protocol.FlightService.ListActions}
                  */
+                $Object.defineProperties(FlightService.prototype.listActions = function(request, callback) {
+                    return $protobuf.rpc.Service.prototype.rpcCall.call(this, FlightService.prototype.listActions, $root.arrow.flight.protocol.Empty, $root.arrow.flight.protocol.ActionType, request, callback);
+                }, {
+                    name: { value: "ListActions" },
+                    path: { value: "/arrow.flight.protocol.FlightService/ListActions" },
+                    requestType: { value: "Empty" },
+                    responseType: { value: "ActionType" },
+                    requestStream: { value: $undefined },
+                    responseStream: { value: true }
+                });
 
                 return FlightService;
             })();
@@ -405,26 +486,39 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a HandshakeRequest.
-                 * @memberof arrow.flight.protocol
-                 * @interface IHandshakeRequest
+                 * @typedef {Object} arrow.flight.protocol.HandshakeRequest.$Properties
                  * @property {number|Long|null} [protocolVersion] HandshakeRequest protocolVersion
                  * @property {Uint8Array|null} [payload] HandshakeRequest payload
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a HandshakeRequest.
+                 * @memberof arrow.flight.protocol
+                 * @interface IHandshakeRequest
+                 * @augments arrow.flight.protocol.HandshakeRequest.$Properties
+                 * @deprecated Use arrow.flight.protocol.HandshakeRequest.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a HandshakeRequest.
+                 * @typedef {arrow.flight.protocol.HandshakeRequest.$Properties} arrow.flight.protocol.HandshakeRequest.$Shape
                  */
 
                 /**
                  * Constructs a new HandshakeRequest.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a HandshakeRequest.
-                 * @implements IHandshakeRequest
                  * @constructor
-                 * @param {arrow.flight.protocol.IHandshakeRequest=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.HandshakeRequest.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function HandshakeRequest(properties) {
+                var HandshakeRequest = function (properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * HandshakeRequest protocolVersion.
@@ -447,10 +541,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.HandshakeRequest
                  * @static
-                 * @param {arrow.flight.protocol.IHandshakeRequest=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.HandshakeRequest.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.HandshakeRequest} HandshakeRequest instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.HandshakeRequest.$Shape): arrow.flight.protocol.HandshakeRequest & arrow.flight.protocol.HandshakeRequest.$Shape;
+                 *   (properties?: arrow.flight.protocol.HandshakeRequest.$Properties): arrow.flight.protocol.HandshakeRequest;
+                 * }}
                  */
-                HandshakeRequest.create = function create(properties) {
+                HandshakeRequest.create = function(properties) {
                     return new HandshakeRequest(properties);
                 };
 
@@ -459,17 +557,24 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.HandshakeRequest
                  * @static
-                 * @param {arrow.flight.protocol.IHandshakeRequest} message HandshakeRequest message or plain object to encode
+                 * @param {arrow.flight.protocol.HandshakeRequest.$Properties} message HandshakeRequest message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                HandshakeRequest.encode = function encode(message, writer) {
+                HandshakeRequest.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.protocolVersion != null && Object.hasOwnProperty.call(message, "protocolVersion"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.protocolVersion != null && $Object.hasOwnProperty.call(message, "protocolVersion") && (typeof message.protocolVersion === "object" ? message.protocolVersion.low || message.protocolVersion.high : message.protocolVersion !== 0))
                         writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.protocolVersion);
-                    if (message.payload != null && Object.hasOwnProperty.call(message, "payload"))
+                    if (message.payload != null && $Object.hasOwnProperty.call(message, "payload") && message.payload.length)
                         writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.payload);
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -478,12 +583,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.HandshakeRequest
                  * @static
-                 * @param {arrow.flight.protocol.IHandshakeRequest} message HandshakeRequest message or plain object to encode
+                 * @param {arrow.flight.protocol.HandshakeRequest.$Properties} message HandshakeRequest message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                HandshakeRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                HandshakeRequest.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -493,30 +598,69 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.HandshakeRequest} HandshakeRequest
+                 * @returns {arrow.flight.protocol.HandshakeRequest & arrow.flight.protocol.HandshakeRequest.$Shape} HandshakeRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HandshakeRequest.decode = function decode(reader, length) {
+                HandshakeRequest.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.HandshakeRequest();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.HandshakeRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.protocolVersion = reader.uint64();
-                                break;
-                            }
-                        case 2: {
-                                message.payload = reader.bytes();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
+                        case 1: {
+                                if (wireType !== 0)
+                                    break;
+                                if (typeof (value = reader.uint64()) === "object" ? value.low || value.high : value !== 0)
+                                    message.protocolVersion = value;
+                                else
+                                    delete message.protocolVersion;
+                                continue;
+                            }
+                        case 2: {
+                                if (wireType !== 2)
+                                    break;
+                                if ((value = reader.bytes()).length)
+                                    message.payload = value;
+                                else
+                                    delete message.payload;
+                                continue;
+                            }
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -526,11 +670,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.HandshakeRequest
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.HandshakeRequest} HandshakeRequest
+                 * @returns {arrow.flight.protocol.HandshakeRequest & arrow.flight.protocol.HandshakeRequest.$Shape} HandshakeRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HandshakeRequest.decodeDelimited = function decodeDelimited(reader) {
+                HandshakeRequest.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -544,13 +688,17 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                HandshakeRequest.verify = function verify(message) {
+                HandshakeRequest.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.protocolVersion != null && message.hasOwnProperty("protocolVersion"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
+                    if (message.protocolVersion != null && $Object.hasOwnProperty.call(message, "protocolVersion"))
                         if (!$util.isInteger(message.protocolVersion) && !(message.protocolVersion && $util.isInteger(message.protocolVersion.low) && $util.isInteger(message.protocolVersion.high)))
                             return "protocolVersion: integer|Long expected";
-                    if (message.payload != null && message.hasOwnProperty("payload"))
+                    if (message.payload != null && $Object.hasOwnProperty.call(message, "payload"))
                         if (!(message.payload && typeof message.payload.length === "number" || $util.isString(message.payload)))
                             return "payload: buffer expected";
                     return null;
@@ -564,24 +712,32 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.HandshakeRequest} HandshakeRequest
                  */
-                HandshakeRequest.fromObject = function fromObject(object) {
+                HandshakeRequest.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.HandshakeRequest)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.HandshakeRequest: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.HandshakeRequest();
                     if (object.protocolVersion != null)
-                        if ($util.Long)
-                            (message.protocolVersion = $util.Long.fromValue(object.protocolVersion)).unsigned = true;
-                        else if (typeof object.protocolVersion === "string")
-                            message.protocolVersion = parseInt(object.protocolVersion, 10);
-                        else if (typeof object.protocolVersion === "number")
-                            message.protocolVersion = object.protocolVersion;
-                        else if (typeof object.protocolVersion === "object")
-                            message.protocolVersion = new $util.LongBits(object.protocolVersion.low >>> 0, object.protocolVersion.high >>> 0).toNumber(true);
+                        if (typeof object.protocolVersion === "object" ? object.protocolVersion.low || object.protocolVersion.high : $Number(object.protocolVersion) !== 0)
+                            if ($util.Long)
+                                message.protocolVersion = $util.Long.fromValue(object.protocolVersion, true);
+                            else if (typeof object.protocolVersion === "string")
+                                message.protocolVersion = $parseInt(object.protocolVersion, 10);
+                            else if (typeof object.protocolVersion === "number")
+                                message.protocolVersion = object.protocolVersion;
+                            else if (typeof object.protocolVersion === "object")
+                                message.protocolVersion = new $util.LongBits(object.protocolVersion.low >>> 0, object.protocolVersion.high >>> 0).toNumber(true);
                     if (object.payload != null)
-                        if (typeof object.payload === "string")
-                            $util.base64.decode(object.payload, message.payload = $util.newBuffer($util.base64.length(object.payload)), 0);
-                        else if (object.payload.length >= 0)
-                            message.payload = object.payload;
+                        if (object.payload.length)
+                            if (typeof object.payload === "string")
+                                $util.base64.decode(object.payload, message.payload = $util.newBuffer($util.base64.length(object.payload)), 0);
+                            else if (object.payload.length >= 0)
+                                message.payload = object.payload;
                     return message;
                 };
 
@@ -594,31 +750,37 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                HandshakeRequest.toObject = function toObject(message, options) {
+                HandshakeRequest.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, true);
-                            object.protocolVersion = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.protocolVersion = options.longs === $String ? long.toString() : options.longs === $Number ? long.toNumber() : typeof $BigInt !== "undefined" && options.longs === $BigInt ? long.toBigInt() : long;
                         } else
-                            object.protocolVersion = options.longs === String ? "0" : 0;
-                        if (options.bytes === String)
+                            object.protocolVersion = options.longs === $String ? "0" : typeof $BigInt !== "undefined" && options.longs === $BigInt ? $BigInt("0") : 0;
+                        if (options.bytes === $String)
                             object.payload = "";
                         else {
                             object.payload = [];
-                            if (options.bytes !== Array)
+                            if (options.bytes !== $Array)
                                 object.payload = $util.newBuffer(object.payload);
                         }
                     }
-                    if (message.protocolVersion != null && message.hasOwnProperty("protocolVersion"))
-                        if (typeof message.protocolVersion === "number")
-                            object.protocolVersion = options.longs === String ? String(message.protocolVersion) : message.protocolVersion;
+                    if (message.protocolVersion != null && $Object.hasOwnProperty.call(message, "protocolVersion"))
+                        if (typeof $BigInt !== "undefined" && options.longs === $BigInt)
+                            object.protocolVersion = typeof message.protocolVersion === "number" ? $BigInt(message.protocolVersion) : $util.Long.fromBits(message.protocolVersion.low >>> 0, message.protocolVersion.high >>> 0, true).toBigInt();
+                        else if (typeof message.protocolVersion === "number")
+                            object.protocolVersion = options.longs === $String ? $String(message.protocolVersion) : message.protocolVersion;
                         else
-                            object.protocolVersion = options.longs === String ? $util.Long.prototype.toString.call(message.protocolVersion) : options.longs === Number ? new $util.LongBits(message.protocolVersion.low >>> 0, message.protocolVersion.high >>> 0).toNumber(true) : message.protocolVersion;
-                    if (message.payload != null && message.hasOwnProperty("payload"))
-                        object.payload = options.bytes === String ? $util.base64.encode(message.payload, 0, message.payload.length) : options.bytes === Array ? Array.prototype.slice.call(message.payload) : message.payload;
+                            object.protocolVersion = options.longs === $String ? $util.Long.prototype.toString.call(message.protocolVersion) : options.longs === $Number ? new $util.LongBits(message.protocolVersion.low >>> 0, message.protocolVersion.high >>> 0).toNumber(true) : message.protocolVersion;
+                    if (message.payload != null && $Object.hasOwnProperty.call(message, "payload"))
+                        object.payload = options.bytes === $String ? $util.base64.encode(message.payload, 0, message.payload.length) : options.bytes === $Array ? $Array.prototype.slice.call(message.payload) : message.payload;
                     return object;
                 };
 
@@ -629,23 +791,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                HandshakeRequest.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                HandshakeRequest.prototype.toJSON = function() {
+                    return HandshakeRequest.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for HandshakeRequest
+                 * Gets the type url for HandshakeRequest
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.HandshakeRequest
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                HandshakeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.HandshakeRequest";
+                HandshakeRequest.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.HandshakeRequest";
                 };
 
                 return HandshakeRequest;
@@ -655,26 +816,39 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a HandshakeResponse.
-                 * @memberof arrow.flight.protocol
-                 * @interface IHandshakeResponse
+                 * @typedef {Object} arrow.flight.protocol.HandshakeResponse.$Properties
                  * @property {number|Long|null} [protocolVersion] HandshakeResponse protocolVersion
                  * @property {Uint8Array|null} [payload] HandshakeResponse payload
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a HandshakeResponse.
+                 * @memberof arrow.flight.protocol
+                 * @interface IHandshakeResponse
+                 * @augments arrow.flight.protocol.HandshakeResponse.$Properties
+                 * @deprecated Use arrow.flight.protocol.HandshakeResponse.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a HandshakeResponse.
+                 * @typedef {arrow.flight.protocol.HandshakeResponse.$Properties} arrow.flight.protocol.HandshakeResponse.$Shape
                  */
 
                 /**
                  * Constructs a new HandshakeResponse.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a HandshakeResponse.
-                 * @implements IHandshakeResponse
                  * @constructor
-                 * @param {arrow.flight.protocol.IHandshakeResponse=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.HandshakeResponse.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function HandshakeResponse(properties) {
+                var HandshakeResponse = function (properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * HandshakeResponse protocolVersion.
@@ -697,10 +871,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.HandshakeResponse
                  * @static
-                 * @param {arrow.flight.protocol.IHandshakeResponse=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.HandshakeResponse.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.HandshakeResponse} HandshakeResponse instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.HandshakeResponse.$Shape): arrow.flight.protocol.HandshakeResponse & arrow.flight.protocol.HandshakeResponse.$Shape;
+                 *   (properties?: arrow.flight.protocol.HandshakeResponse.$Properties): arrow.flight.protocol.HandshakeResponse;
+                 * }}
                  */
-                HandshakeResponse.create = function create(properties) {
+                HandshakeResponse.create = function(properties) {
                     return new HandshakeResponse(properties);
                 };
 
@@ -709,17 +887,24 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.HandshakeResponse
                  * @static
-                 * @param {arrow.flight.protocol.IHandshakeResponse} message HandshakeResponse message or plain object to encode
+                 * @param {arrow.flight.protocol.HandshakeResponse.$Properties} message HandshakeResponse message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                HandshakeResponse.encode = function encode(message, writer) {
+                HandshakeResponse.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.protocolVersion != null && Object.hasOwnProperty.call(message, "protocolVersion"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.protocolVersion != null && $Object.hasOwnProperty.call(message, "protocolVersion") && (typeof message.protocolVersion === "object" ? message.protocolVersion.low || message.protocolVersion.high : message.protocolVersion !== 0))
                         writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.protocolVersion);
-                    if (message.payload != null && Object.hasOwnProperty.call(message, "payload"))
+                    if (message.payload != null && $Object.hasOwnProperty.call(message, "payload") && message.payload.length)
                         writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.payload);
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -728,12 +913,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.HandshakeResponse
                  * @static
-                 * @param {arrow.flight.protocol.IHandshakeResponse} message HandshakeResponse message or plain object to encode
+                 * @param {arrow.flight.protocol.HandshakeResponse.$Properties} message HandshakeResponse message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                HandshakeResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                HandshakeResponse.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -743,30 +928,69 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.HandshakeResponse} HandshakeResponse
+                 * @returns {arrow.flight.protocol.HandshakeResponse & arrow.flight.protocol.HandshakeResponse.$Shape} HandshakeResponse
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HandshakeResponse.decode = function decode(reader, length) {
+                HandshakeResponse.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.HandshakeResponse();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.HandshakeResponse();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.protocolVersion = reader.uint64();
-                                break;
-                            }
-                        case 2: {
-                                message.payload = reader.bytes();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
+                        case 1: {
+                                if (wireType !== 0)
+                                    break;
+                                if (typeof (value = reader.uint64()) === "object" ? value.low || value.high : value !== 0)
+                                    message.protocolVersion = value;
+                                else
+                                    delete message.protocolVersion;
+                                continue;
+                            }
+                        case 2: {
+                                if (wireType !== 2)
+                                    break;
+                                if ((value = reader.bytes()).length)
+                                    message.payload = value;
+                                else
+                                    delete message.payload;
+                                continue;
+                            }
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -776,11 +1000,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.HandshakeResponse
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.HandshakeResponse} HandshakeResponse
+                 * @returns {arrow.flight.protocol.HandshakeResponse & arrow.flight.protocol.HandshakeResponse.$Shape} HandshakeResponse
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HandshakeResponse.decodeDelimited = function decodeDelimited(reader) {
+                HandshakeResponse.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -794,13 +1018,17 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                HandshakeResponse.verify = function verify(message) {
+                HandshakeResponse.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.protocolVersion != null && message.hasOwnProperty("protocolVersion"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
+                    if (message.protocolVersion != null && $Object.hasOwnProperty.call(message, "protocolVersion"))
                         if (!$util.isInteger(message.protocolVersion) && !(message.protocolVersion && $util.isInteger(message.protocolVersion.low) && $util.isInteger(message.protocolVersion.high)))
                             return "protocolVersion: integer|Long expected";
-                    if (message.payload != null && message.hasOwnProperty("payload"))
+                    if (message.payload != null && $Object.hasOwnProperty.call(message, "payload"))
                         if (!(message.payload && typeof message.payload.length === "number" || $util.isString(message.payload)))
                             return "payload: buffer expected";
                     return null;
@@ -814,24 +1042,32 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.HandshakeResponse} HandshakeResponse
                  */
-                HandshakeResponse.fromObject = function fromObject(object) {
+                HandshakeResponse.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.HandshakeResponse)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.HandshakeResponse: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.HandshakeResponse();
                     if (object.protocolVersion != null)
-                        if ($util.Long)
-                            (message.protocolVersion = $util.Long.fromValue(object.protocolVersion)).unsigned = true;
-                        else if (typeof object.protocolVersion === "string")
-                            message.protocolVersion = parseInt(object.protocolVersion, 10);
-                        else if (typeof object.protocolVersion === "number")
-                            message.protocolVersion = object.protocolVersion;
-                        else if (typeof object.protocolVersion === "object")
-                            message.protocolVersion = new $util.LongBits(object.protocolVersion.low >>> 0, object.protocolVersion.high >>> 0).toNumber(true);
+                        if (typeof object.protocolVersion === "object" ? object.protocolVersion.low || object.protocolVersion.high : $Number(object.protocolVersion) !== 0)
+                            if ($util.Long)
+                                message.protocolVersion = $util.Long.fromValue(object.protocolVersion, true);
+                            else if (typeof object.protocolVersion === "string")
+                                message.protocolVersion = $parseInt(object.protocolVersion, 10);
+                            else if (typeof object.protocolVersion === "number")
+                                message.protocolVersion = object.protocolVersion;
+                            else if (typeof object.protocolVersion === "object")
+                                message.protocolVersion = new $util.LongBits(object.protocolVersion.low >>> 0, object.protocolVersion.high >>> 0).toNumber(true);
                     if (object.payload != null)
-                        if (typeof object.payload === "string")
-                            $util.base64.decode(object.payload, message.payload = $util.newBuffer($util.base64.length(object.payload)), 0);
-                        else if (object.payload.length >= 0)
-                            message.payload = object.payload;
+                        if (object.payload.length)
+                            if (typeof object.payload === "string")
+                                $util.base64.decode(object.payload, message.payload = $util.newBuffer($util.base64.length(object.payload)), 0);
+                            else if (object.payload.length >= 0)
+                                message.payload = object.payload;
                     return message;
                 };
 
@@ -844,31 +1080,37 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                HandshakeResponse.toObject = function toObject(message, options) {
+                HandshakeResponse.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, true);
-                            object.protocolVersion = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.protocolVersion = options.longs === $String ? long.toString() : options.longs === $Number ? long.toNumber() : typeof $BigInt !== "undefined" && options.longs === $BigInt ? long.toBigInt() : long;
                         } else
-                            object.protocolVersion = options.longs === String ? "0" : 0;
-                        if (options.bytes === String)
+                            object.protocolVersion = options.longs === $String ? "0" : typeof $BigInt !== "undefined" && options.longs === $BigInt ? $BigInt("0") : 0;
+                        if (options.bytes === $String)
                             object.payload = "";
                         else {
                             object.payload = [];
-                            if (options.bytes !== Array)
+                            if (options.bytes !== $Array)
                                 object.payload = $util.newBuffer(object.payload);
                         }
                     }
-                    if (message.protocolVersion != null && message.hasOwnProperty("protocolVersion"))
-                        if (typeof message.protocolVersion === "number")
-                            object.protocolVersion = options.longs === String ? String(message.protocolVersion) : message.protocolVersion;
+                    if (message.protocolVersion != null && $Object.hasOwnProperty.call(message, "protocolVersion"))
+                        if (typeof $BigInt !== "undefined" && options.longs === $BigInt)
+                            object.protocolVersion = typeof message.protocolVersion === "number" ? $BigInt(message.protocolVersion) : $util.Long.fromBits(message.protocolVersion.low >>> 0, message.protocolVersion.high >>> 0, true).toBigInt();
+                        else if (typeof message.protocolVersion === "number")
+                            object.protocolVersion = options.longs === $String ? $String(message.protocolVersion) : message.protocolVersion;
                         else
-                            object.protocolVersion = options.longs === String ? $util.Long.prototype.toString.call(message.protocolVersion) : options.longs === Number ? new $util.LongBits(message.protocolVersion.low >>> 0, message.protocolVersion.high >>> 0).toNumber(true) : message.protocolVersion;
-                    if (message.payload != null && message.hasOwnProperty("payload"))
-                        object.payload = options.bytes === String ? $util.base64.encode(message.payload, 0, message.payload.length) : options.bytes === Array ? Array.prototype.slice.call(message.payload) : message.payload;
+                            object.protocolVersion = options.longs === $String ? $util.Long.prototype.toString.call(message.protocolVersion) : options.longs === $Number ? new $util.LongBits(message.protocolVersion.low >>> 0, message.protocolVersion.high >>> 0).toNumber(true) : message.protocolVersion;
+                    if (message.payload != null && $Object.hasOwnProperty.call(message, "payload"))
+                        object.payload = options.bytes === $String ? $util.base64.encode(message.payload, 0, message.payload.length) : options.bytes === $Array ? $Array.prototype.slice.call(message.payload) : message.payload;
                     return object;
                 };
 
@@ -879,23 +1121,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                HandshakeResponse.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                HandshakeResponse.prototype.toJSON = function() {
+                    return HandshakeResponse.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for HandshakeResponse
+                 * Gets the type url for HandshakeResponse
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.HandshakeResponse
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                HandshakeResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.HandshakeResponse";
+                HandshakeResponse.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.HandshakeResponse";
                 };
 
                 return HandshakeResponse;
@@ -905,26 +1146,39 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a BasicAuth.
-                 * @memberof arrow.flight.protocol
-                 * @interface IBasicAuth
+                 * @typedef {Object} arrow.flight.protocol.BasicAuth.$Properties
                  * @property {string|null} [username] BasicAuth username
                  * @property {string|null} [password] BasicAuth password
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a BasicAuth.
+                 * @memberof arrow.flight.protocol
+                 * @interface IBasicAuth
+                 * @augments arrow.flight.protocol.BasicAuth.$Properties
+                 * @deprecated Use arrow.flight.protocol.BasicAuth.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a BasicAuth.
+                 * @typedef {arrow.flight.protocol.BasicAuth.$Properties} arrow.flight.protocol.BasicAuth.$Shape
                  */
 
                 /**
                  * Constructs a new BasicAuth.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a BasicAuth.
-                 * @implements IBasicAuth
                  * @constructor
-                 * @param {arrow.flight.protocol.IBasicAuth=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.BasicAuth.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function BasicAuth(properties) {
+                var BasicAuth = function (properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * BasicAuth username.
@@ -947,10 +1201,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.BasicAuth
                  * @static
-                 * @param {arrow.flight.protocol.IBasicAuth=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.BasicAuth.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.BasicAuth} BasicAuth instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.BasicAuth.$Shape): arrow.flight.protocol.BasicAuth & arrow.flight.protocol.BasicAuth.$Shape;
+                 *   (properties?: arrow.flight.protocol.BasicAuth.$Properties): arrow.flight.protocol.BasicAuth;
+                 * }}
                  */
-                BasicAuth.create = function create(properties) {
+                BasicAuth.create = function(properties) {
                     return new BasicAuth(properties);
                 };
 
@@ -959,17 +1217,24 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.BasicAuth
                  * @static
-                 * @param {arrow.flight.protocol.IBasicAuth} message BasicAuth message or plain object to encode
+                 * @param {arrow.flight.protocol.BasicAuth.$Properties} message BasicAuth message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                BasicAuth.encode = function encode(message, writer) {
+                BasicAuth.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.username != null && Object.hasOwnProperty.call(message, "username"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.username != null && $Object.hasOwnProperty.call(message, "username") && message.username !== "")
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.username);
-                    if (message.password != null && Object.hasOwnProperty.call(message, "password"))
+                    if (message.password != null && $Object.hasOwnProperty.call(message, "password") && message.password !== "")
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.password);
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -978,12 +1243,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.BasicAuth
                  * @static
-                 * @param {arrow.flight.protocol.IBasicAuth} message BasicAuth message or plain object to encode
+                 * @param {arrow.flight.protocol.BasicAuth.$Properties} message BasicAuth message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                BasicAuth.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                BasicAuth.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -993,30 +1258,69 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.BasicAuth} BasicAuth
+                 * @returns {arrow.flight.protocol.BasicAuth & arrow.flight.protocol.BasicAuth.$Shape} BasicAuth
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                BasicAuth.decode = function decode(reader, length) {
+                BasicAuth.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.BasicAuth();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.BasicAuth();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 2: {
-                                message.username = reader.string();
-                                break;
-                            }
-                        case 3: {
-                                message.password = reader.string();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
+                        case 2: {
+                                if (wireType !== 2)
+                                    break;
+                                if ((value = reader.stringVerify()).length)
+                                    message.username = value;
+                                else
+                                    delete message.username;
+                                continue;
+                            }
+                        case 3: {
+                                if (wireType !== 2)
+                                    break;
+                                if ((value = reader.stringVerify()).length)
+                                    message.password = value;
+                                else
+                                    delete message.password;
+                                continue;
+                            }
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -1026,11 +1330,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.BasicAuth
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.BasicAuth} BasicAuth
+                 * @returns {arrow.flight.protocol.BasicAuth & arrow.flight.protocol.BasicAuth.$Shape} BasicAuth
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                BasicAuth.decodeDelimited = function decodeDelimited(reader) {
+                BasicAuth.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -1044,13 +1348,17 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                BasicAuth.verify = function verify(message) {
+                BasicAuth.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.username != null && message.hasOwnProperty("username"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
+                    if (message.username != null && $Object.hasOwnProperty.call(message, "username"))
                         if (!$util.isString(message.username))
                             return "username: string expected";
-                    if (message.password != null && message.hasOwnProperty("password"))
+                    if (message.password != null && $Object.hasOwnProperty.call(message, "password"))
                         if (!$util.isString(message.password))
                             return "password: string expected";
                     return null;
@@ -1064,14 +1372,22 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.BasicAuth} BasicAuth
                  */
-                BasicAuth.fromObject = function fromObject(object) {
+                BasicAuth.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.BasicAuth)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.BasicAuth: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.BasicAuth();
                     if (object.username != null)
-                        message.username = String(object.username);
+                        if (typeof object.username !== "string" || object.username.length)
+                            message.username = $String(object.username);
                     if (object.password != null)
-                        message.password = String(object.password);
+                        if (typeof object.password !== "string" || object.password.length)
+                            message.password = $String(object.password);
                     return message;
                 };
 
@@ -1084,17 +1400,21 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                BasicAuth.toObject = function toObject(message, options) {
+                BasicAuth.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.username = "";
                         object.password = "";
                     }
-                    if (message.username != null && message.hasOwnProperty("username"))
+                    if (message.username != null && $Object.hasOwnProperty.call(message, "username"))
                         object.username = message.username;
-                    if (message.password != null && message.hasOwnProperty("password"))
+                    if (message.password != null && $Object.hasOwnProperty.call(message, "password"))
                         object.password = message.password;
                     return object;
                 };
@@ -1106,23 +1426,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                BasicAuth.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                BasicAuth.prototype.toJSON = function() {
+                    return BasicAuth.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for BasicAuth
+                 * Gets the type url for BasicAuth
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.BasicAuth
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                BasicAuth.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.BasicAuth";
+                BasicAuth.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.BasicAuth";
                 };
 
                 return BasicAuth;
@@ -1132,34 +1451,51 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of an Empty.
+                 * @typedef {Object} arrow.flight.protocol.Empty.$Properties
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of an Empty.
                  * @memberof arrow.flight.protocol
                  * @interface IEmpty
+                 * @augments arrow.flight.protocol.Empty.$Properties
+                 * @deprecated Use arrow.flight.protocol.Empty.$Properties instead.
+                 */
+
+                /**
+                 * Shape of an Empty.
+                 * @typedef {arrow.flight.protocol.Empty.$Properties} arrow.flight.protocol.Empty.$Shape
                  */
 
                 /**
                  * Constructs a new Empty.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents an Empty.
-                 * @implements IEmpty
                  * @constructor
-                 * @param {arrow.flight.protocol.IEmpty=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.Empty.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function Empty(properties) {
+                var Empty = function (properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * Creates a new Empty instance using the specified properties.
                  * @function create
                  * @memberof arrow.flight.protocol.Empty
                  * @static
-                 * @param {arrow.flight.protocol.IEmpty=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.Empty.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.Empty} Empty instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.Empty.$Shape): arrow.flight.protocol.Empty & arrow.flight.protocol.Empty.$Shape;
+                 *   (properties?: arrow.flight.protocol.Empty.$Properties): arrow.flight.protocol.Empty;
+                 * }}
                  */
-                Empty.create = function create(properties) {
+                Empty.create = function(properties) {
                     return new Empty(properties);
                 };
 
@@ -1168,13 +1504,20 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.Empty
                  * @static
-                 * @param {arrow.flight.protocol.IEmpty} message Empty message or plain object to encode
+                 * @param {arrow.flight.protocol.Empty.$Properties} message Empty message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Empty.encode = function encode(message, writer) {
+                Empty.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -1183,12 +1526,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.Empty
                  * @static
-                 * @param {arrow.flight.protocol.IEmpty} message Empty message or plain object to encode
+                 * @param {arrow.flight.protocol.Empty.$Properties} message Empty message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Empty.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                Empty.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -1198,22 +1541,48 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.Empty} Empty
+                 * @returns {arrow.flight.protocol.Empty & arrow.flight.protocol.Empty.$Shape} Empty
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length) {
+                Empty.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.Empty();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.Empty();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        reader.skipType(tag & 7, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -1223,11 +1592,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.Empty
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.Empty} Empty
+                 * @returns {arrow.flight.protocol.Empty & arrow.flight.protocol.Empty.$Shape} Empty
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decodeDelimited = function decodeDelimited(reader) {
+                Empty.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -1241,9 +1610,13 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Empty.verify = function verify(message) {
+                Empty.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
                     return null;
                 };
 
@@ -1255,9 +1628,15 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.Empty} Empty
                  */
-                Empty.fromObject = function fromObject(object) {
+                Empty.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.Empty)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.Empty: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     return new $root.arrow.flight.protocol.Empty();
                 };
 
@@ -1270,7 +1649,7 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Empty.toObject = function toObject() {
+                Empty.toObject = function () {
                     return {};
                 };
 
@@ -1281,23 +1660,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                Empty.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                Empty.prototype.toJSON = function() {
+                    return Empty.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for Empty
+                 * Gets the type url for Empty
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.Empty
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                Empty.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.Empty";
+                Empty.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.Empty";
                 };
 
                 return Empty;
@@ -1307,26 +1685,39 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of an ActionType.
-                 * @memberof arrow.flight.protocol
-                 * @interface IActionType
+                 * @typedef {Object} arrow.flight.protocol.ActionType.$Properties
                  * @property {string|null} [type] ActionType type
                  * @property {string|null} [description] ActionType description
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of an ActionType.
+                 * @memberof arrow.flight.protocol
+                 * @interface IActionType
+                 * @augments arrow.flight.protocol.ActionType.$Properties
+                 * @deprecated Use arrow.flight.protocol.ActionType.$Properties instead.
+                 */
+
+                /**
+                 * Shape of an ActionType.
+                 * @typedef {arrow.flight.protocol.ActionType.$Properties} arrow.flight.protocol.ActionType.$Shape
                  */
 
                 /**
                  * Constructs a new ActionType.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents an ActionType.
-                 * @implements IActionType
                  * @constructor
-                 * @param {arrow.flight.protocol.IActionType=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.ActionType.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function ActionType(properties) {
+                var ActionType = function (properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * ActionType type.
@@ -1349,10 +1740,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.ActionType
                  * @static
-                 * @param {arrow.flight.protocol.IActionType=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.ActionType.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.ActionType} ActionType instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.ActionType.$Shape): arrow.flight.protocol.ActionType & arrow.flight.protocol.ActionType.$Shape;
+                 *   (properties?: arrow.flight.protocol.ActionType.$Properties): arrow.flight.protocol.ActionType;
+                 * }}
                  */
-                ActionType.create = function create(properties) {
+                ActionType.create = function(properties) {
                     return new ActionType(properties);
                 };
 
@@ -1361,17 +1756,24 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.ActionType
                  * @static
-                 * @param {arrow.flight.protocol.IActionType} message ActionType message or plain object to encode
+                 * @param {arrow.flight.protocol.ActionType.$Properties} message ActionType message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                ActionType.encode = function encode(message, writer) {
+                ActionType.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.type != null && $Object.hasOwnProperty.call(message, "type") && message.type !== "")
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                    if (message.description != null && $Object.hasOwnProperty.call(message, "description") && message.description !== "")
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -1380,12 +1782,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.ActionType
                  * @static
-                 * @param {arrow.flight.protocol.IActionType} message ActionType message or plain object to encode
+                 * @param {arrow.flight.protocol.ActionType.$Properties} message ActionType message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                ActionType.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                ActionType.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -1395,30 +1797,69 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.ActionType} ActionType
+                 * @returns {arrow.flight.protocol.ActionType & arrow.flight.protocol.ActionType.$Shape} ActionType
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ActionType.decode = function decode(reader, length) {
+                ActionType.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.ActionType();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.ActionType();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.type = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                message.description = reader.string();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
+                        case 1: {
+                                if (wireType !== 2)
+                                    break;
+                                if ((value = reader.stringVerify()).length)
+                                    message.type = value;
+                                else
+                                    delete message.type;
+                                continue;
+                            }
+                        case 2: {
+                                if (wireType !== 2)
+                                    break;
+                                if ((value = reader.stringVerify()).length)
+                                    message.description = value;
+                                else
+                                    delete message.description;
+                                continue;
+                            }
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -1428,11 +1869,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.ActionType
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.ActionType} ActionType
+                 * @returns {arrow.flight.protocol.ActionType & arrow.flight.protocol.ActionType.$Shape} ActionType
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ActionType.decodeDelimited = function decodeDelimited(reader) {
+                ActionType.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -1446,13 +1887,17 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ActionType.verify = function verify(message) {
+                ActionType.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
+                    if (message.type != null && $Object.hasOwnProperty.call(message, "type"))
                         if (!$util.isString(message.type))
                             return "type: string expected";
-                    if (message.description != null && message.hasOwnProperty("description"))
+                    if (message.description != null && $Object.hasOwnProperty.call(message, "description"))
                         if (!$util.isString(message.description))
                             return "description: string expected";
                     return null;
@@ -1466,14 +1911,22 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.ActionType} ActionType
                  */
-                ActionType.fromObject = function fromObject(object) {
+                ActionType.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.ActionType)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.ActionType: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.ActionType();
                     if (object.type != null)
-                        message.type = String(object.type);
+                        if (typeof object.type !== "string" || object.type.length)
+                            message.type = $String(object.type);
                     if (object.description != null)
-                        message.description = String(object.description);
+                        if (typeof object.description !== "string" || object.description.length)
+                            message.description = $String(object.description);
                     return message;
                 };
 
@@ -1486,17 +1939,21 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                ActionType.toObject = function toObject(message, options) {
+                ActionType.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.type = "";
                         object.description = "";
                     }
-                    if (message.type != null && message.hasOwnProperty("type"))
+                    if (message.type != null && $Object.hasOwnProperty.call(message, "type"))
                         object.type = message.type;
-                    if (message.description != null && message.hasOwnProperty("description"))
+                    if (message.description != null && $Object.hasOwnProperty.call(message, "description"))
                         object.description = message.description;
                     return object;
                 };
@@ -1508,23 +1965,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                ActionType.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                ActionType.prototype.toJSON = function() {
+                    return ActionType.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for ActionType
+                 * Gets the type url for ActionType
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.ActionType
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                ActionType.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.ActionType";
+                ActionType.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.ActionType";
                 };
 
                 return ActionType;
@@ -1534,25 +1990,38 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a Criteria.
+                 * @typedef {Object} arrow.flight.protocol.Criteria.$Properties
+                 * @property {Uint8Array|null} [expression] Criteria expression
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a Criteria.
                  * @memberof arrow.flight.protocol
                  * @interface ICriteria
-                 * @property {Uint8Array|null} [expression] Criteria expression
+                 * @augments arrow.flight.protocol.Criteria.$Properties
+                 * @deprecated Use arrow.flight.protocol.Criteria.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a Criteria.
+                 * @typedef {arrow.flight.protocol.Criteria.$Properties} arrow.flight.protocol.Criteria.$Shape
                  */
 
                 /**
                  * Constructs a new Criteria.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a Criteria.
-                 * @implements ICriteria
                  * @constructor
-                 * @param {arrow.flight.protocol.ICriteria=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.Criteria.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function Criteria(properties) {
+                var Criteria = function (properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * Criteria expression.
@@ -1567,10 +2036,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.Criteria
                  * @static
-                 * @param {arrow.flight.protocol.ICriteria=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.Criteria.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.Criteria} Criteria instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.Criteria.$Shape): arrow.flight.protocol.Criteria & arrow.flight.protocol.Criteria.$Shape;
+                 *   (properties?: arrow.flight.protocol.Criteria.$Properties): arrow.flight.protocol.Criteria;
+                 * }}
                  */
-                Criteria.create = function create(properties) {
+                Criteria.create = function(properties) {
                     return new Criteria(properties);
                 };
 
@@ -1579,15 +2052,22 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.Criteria
                  * @static
-                 * @param {arrow.flight.protocol.ICriteria} message Criteria message or plain object to encode
+                 * @param {arrow.flight.protocol.Criteria.$Properties} message Criteria message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Criteria.encode = function encode(message, writer) {
+                Criteria.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.expression != null && Object.hasOwnProperty.call(message, "expression"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.expression != null && $Object.hasOwnProperty.call(message, "expression") && message.expression.length)
                         writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.expression);
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -1596,12 +2076,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.Criteria
                  * @static
-                 * @param {arrow.flight.protocol.ICriteria} message Criteria message or plain object to encode
+                 * @param {arrow.flight.protocol.Criteria.$Properties} message Criteria message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Criteria.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                Criteria.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -1611,26 +2091,60 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.Criteria} Criteria
+                 * @returns {arrow.flight.protocol.Criteria & arrow.flight.protocol.Criteria.$Shape} Criteria
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Criteria.decode = function decode(reader, length) {
+                Criteria.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.Criteria();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.Criteria();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.expression = reader.bytes();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
+                        case 1: {
+                                if (wireType !== 2)
+                                    break;
+                                if ((value = reader.bytes()).length)
+                                    message.expression = value;
+                                else
+                                    delete message.expression;
+                                continue;
+                            }
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -1640,11 +2154,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.Criteria
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.Criteria} Criteria
+                 * @returns {arrow.flight.protocol.Criteria & arrow.flight.protocol.Criteria.$Shape} Criteria
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Criteria.decodeDelimited = function decodeDelimited(reader) {
+                Criteria.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -1658,10 +2172,14 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Criteria.verify = function verify(message) {
+                Criteria.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.expression != null && message.hasOwnProperty("expression"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
+                    if (message.expression != null && $Object.hasOwnProperty.call(message, "expression"))
                         if (!(message.expression && typeof message.expression.length === "number" || $util.isString(message.expression)))
                             return "expression: buffer expected";
                     return null;
@@ -1675,15 +2193,22 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.Criteria} Criteria
                  */
-                Criteria.fromObject = function fromObject(object) {
+                Criteria.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.Criteria)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.Criteria: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.Criteria();
                     if (object.expression != null)
-                        if (typeof object.expression === "string")
-                            $util.base64.decode(object.expression, message.expression = $util.newBuffer($util.base64.length(object.expression)), 0);
-                        else if (object.expression.length >= 0)
-                            message.expression = object.expression;
+                        if (object.expression.length)
+                            if (typeof object.expression === "string")
+                                $util.base64.decode(object.expression, message.expression = $util.newBuffer($util.base64.length(object.expression)), 0);
+                            else if (object.expression.length >= 0)
+                                message.expression = object.expression;
                     return message;
                 };
 
@@ -1696,20 +2221,24 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Criteria.toObject = function toObject(message, options) {
+                Criteria.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.defaults)
-                        if (options.bytes === String)
+                        if (options.bytes === $String)
                             object.expression = "";
                         else {
                             object.expression = [];
-                            if (options.bytes !== Array)
+                            if (options.bytes !== $Array)
                                 object.expression = $util.newBuffer(object.expression);
                         }
-                    if (message.expression != null && message.hasOwnProperty("expression"))
-                        object.expression = options.bytes === String ? $util.base64.encode(message.expression, 0, message.expression.length) : options.bytes === Array ? Array.prototype.slice.call(message.expression) : message.expression;
+                    if (message.expression != null && $Object.hasOwnProperty.call(message, "expression"))
+                        object.expression = options.bytes === $String ? $util.base64.encode(message.expression, 0, message.expression.length) : options.bytes === $Array ? $Array.prototype.slice.call(message.expression) : message.expression;
                     return object;
                 };
 
@@ -1720,23 +2249,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                Criteria.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                Criteria.prototype.toJSON = function() {
+                    return Criteria.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for Criteria
+                 * Gets the type url for Criteria
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.Criteria
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                Criteria.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.Criteria";
+                Criteria.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.Criteria";
                 };
 
                 return Criteria;
@@ -1746,26 +2274,39 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of an Action.
-                 * @memberof arrow.flight.protocol
-                 * @interface IAction
+                 * @typedef {Object} arrow.flight.protocol.Action.$Properties
                  * @property {string|null} [type] Action type
                  * @property {Uint8Array|null} [body] Action body
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of an Action.
+                 * @memberof arrow.flight.protocol
+                 * @interface IAction
+                 * @augments arrow.flight.protocol.Action.$Properties
+                 * @deprecated Use arrow.flight.protocol.Action.$Properties instead.
+                 */
+
+                /**
+                 * Shape of an Action.
+                 * @typedef {arrow.flight.protocol.Action.$Properties} arrow.flight.protocol.Action.$Shape
                  */
 
                 /**
                  * Constructs a new Action.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents an Action.
-                 * @implements IAction
                  * @constructor
-                 * @param {arrow.flight.protocol.IAction=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.Action.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function Action(properties) {
+                var Action = function (properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * Action type.
@@ -1788,10 +2329,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.Action
                  * @static
-                 * @param {arrow.flight.protocol.IAction=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.Action.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.Action} Action instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.Action.$Shape): arrow.flight.protocol.Action & arrow.flight.protocol.Action.$Shape;
+                 *   (properties?: arrow.flight.protocol.Action.$Properties): arrow.flight.protocol.Action;
+                 * }}
                  */
-                Action.create = function create(properties) {
+                Action.create = function(properties) {
                     return new Action(properties);
                 };
 
@@ -1800,17 +2345,24 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.Action
                  * @static
-                 * @param {arrow.flight.protocol.IAction} message Action message or plain object to encode
+                 * @param {arrow.flight.protocol.Action.$Properties} message Action message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Action.encode = function encode(message, writer) {
+                Action.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.type != null && $Object.hasOwnProperty.call(message, "type") && message.type !== "")
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.body != null && Object.hasOwnProperty.call(message, "body"))
+                    if (message.body != null && $Object.hasOwnProperty.call(message, "body") && message.body.length)
                         writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.body);
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -1819,12 +2371,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.Action
                  * @static
-                 * @param {arrow.flight.protocol.IAction} message Action message or plain object to encode
+                 * @param {arrow.flight.protocol.Action.$Properties} message Action message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Action.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                Action.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -1834,30 +2386,69 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.Action} Action
+                 * @returns {arrow.flight.protocol.Action & arrow.flight.protocol.Action.$Shape} Action
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Action.decode = function decode(reader, length) {
+                Action.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.Action();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.Action();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.type = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                message.body = reader.bytes();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
+                        case 1: {
+                                if (wireType !== 2)
+                                    break;
+                                if ((value = reader.stringVerify()).length)
+                                    message.type = value;
+                                else
+                                    delete message.type;
+                                continue;
+                            }
+                        case 2: {
+                                if (wireType !== 2)
+                                    break;
+                                if ((value = reader.bytes()).length)
+                                    message.body = value;
+                                else
+                                    delete message.body;
+                                continue;
+                            }
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -1867,11 +2458,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.Action
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.Action} Action
+                 * @returns {arrow.flight.protocol.Action & arrow.flight.protocol.Action.$Shape} Action
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Action.decodeDelimited = function decodeDelimited(reader) {
+                Action.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -1885,13 +2476,17 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Action.verify = function verify(message) {
+                Action.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
+                    if (message.type != null && $Object.hasOwnProperty.call(message, "type"))
                         if (!$util.isString(message.type))
                             return "type: string expected";
-                    if (message.body != null && message.hasOwnProperty("body"))
+                    if (message.body != null && $Object.hasOwnProperty.call(message, "body"))
                         if (!(message.body && typeof message.body.length === "number" || $util.isString(message.body)))
                             return "body: buffer expected";
                     return null;
@@ -1905,17 +2500,25 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.Action} Action
                  */
-                Action.fromObject = function fromObject(object) {
+                Action.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.Action)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.Action: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.Action();
                     if (object.type != null)
-                        message.type = String(object.type);
+                        if (typeof object.type !== "string" || object.type.length)
+                            message.type = $String(object.type);
                     if (object.body != null)
-                        if (typeof object.body === "string")
-                            $util.base64.decode(object.body, message.body = $util.newBuffer($util.base64.length(object.body)), 0);
-                        else if (object.body.length >= 0)
-                            message.body = object.body;
+                        if (object.body.length)
+                            if (typeof object.body === "string")
+                                $util.base64.decode(object.body, message.body = $util.newBuffer($util.base64.length(object.body)), 0);
+                            else if (object.body.length >= 0)
+                                message.body = object.body;
                     return message;
                 };
 
@@ -1928,24 +2531,28 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Action.toObject = function toObject(message, options) {
+                Action.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.type = "";
-                        if (options.bytes === String)
+                        if (options.bytes === $String)
                             object.body = "";
                         else {
                             object.body = [];
-                            if (options.bytes !== Array)
+                            if (options.bytes !== $Array)
                                 object.body = $util.newBuffer(object.body);
                         }
                     }
-                    if (message.type != null && message.hasOwnProperty("type"))
+                    if (message.type != null && $Object.hasOwnProperty.call(message, "type"))
                         object.type = message.type;
-                    if (message.body != null && message.hasOwnProperty("body"))
-                        object.body = options.bytes === String ? $util.base64.encode(message.body, 0, message.body.length) : options.bytes === Array ? Array.prototype.slice.call(message.body) : message.body;
+                    if (message.body != null && $Object.hasOwnProperty.call(message, "body"))
+                        object.body = options.bytes === $String ? $util.base64.encode(message.body, 0, message.body.length) : options.bytes === $Array ? $Array.prototype.slice.call(message.body) : message.body;
                     return object;
                 };
 
@@ -1956,23 +2563,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                Action.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                Action.prototype.toJSON = function() {
+                    return Action.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for Action
+                 * Gets the type url for Action
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.Action
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                Action.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.Action";
+                Action.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.Action";
                 };
 
                 return Action;
@@ -1982,25 +2588,38 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a Result.
+                 * @typedef {Object} arrow.flight.protocol.Result.$Properties
+                 * @property {Uint8Array|null} [body] Result body
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a Result.
                  * @memberof arrow.flight.protocol
                  * @interface IResult
-                 * @property {Uint8Array|null} [body] Result body
+                 * @augments arrow.flight.protocol.Result.$Properties
+                 * @deprecated Use arrow.flight.protocol.Result.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a Result.
+                 * @typedef {arrow.flight.protocol.Result.$Properties} arrow.flight.protocol.Result.$Shape
                  */
 
                 /**
                  * Constructs a new Result.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a Result.
-                 * @implements IResult
                  * @constructor
-                 * @param {arrow.flight.protocol.IResult=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.Result.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function Result(properties) {
+                var Result = function (properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * Result body.
@@ -2015,10 +2634,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.Result
                  * @static
-                 * @param {arrow.flight.protocol.IResult=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.Result.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.Result} Result instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.Result.$Shape): arrow.flight.protocol.Result & arrow.flight.protocol.Result.$Shape;
+                 *   (properties?: arrow.flight.protocol.Result.$Properties): arrow.flight.protocol.Result;
+                 * }}
                  */
-                Result.create = function create(properties) {
+                Result.create = function(properties) {
                     return new Result(properties);
                 };
 
@@ -2027,15 +2650,22 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.Result
                  * @static
-                 * @param {arrow.flight.protocol.IResult} message Result message or plain object to encode
+                 * @param {arrow.flight.protocol.Result.$Properties} message Result message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Result.encode = function encode(message, writer) {
+                Result.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.body != null && Object.hasOwnProperty.call(message, "body"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.body != null && $Object.hasOwnProperty.call(message, "body") && message.body.length)
                         writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.body);
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -2044,12 +2674,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.Result
                  * @static
-                 * @param {arrow.flight.protocol.IResult} message Result message or plain object to encode
+                 * @param {arrow.flight.protocol.Result.$Properties} message Result message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Result.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                Result.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -2059,26 +2689,60 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.Result} Result
+                 * @returns {arrow.flight.protocol.Result & arrow.flight.protocol.Result.$Shape} Result
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Result.decode = function decode(reader, length) {
+                Result.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.Result();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.Result();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.body = reader.bytes();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
+                        case 1: {
+                                if (wireType !== 2)
+                                    break;
+                                if ((value = reader.bytes()).length)
+                                    message.body = value;
+                                else
+                                    delete message.body;
+                                continue;
+                            }
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -2088,11 +2752,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.Result
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.Result} Result
+                 * @returns {arrow.flight.protocol.Result & arrow.flight.protocol.Result.$Shape} Result
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Result.decodeDelimited = function decodeDelimited(reader) {
+                Result.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -2106,10 +2770,14 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Result.verify = function verify(message) {
+                Result.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.body != null && message.hasOwnProperty("body"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
+                    if (message.body != null && $Object.hasOwnProperty.call(message, "body"))
                         if (!(message.body && typeof message.body.length === "number" || $util.isString(message.body)))
                             return "body: buffer expected";
                     return null;
@@ -2123,15 +2791,22 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.Result} Result
                  */
-                Result.fromObject = function fromObject(object) {
+                Result.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.Result)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.Result: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.Result();
                     if (object.body != null)
-                        if (typeof object.body === "string")
-                            $util.base64.decode(object.body, message.body = $util.newBuffer($util.base64.length(object.body)), 0);
-                        else if (object.body.length >= 0)
-                            message.body = object.body;
+                        if (object.body.length)
+                            if (typeof object.body === "string")
+                                $util.base64.decode(object.body, message.body = $util.newBuffer($util.base64.length(object.body)), 0);
+                            else if (object.body.length >= 0)
+                                message.body = object.body;
                     return message;
                 };
 
@@ -2144,20 +2819,24 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Result.toObject = function toObject(message, options) {
+                Result.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.defaults)
-                        if (options.bytes === String)
+                        if (options.bytes === $String)
                             object.body = "";
                         else {
                             object.body = [];
-                            if (options.bytes !== Array)
+                            if (options.bytes !== $Array)
                                 object.body = $util.newBuffer(object.body);
                         }
-                    if (message.body != null && message.hasOwnProperty("body"))
-                        object.body = options.bytes === String ? $util.base64.encode(message.body, 0, message.body.length) : options.bytes === Array ? Array.prototype.slice.call(message.body) : message.body;
+                    if (message.body != null && $Object.hasOwnProperty.call(message, "body"))
+                        object.body = options.bytes === $String ? $util.base64.encode(message.body, 0, message.body.length) : options.bytes === $Array ? $Array.prototype.slice.call(message.body) : message.body;
                     return object;
                 };
 
@@ -2168,23 +2847,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                Result.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                Result.prototype.toJSON = function() {
+                    return Result.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for Result
+                 * Gets the type url for Result
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.Result
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                Result.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.Result";
+                Result.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.Result";
                 };
 
                 return Result;
@@ -2194,25 +2872,38 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a SchemaResult.
+                 * @typedef {Object} arrow.flight.protocol.SchemaResult.$Properties
+                 * @property {Uint8Array|null} [schema] SchemaResult schema
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a SchemaResult.
                  * @memberof arrow.flight.protocol
                  * @interface ISchemaResult
-                 * @property {Uint8Array|null} [schema] SchemaResult schema
+                 * @augments arrow.flight.protocol.SchemaResult.$Properties
+                 * @deprecated Use arrow.flight.protocol.SchemaResult.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a SchemaResult.
+                 * @typedef {arrow.flight.protocol.SchemaResult.$Properties} arrow.flight.protocol.SchemaResult.$Shape
                  */
 
                 /**
                  * Constructs a new SchemaResult.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a SchemaResult.
-                 * @implements ISchemaResult
                  * @constructor
-                 * @param {arrow.flight.protocol.ISchemaResult=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.SchemaResult.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function SchemaResult(properties) {
+                var SchemaResult = function (properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * SchemaResult schema.
@@ -2227,10 +2918,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.SchemaResult
                  * @static
-                 * @param {arrow.flight.protocol.ISchemaResult=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.SchemaResult.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.SchemaResult} SchemaResult instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.SchemaResult.$Shape): arrow.flight.protocol.SchemaResult & arrow.flight.protocol.SchemaResult.$Shape;
+                 *   (properties?: arrow.flight.protocol.SchemaResult.$Properties): arrow.flight.protocol.SchemaResult;
+                 * }}
                  */
-                SchemaResult.create = function create(properties) {
+                SchemaResult.create = function(properties) {
                     return new SchemaResult(properties);
                 };
 
@@ -2239,15 +2934,22 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.SchemaResult
                  * @static
-                 * @param {arrow.flight.protocol.ISchemaResult} message SchemaResult message or plain object to encode
+                 * @param {arrow.flight.protocol.SchemaResult.$Properties} message SchemaResult message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                SchemaResult.encode = function encode(message, writer) {
+                SchemaResult.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.schema != null && Object.hasOwnProperty.call(message, "schema"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.schema != null && $Object.hasOwnProperty.call(message, "schema") && message.schema.length)
                         writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.schema);
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -2256,12 +2958,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.SchemaResult
                  * @static
-                 * @param {arrow.flight.protocol.ISchemaResult} message SchemaResult message or plain object to encode
+                 * @param {arrow.flight.protocol.SchemaResult.$Properties} message SchemaResult message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                SchemaResult.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                SchemaResult.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -2271,26 +2973,60 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.SchemaResult} SchemaResult
+                 * @returns {arrow.flight.protocol.SchemaResult & arrow.flight.protocol.SchemaResult.$Shape} SchemaResult
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SchemaResult.decode = function decode(reader, length) {
+                SchemaResult.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.SchemaResult();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.SchemaResult();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.schema = reader.bytes();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
+                        case 1: {
+                                if (wireType !== 2)
+                                    break;
+                                if ((value = reader.bytes()).length)
+                                    message.schema = value;
+                                else
+                                    delete message.schema;
+                                continue;
+                            }
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -2300,11 +3036,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.SchemaResult
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.SchemaResult} SchemaResult
+                 * @returns {arrow.flight.protocol.SchemaResult & arrow.flight.protocol.SchemaResult.$Shape} SchemaResult
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SchemaResult.decodeDelimited = function decodeDelimited(reader) {
+                SchemaResult.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -2318,10 +3054,14 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                SchemaResult.verify = function verify(message) {
+                SchemaResult.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.schema != null && message.hasOwnProperty("schema"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
+                    if (message.schema != null && $Object.hasOwnProperty.call(message, "schema"))
                         if (!(message.schema && typeof message.schema.length === "number" || $util.isString(message.schema)))
                             return "schema: buffer expected";
                     return null;
@@ -2335,15 +3075,22 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.SchemaResult} SchemaResult
                  */
-                SchemaResult.fromObject = function fromObject(object) {
+                SchemaResult.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.SchemaResult)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.SchemaResult: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.SchemaResult();
                     if (object.schema != null)
-                        if (typeof object.schema === "string")
-                            $util.base64.decode(object.schema, message.schema = $util.newBuffer($util.base64.length(object.schema)), 0);
-                        else if (object.schema.length >= 0)
-                            message.schema = object.schema;
+                        if (object.schema.length)
+                            if (typeof object.schema === "string")
+                                $util.base64.decode(object.schema, message.schema = $util.newBuffer($util.base64.length(object.schema)), 0);
+                            else if (object.schema.length >= 0)
+                                message.schema = object.schema;
                     return message;
                 };
 
@@ -2356,20 +3103,24 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                SchemaResult.toObject = function toObject(message, options) {
+                SchemaResult.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.defaults)
-                        if (options.bytes === String)
+                        if (options.bytes === $String)
                             object.schema = "";
                         else {
                             object.schema = [];
-                            if (options.bytes !== Array)
+                            if (options.bytes !== $Array)
                                 object.schema = $util.newBuffer(object.schema);
                         }
-                    if (message.schema != null && message.hasOwnProperty("schema"))
-                        object.schema = options.bytes === String ? $util.base64.encode(message.schema, 0, message.schema.length) : options.bytes === Array ? Array.prototype.slice.call(message.schema) : message.schema;
+                    if (message.schema != null && $Object.hasOwnProperty.call(message, "schema"))
+                        object.schema = options.bytes === $String ? $util.base64.encode(message.schema, 0, message.schema.length) : options.bytes === $Array ? $Array.prototype.slice.call(message.schema) : message.schema;
                     return object;
                 };
 
@@ -2380,23 +3131,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                SchemaResult.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                SchemaResult.prototype.toJSON = function() {
+                    return SchemaResult.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for SchemaResult
+                 * Gets the type url for SchemaResult
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.SchemaResult
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                SchemaResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.SchemaResult";
+                SchemaResult.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.SchemaResult";
                 };
 
                 return SchemaResult;
@@ -2406,28 +3156,41 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a FlightDescriptor.
-                 * @memberof arrow.flight.protocol
-                 * @interface IFlightDescriptor
+                 * @typedef {Object} arrow.flight.protocol.FlightDescriptor.$Properties
                  * @property {arrow.flight.protocol.FlightDescriptor.DescriptorType|null} [type] FlightDescriptor type
                  * @property {Uint8Array|null} [cmd] FlightDescriptor cmd
                  * @property {Array.<string>|null} [path] FlightDescriptor path
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a FlightDescriptor.
+                 * @memberof arrow.flight.protocol
+                 * @interface IFlightDescriptor
+                 * @augments arrow.flight.protocol.FlightDescriptor.$Properties
+                 * @deprecated Use arrow.flight.protocol.FlightDescriptor.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a FlightDescriptor.
+                 * @typedef {arrow.flight.protocol.FlightDescriptor.$Properties} arrow.flight.protocol.FlightDescriptor.$Shape
                  */
 
                 /**
                  * Constructs a new FlightDescriptor.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a FlightDescriptor.
-                 * @implements IFlightDescriptor
                  * @constructor
-                 * @param {arrow.flight.protocol.IFlightDescriptor=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.FlightDescriptor.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function FlightDescriptor(properties) {
+                var FlightDescriptor = function (properties) {
                     this.path = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * FlightDescriptor type.
@@ -2458,10 +3221,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.FlightDescriptor
                  * @static
-                 * @param {arrow.flight.protocol.IFlightDescriptor=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.FlightDescriptor.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.FlightDescriptor} FlightDescriptor instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.FlightDescriptor.$Shape): arrow.flight.protocol.FlightDescriptor & arrow.flight.protocol.FlightDescriptor.$Shape;
+                 *   (properties?: arrow.flight.protocol.FlightDescriptor.$Properties): arrow.flight.protocol.FlightDescriptor;
+                 * }}
                  */
-                FlightDescriptor.create = function create(properties) {
+                FlightDescriptor.create = function(properties) {
                     return new FlightDescriptor(properties);
                 };
 
@@ -2470,20 +3237,27 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.FlightDescriptor
                  * @static
-                 * @param {arrow.flight.protocol.IFlightDescriptor} message FlightDescriptor message or plain object to encode
+                 * @param {arrow.flight.protocol.FlightDescriptor.$Properties} message FlightDescriptor message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FlightDescriptor.encode = function encode(message, writer) {
+                FlightDescriptor.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.type != null && $Object.hasOwnProperty.call(message, "type") && message.type !== 0)
                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
-                    if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                    if (message.cmd != null && $Object.hasOwnProperty.call(message, "cmd") && message.cmd.length)
                         writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.cmd);
                     if (message.path != null && message.path.length)
                         for (var i = 0; i < message.path.length; ++i)
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.path[i]);
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -2492,12 +3266,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.FlightDescriptor
                  * @static
-                 * @param {arrow.flight.protocol.IFlightDescriptor} message FlightDescriptor message or plain object to encode
+                 * @param {arrow.flight.protocol.FlightDescriptor.$Properties} message FlightDescriptor message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FlightDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                FlightDescriptor.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -2507,36 +3281,77 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.FlightDescriptor} FlightDescriptor
+                 * @returns {arrow.flight.protocol.FlightDescriptor & arrow.flight.protocol.FlightDescriptor.$Shape} FlightDescriptor
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FlightDescriptor.decode = function decode(reader, length) {
+                FlightDescriptor.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.FlightDescriptor();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.FlightDescriptor();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.type = reader.int32();
-                                break;
-                            }
-                        case 2: {
-                                message.cmd = reader.bytes();
-                                break;
-                            }
-                        case 3: {
-                                if (!(message.path && message.path.length))
-                                    message.path = [];
-                                message.path.push(reader.string());
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
+                        case 1: {
+                                if (wireType !== 0)
+                                    break;
+                                if (value = reader.int32())
+                                    message.type = value;
+                                else
+                                    delete message.type;
+                                continue;
+                            }
+                        case 2: {
+                                if (wireType !== 2)
+                                    break;
+                                if ((value = reader.bytes()).length)
+                                    message.cmd = value;
+                                else
+                                    delete message.cmd;
+                                continue;
+                            }
+                        case 3: {
+                                if (wireType !== 2)
+                                    break;
+                                if (!(message.path && message.path.length))
+                                    message.path = [];
+                                message.path.push(reader.stringVerify());
+                                continue;
+                            }
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -2546,11 +3361,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.FlightDescriptor
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.FlightDescriptor} FlightDescriptor
+                 * @returns {arrow.flight.protocol.FlightDescriptor & arrow.flight.protocol.FlightDescriptor.$Shape} FlightDescriptor
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FlightDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                FlightDescriptor.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -2564,23 +3379,21 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FlightDescriptor.verify = function verify(message) {
+                FlightDescriptor.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        switch (message.type) {
-                        default:
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
+                    if (message.type != null && $Object.hasOwnProperty.call(message, "type"))
+                        if (typeof message.type !== "number" || (message.type | 0) !== message.type)
                             return "type: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.cmd != null && message.hasOwnProperty("cmd"))
+                    if (message.cmd != null && $Object.hasOwnProperty.call(message, "cmd"))
                         if (!(message.cmd && typeof message.cmd.length === "number" || $util.isString(message.cmd)))
                             return "cmd: buffer expected";
-                    if (message.path != null && message.hasOwnProperty("path")) {
-                        if (!Array.isArray(message.path))
+                    if (message.path != null && $Object.hasOwnProperty.call(message, "path")) {
+                        if (!$Array.isArray(message.path))
                             return "path: array expected";
                         for (var i = 0; i < message.path.length; ++i)
                             if (!$util.isString(message.path[i]))
@@ -2597,41 +3410,46 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.FlightDescriptor} FlightDescriptor
                  */
-                FlightDescriptor.fromObject = function fromObject(object) {
+                FlightDescriptor.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.FlightDescriptor)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.FlightDescriptor: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.FlightDescriptor();
-                    switch (object.type) {
-                    default:
-                        if (typeof object.type === "number") {
-                            message.type = object.type;
+                    if (object.type !== 0 && (typeof object.type !== "string" || $root.arrow.flight.protocol.FlightDescriptor.DescriptorType[object.type] !== 0))
+                        switch (object.type) {
+                        case "UNKNOWN":
+                        case 0:
+                            message.type = 0;
                             break;
+                        case "PATH":
+                        case 1:
+                            message.type = 1;
+                            break;
+                        case "CMD":
+                        case 2:
+                            message.type = 2;
+                            break;
+                        default:
+                            if (typeof object.type === "number" && (object.type | 0) === object.type)
+                                message.type = object.type;
                         }
-                        break;
-                    case "UNKNOWN":
-                    case 0:
-                        message.type = 0;
-                        break;
-                    case "PATH":
-                    case 1:
-                        message.type = 1;
-                        break;
-                    case "CMD":
-                    case 2:
-                        message.type = 2;
-                        break;
-                    }
                     if (object.cmd != null)
-                        if (typeof object.cmd === "string")
-                            $util.base64.decode(object.cmd, message.cmd = $util.newBuffer($util.base64.length(object.cmd)), 0);
-                        else if (object.cmd.length >= 0)
-                            message.cmd = object.cmd;
+                        if (object.cmd.length)
+                            if (typeof object.cmd === "string")
+                                $util.base64.decode(object.cmd, message.cmd = $util.newBuffer($util.base64.length(object.cmd)), 0);
+                            else if (object.cmd.length >= 0)
+                                message.cmd = object.cmd;
                     if (object.path) {
-                        if (!Array.isArray(object.path))
-                            throw TypeError(".arrow.flight.protocol.FlightDescriptor.path: array expected");
-                        message.path = [];
+                        if (!$Array.isArray(object.path))
+                            throw $TypeError(".arrow.flight.protocol.FlightDescriptor.path: array expected");
+                        message.path = $Array(object.path.length);
                         for (var i = 0; i < object.path.length; ++i)
-                            message.path[i] = String(object.path[i]);
+                            message.path[i] = $String(object.path[i]);
                     }
                     return message;
                 };
@@ -2645,28 +3463,32 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                FlightDescriptor.toObject = function toObject(message, options) {
+                FlightDescriptor.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.path = [];
                     if (options.defaults) {
-                        object.type = options.enums === String ? "UNKNOWN" : 0;
-                        if (options.bytes === String)
+                        object.type = options.enums === $String ? "UNKNOWN" : 0;
+                        if (options.bytes === $String)
                             object.cmd = "";
                         else {
                             object.cmd = [];
-                            if (options.bytes !== Array)
+                            if (options.bytes !== $Array)
                                 object.cmd = $util.newBuffer(object.cmd);
                         }
                     }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.arrow.flight.protocol.FlightDescriptor.DescriptorType[message.type] === undefined ? message.type : $root.arrow.flight.protocol.FlightDescriptor.DescriptorType[message.type] : message.type;
-                    if (message.cmd != null && message.hasOwnProperty("cmd"))
-                        object.cmd = options.bytes === String ? $util.base64.encode(message.cmd, 0, message.cmd.length) : options.bytes === Array ? Array.prototype.slice.call(message.cmd) : message.cmd;
+                    if (message.type != null && $Object.hasOwnProperty.call(message, "type"))
+                        object.type = options.enums === $String ? $root.arrow.flight.protocol.FlightDescriptor.DescriptorType[message.type] === $undefined ? message.type : $root.arrow.flight.protocol.FlightDescriptor.DescriptorType[message.type] : message.type;
+                    if (message.cmd != null && $Object.hasOwnProperty.call(message, "cmd"))
+                        object.cmd = options.bytes === $String ? $util.base64.encode(message.cmd, 0, message.cmd.length) : options.bytes === $Array ? $Array.prototype.slice.call(message.cmd) : message.cmd;
                     if (message.path && message.path.length) {
-                        object.path = [];
+                        object.path = $Array(message.path.length);
                         for (var j = 0; j < message.path.length; ++j)
                             object.path[j] = message.path[j];
                     }
@@ -2680,23 +3502,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                FlightDescriptor.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                FlightDescriptor.prototype.toJSON = function() {
+                    return FlightDescriptor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for FlightDescriptor
+                 * Gets the type url for FlightDescriptor
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.FlightDescriptor
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                FlightDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.FlightDescriptor";
+                FlightDescriptor.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.FlightDescriptor";
                 };
 
                 /**
@@ -2708,7 +3529,7 @@ $root.arrow = (function() {
                  * @property {number} CMD=2 CMD value
                  */
                 FlightDescriptor.DescriptorType = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
+                    var valuesById = $Object.create(null), values = $Object.create(valuesById);
                     values[valuesById[0] = "UNKNOWN"] = 0;
                     values[valuesById[1] = "PATH"] = 1;
                     values[valuesById[2] = "CMD"] = 2;
@@ -2722,32 +3543,45 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a FlightInfo.
-                 * @memberof arrow.flight.protocol
-                 * @interface IFlightInfo
+                 * @typedef {Object} arrow.flight.protocol.FlightInfo.$Properties
                  * @property {Uint8Array|null} [schema] FlightInfo schema
-                 * @property {arrow.flight.protocol.IFlightDescriptor|null} [flightDescriptor] FlightInfo flightDescriptor
-                 * @property {Array.<arrow.flight.protocol.IFlightEndpoint>|null} [endpoint] FlightInfo endpoint
+                 * @property {arrow.flight.protocol.FlightDescriptor.$Properties|null} [flightDescriptor] FlightInfo flightDescriptor
+                 * @property {Array.<arrow.flight.protocol.FlightEndpoint.$Properties>|null} [endpoint] FlightInfo endpoint
                  * @property {number|Long|null} [totalRecords] FlightInfo totalRecords
                  * @property {number|Long|null} [totalBytes] FlightInfo totalBytes
                  * @property {boolean|null} [ordered] FlightInfo ordered
                  * @property {Uint8Array|null} [appMetadata] FlightInfo appMetadata
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a FlightInfo.
+                 * @memberof arrow.flight.protocol
+                 * @interface IFlightInfo
+                 * @augments arrow.flight.protocol.FlightInfo.$Properties
+                 * @deprecated Use arrow.flight.protocol.FlightInfo.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a FlightInfo.
+                 * @typedef {arrow.flight.protocol.FlightInfo.$Properties} arrow.flight.protocol.FlightInfo.$Shape
                  */
 
                 /**
                  * Constructs a new FlightInfo.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a FlightInfo.
-                 * @implements IFlightInfo
                  * @constructor
-                 * @param {arrow.flight.protocol.IFlightInfo=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.FlightInfo.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function FlightInfo(properties) {
+                var FlightInfo = function (properties) {
                     this.endpoint = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * FlightInfo schema.
@@ -2759,7 +3593,7 @@ $root.arrow = (function() {
 
                 /**
                  * FlightInfo flightDescriptor.
-                 * @member {arrow.flight.protocol.IFlightDescriptor|null|undefined} flightDescriptor
+                 * @member {arrow.flight.protocol.FlightDescriptor.$Properties|null|undefined} flightDescriptor
                  * @memberof arrow.flight.protocol.FlightInfo
                  * @instance
                  */
@@ -2767,7 +3601,7 @@ $root.arrow = (function() {
 
                 /**
                  * FlightInfo endpoint.
-                 * @member {Array.<arrow.flight.protocol.IFlightEndpoint>} endpoint
+                 * @member {Array.<arrow.flight.protocol.FlightEndpoint.$Properties>} endpoint
                  * @memberof arrow.flight.protocol.FlightInfo
                  * @instance
                  */
@@ -2810,10 +3644,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.FlightInfo
                  * @static
-                 * @param {arrow.flight.protocol.IFlightInfo=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.FlightInfo.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.FlightInfo} FlightInfo instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.FlightInfo.$Shape): arrow.flight.protocol.FlightInfo & arrow.flight.protocol.FlightInfo.$Shape;
+                 *   (properties?: arrow.flight.protocol.FlightInfo.$Properties): arrow.flight.protocol.FlightInfo;
+                 * }}
                  */
-                FlightInfo.create = function create(properties) {
+                FlightInfo.create = function(properties) {
                     return new FlightInfo(properties);
                 };
 
@@ -2822,28 +3660,35 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.FlightInfo
                  * @static
-                 * @param {arrow.flight.protocol.IFlightInfo} message FlightInfo message or plain object to encode
+                 * @param {arrow.flight.protocol.FlightInfo.$Properties} message FlightInfo message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FlightInfo.encode = function encode(message, writer) {
+                FlightInfo.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.schema != null && Object.hasOwnProperty.call(message, "schema"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.schema != null && $Object.hasOwnProperty.call(message, "schema") && message.schema.length)
                         writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.schema);
-                    if (message.flightDescriptor != null && Object.hasOwnProperty.call(message, "flightDescriptor"))
-                        $root.arrow.flight.protocol.FlightDescriptor.encode(message.flightDescriptor, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.flightDescriptor != null && $Object.hasOwnProperty.call(message, "flightDescriptor"))
+                        $root.arrow.flight.protocol.FlightDescriptor.encode(message.flightDescriptor, writer.uint32(/* id 2, wireType 2 =*/18).fork(), _depth + 1).ldelim();
                     if (message.endpoint != null && message.endpoint.length)
                         for (var i = 0; i < message.endpoint.length; ++i)
-                            $root.arrow.flight.protocol.FlightEndpoint.encode(message.endpoint[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                    if (message.totalRecords != null && Object.hasOwnProperty.call(message, "totalRecords"))
+                            $root.arrow.flight.protocol.FlightEndpoint.encode(message.endpoint[i], writer.uint32(/* id 3, wireType 2 =*/26).fork(), _depth + 1).ldelim();
+                    if (message.totalRecords != null && $Object.hasOwnProperty.call(message, "totalRecords") && (typeof message.totalRecords === "object" ? message.totalRecords.low || message.totalRecords.high : message.totalRecords !== 0))
                         writer.uint32(/* id 4, wireType 0 =*/32).int64(message.totalRecords);
-                    if (message.totalBytes != null && Object.hasOwnProperty.call(message, "totalBytes"))
+                    if (message.totalBytes != null && $Object.hasOwnProperty.call(message, "totalBytes") && (typeof message.totalBytes === "object" ? message.totalBytes.low || message.totalBytes.high : message.totalBytes !== 0))
                         writer.uint32(/* id 5, wireType 0 =*/40).int64(message.totalBytes);
-                    if (message.ordered != null && Object.hasOwnProperty.call(message, "ordered"))
+                    if (message.ordered != null && $Object.hasOwnProperty.call(message, "ordered") && message.ordered !== false)
                         writer.uint32(/* id 6, wireType 0 =*/48).bool(message.ordered);
-                    if (message.appMetadata != null && Object.hasOwnProperty.call(message, "appMetadata"))
+                    if (message.appMetadata != null && $Object.hasOwnProperty.call(message, "appMetadata") && message.appMetadata.length)
                         writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.appMetadata);
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -2852,12 +3697,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.FlightInfo
                  * @static
-                 * @param {arrow.flight.protocol.IFlightInfo} message FlightInfo message or plain object to encode
+                 * @param {arrow.flight.protocol.FlightInfo.$Properties} message FlightInfo message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FlightInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                FlightInfo.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -2867,52 +3712,110 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.FlightInfo} FlightInfo
+                 * @returns {arrow.flight.protocol.FlightInfo & arrow.flight.protocol.FlightInfo.$Shape} FlightInfo
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FlightInfo.decode = function decode(reader, length) {
+                FlightInfo.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.FlightInfo();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.FlightInfo();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.schema = reader.bytes();
-                                break;
-                            }
-                        case 2: {
-                                message.flightDescriptor = $root.arrow.flight.protocol.FlightDescriptor.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 3: {
-                                if (!(message.endpoint && message.endpoint.length))
-                                    message.endpoint = [];
-                                message.endpoint.push($root.arrow.flight.protocol.FlightEndpoint.decode(reader, reader.uint32()));
-                                break;
-                            }
-                        case 4: {
-                                message.totalRecords = reader.int64();
-                                break;
-                            }
-                        case 5: {
-                                message.totalBytes = reader.int64();
-                                break;
-                            }
-                        case 6: {
-                                message.ordered = reader.bool();
-                                break;
-                            }
-                        case 7: {
-                                message.appMetadata = reader.bytes();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
+                        case 1: {
+                                if (wireType !== 2)
+                                    break;
+                                if ((value = reader.bytes()).length)
+                                    message.schema = value;
+                                else
+                                    delete message.schema;
+                                continue;
+                            }
+                        case 2: {
+                                if (wireType !== 2)
+                                    break;
+                                message.flightDescriptor = $root.arrow.flight.protocol.FlightDescriptor.decode(reader, reader.uint32(), $undefined, _depth + 1, message.flightDescriptor);
+                                continue;
+                            }
+                        case 3: {
+                                if (wireType !== 2)
+                                    break;
+                                if (!(message.endpoint && message.endpoint.length))
+                                    message.endpoint = [];
+                                message.endpoint.push($root.arrow.flight.protocol.FlightEndpoint.decode(reader, reader.uint32(), $undefined, _depth + 1));
+                                continue;
+                            }
+                        case 4: {
+                                if (wireType !== 0)
+                                    break;
+                                if (typeof (value = reader.int64()) === "object" ? value.low || value.high : value !== 0)
+                                    message.totalRecords = value;
+                                else
+                                    delete message.totalRecords;
+                                continue;
+                            }
+                        case 5: {
+                                if (wireType !== 0)
+                                    break;
+                                if (typeof (value = reader.int64()) === "object" ? value.low || value.high : value !== 0)
+                                    message.totalBytes = value;
+                                else
+                                    delete message.totalBytes;
+                                continue;
+                            }
+                        case 6: {
+                                if (wireType !== 0)
+                                    break;
+                                if (value = reader.bool())
+                                    message.ordered = value;
+                                else
+                                    delete message.ordered;
+                                continue;
+                            }
+                        case 7: {
+                                if (wireType !== 2)
+                                    break;
+                                if ((value = reader.bytes()).length)
+                                    message.appMetadata = value;
+                                else
+                                    delete message.appMetadata;
+                                continue;
+                            }
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -2922,11 +3825,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.FlightInfo
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.FlightInfo} FlightInfo
+                 * @returns {arrow.flight.protocol.FlightInfo & arrow.flight.protocol.FlightInfo.$Shape} FlightInfo
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FlightInfo.decodeDelimited = function decodeDelimited(reader) {
+                FlightInfo.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -2940,36 +3843,40 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FlightInfo.verify = function verify(message) {
+                FlightInfo.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.schema != null && message.hasOwnProperty("schema"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
+                    if (message.schema != null && $Object.hasOwnProperty.call(message, "schema"))
                         if (!(message.schema && typeof message.schema.length === "number" || $util.isString(message.schema)))
                             return "schema: buffer expected";
-                    if (message.flightDescriptor != null && message.hasOwnProperty("flightDescriptor")) {
-                        var error = $root.arrow.flight.protocol.FlightDescriptor.verify(message.flightDescriptor);
+                    if (message.flightDescriptor != null && $Object.hasOwnProperty.call(message, "flightDescriptor")) {
+                        var error = $root.arrow.flight.protocol.FlightDescriptor.verify(message.flightDescriptor, _depth + 1);
                         if (error)
                             return "flightDescriptor." + error;
                     }
-                    if (message.endpoint != null && message.hasOwnProperty("endpoint")) {
-                        if (!Array.isArray(message.endpoint))
+                    if (message.endpoint != null && $Object.hasOwnProperty.call(message, "endpoint")) {
+                        if (!$Array.isArray(message.endpoint))
                             return "endpoint: array expected";
                         for (var i = 0; i < message.endpoint.length; ++i) {
-                            var error = $root.arrow.flight.protocol.FlightEndpoint.verify(message.endpoint[i]);
+                            var error = $root.arrow.flight.protocol.FlightEndpoint.verify(message.endpoint[i], _depth + 1);
                             if (error)
                                 return "endpoint." + error;
                         }
                     }
-                    if (message.totalRecords != null && message.hasOwnProperty("totalRecords"))
+                    if (message.totalRecords != null && $Object.hasOwnProperty.call(message, "totalRecords"))
                         if (!$util.isInteger(message.totalRecords) && !(message.totalRecords && $util.isInteger(message.totalRecords.low) && $util.isInteger(message.totalRecords.high)))
                             return "totalRecords: integer|Long expected";
-                    if (message.totalBytes != null && message.hasOwnProperty("totalBytes"))
+                    if (message.totalBytes != null && $Object.hasOwnProperty.call(message, "totalBytes"))
                         if (!$util.isInteger(message.totalBytes) && !(message.totalBytes && $util.isInteger(message.totalBytes.low) && $util.isInteger(message.totalBytes.high)))
                             return "totalBytes: integer|Long expected";
-                    if (message.ordered != null && message.hasOwnProperty("ordered"))
+                    if (message.ordered != null && $Object.hasOwnProperty.call(message, "ordered"))
                         if (typeof message.ordered !== "boolean")
                             return "ordered: boolean expected";
-                    if (message.appMetadata != null && message.hasOwnProperty("appMetadata"))
+                    if (message.appMetadata != null && $Object.hasOwnProperty.call(message, "appMetadata"))
                         if (!(message.appMetadata && typeof message.appMetadata.length === "number" || $util.isString(message.appMetadata)))
                             return "appMetadata: buffer expected";
                     return null;
@@ -2983,55 +3890,66 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.FlightInfo} FlightInfo
                  */
-                FlightInfo.fromObject = function fromObject(object) {
+                FlightInfo.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.FlightInfo)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.FlightInfo: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.FlightInfo();
                     if (object.schema != null)
-                        if (typeof object.schema === "string")
-                            $util.base64.decode(object.schema, message.schema = $util.newBuffer($util.base64.length(object.schema)), 0);
-                        else if (object.schema.length >= 0)
-                            message.schema = object.schema;
+                        if (object.schema.length)
+                            if (typeof object.schema === "string")
+                                $util.base64.decode(object.schema, message.schema = $util.newBuffer($util.base64.length(object.schema)), 0);
+                            else if (object.schema.length >= 0)
+                                message.schema = object.schema;
                     if (object.flightDescriptor != null) {
-                        if (typeof object.flightDescriptor !== "object")
-                            throw TypeError(".arrow.flight.protocol.FlightInfo.flightDescriptor: object expected");
-                        message.flightDescriptor = $root.arrow.flight.protocol.FlightDescriptor.fromObject(object.flightDescriptor);
+                        if (!$util.isObject(object.flightDescriptor))
+                            throw $TypeError(".arrow.flight.protocol.FlightInfo.flightDescriptor: object expected");
+                        message.flightDescriptor = $root.arrow.flight.protocol.FlightDescriptor.fromObject(object.flightDescriptor, _depth + 1);
                     }
                     if (object.endpoint) {
-                        if (!Array.isArray(object.endpoint))
-                            throw TypeError(".arrow.flight.protocol.FlightInfo.endpoint: array expected");
-                        message.endpoint = [];
+                        if (!$Array.isArray(object.endpoint))
+                            throw $TypeError(".arrow.flight.protocol.FlightInfo.endpoint: array expected");
+                        message.endpoint = $Array(object.endpoint.length);
                         for (var i = 0; i < object.endpoint.length; ++i) {
-                            if (typeof object.endpoint[i] !== "object")
-                                throw TypeError(".arrow.flight.protocol.FlightInfo.endpoint: object expected");
-                            message.endpoint[i] = $root.arrow.flight.protocol.FlightEndpoint.fromObject(object.endpoint[i]);
+                            if (!$util.isObject(object.endpoint[i]))
+                                throw $TypeError(".arrow.flight.protocol.FlightInfo.endpoint: object expected");
+                            message.endpoint[i] = $root.arrow.flight.protocol.FlightEndpoint.fromObject(object.endpoint[i], _depth + 1);
                         }
                     }
                     if (object.totalRecords != null)
-                        if ($util.Long)
-                            (message.totalRecords = $util.Long.fromValue(object.totalRecords)).unsigned = false;
-                        else if (typeof object.totalRecords === "string")
-                            message.totalRecords = parseInt(object.totalRecords, 10);
-                        else if (typeof object.totalRecords === "number")
-                            message.totalRecords = object.totalRecords;
-                        else if (typeof object.totalRecords === "object")
-                            message.totalRecords = new $util.LongBits(object.totalRecords.low >>> 0, object.totalRecords.high >>> 0).toNumber();
+                        if (typeof object.totalRecords === "object" ? object.totalRecords.low || object.totalRecords.high : $Number(object.totalRecords) !== 0)
+                            if ($util.Long)
+                                message.totalRecords = $util.Long.fromValue(object.totalRecords, false);
+                            else if (typeof object.totalRecords === "string")
+                                message.totalRecords = $parseInt(object.totalRecords, 10);
+                            else if (typeof object.totalRecords === "number")
+                                message.totalRecords = object.totalRecords;
+                            else if (typeof object.totalRecords === "object")
+                                message.totalRecords = new $util.LongBits(object.totalRecords.low >>> 0, object.totalRecords.high >>> 0).toNumber();
                     if (object.totalBytes != null)
-                        if ($util.Long)
-                            (message.totalBytes = $util.Long.fromValue(object.totalBytes)).unsigned = false;
-                        else if (typeof object.totalBytes === "string")
-                            message.totalBytes = parseInt(object.totalBytes, 10);
-                        else if (typeof object.totalBytes === "number")
-                            message.totalBytes = object.totalBytes;
-                        else if (typeof object.totalBytes === "object")
-                            message.totalBytes = new $util.LongBits(object.totalBytes.low >>> 0, object.totalBytes.high >>> 0).toNumber();
+                        if (typeof object.totalBytes === "object" ? object.totalBytes.low || object.totalBytes.high : $Number(object.totalBytes) !== 0)
+                            if ($util.Long)
+                                message.totalBytes = $util.Long.fromValue(object.totalBytes, false);
+                            else if (typeof object.totalBytes === "string")
+                                message.totalBytes = $parseInt(object.totalBytes, 10);
+                            else if (typeof object.totalBytes === "number")
+                                message.totalBytes = object.totalBytes;
+                            else if (typeof object.totalBytes === "object")
+                                message.totalBytes = new $util.LongBits(object.totalBytes.low >>> 0, object.totalBytes.high >>> 0).toNumber();
                     if (object.ordered != null)
-                        message.ordered = Boolean(object.ordered);
+                        if (object.ordered)
+                            message.ordered = $Boolean(object.ordered);
                     if (object.appMetadata != null)
-                        if (typeof object.appMetadata === "string")
-                            $util.base64.decode(object.appMetadata, message.appMetadata = $util.newBuffer($util.base64.length(object.appMetadata)), 0);
-                        else if (object.appMetadata.length >= 0)
-                            message.appMetadata = object.appMetadata;
+                        if (object.appMetadata.length)
+                            if (typeof object.appMetadata === "string")
+                                $util.base64.decode(object.appMetadata, message.appMetadata = $util.newBuffer($util.base64.length(object.appMetadata)), 0);
+                            else if (object.appMetadata.length >= 0)
+                                message.appMetadata = object.appMetadata;
                     return message;
                 };
 
@@ -3044,63 +3962,71 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                FlightInfo.toObject = function toObject(message, options) {
+                FlightInfo.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.endpoint = [];
                     if (options.defaults) {
-                        if (options.bytes === String)
+                        if (options.bytes === $String)
                             object.schema = "";
                         else {
                             object.schema = [];
-                            if (options.bytes !== Array)
+                            if (options.bytes !== $Array)
                                 object.schema = $util.newBuffer(object.schema);
                         }
                         object.flightDescriptor = null;
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, false);
-                            object.totalRecords = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.totalRecords = options.longs === $String ? long.toString() : options.longs === $Number ? long.toNumber() : typeof $BigInt !== "undefined" && options.longs === $BigInt ? long.toBigInt() : long;
                         } else
-                            object.totalRecords = options.longs === String ? "0" : 0;
+                            object.totalRecords = options.longs === $String ? "0" : typeof $BigInt !== "undefined" && options.longs === $BigInt ? $BigInt("0") : 0;
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, false);
-                            object.totalBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.totalBytes = options.longs === $String ? long.toString() : options.longs === $Number ? long.toNumber() : typeof $BigInt !== "undefined" && options.longs === $BigInt ? long.toBigInt() : long;
                         } else
-                            object.totalBytes = options.longs === String ? "0" : 0;
+                            object.totalBytes = options.longs === $String ? "0" : typeof $BigInt !== "undefined" && options.longs === $BigInt ? $BigInt("0") : 0;
                         object.ordered = false;
-                        if (options.bytes === String)
+                        if (options.bytes === $String)
                             object.appMetadata = "";
                         else {
                             object.appMetadata = [];
-                            if (options.bytes !== Array)
+                            if (options.bytes !== $Array)
                                 object.appMetadata = $util.newBuffer(object.appMetadata);
                         }
                     }
-                    if (message.schema != null && message.hasOwnProperty("schema"))
-                        object.schema = options.bytes === String ? $util.base64.encode(message.schema, 0, message.schema.length) : options.bytes === Array ? Array.prototype.slice.call(message.schema) : message.schema;
-                    if (message.flightDescriptor != null && message.hasOwnProperty("flightDescriptor"))
-                        object.flightDescriptor = $root.arrow.flight.protocol.FlightDescriptor.toObject(message.flightDescriptor, options);
+                    if (message.schema != null && $Object.hasOwnProperty.call(message, "schema"))
+                        object.schema = options.bytes === $String ? $util.base64.encode(message.schema, 0, message.schema.length) : options.bytes === $Array ? $Array.prototype.slice.call(message.schema) : message.schema;
+                    if (message.flightDescriptor != null && $Object.hasOwnProperty.call(message, "flightDescriptor"))
+                        object.flightDescriptor = $root.arrow.flight.protocol.FlightDescriptor.toObject(message.flightDescriptor, options, _depth + 1);
                     if (message.endpoint && message.endpoint.length) {
-                        object.endpoint = [];
+                        object.endpoint = $Array(message.endpoint.length);
                         for (var j = 0; j < message.endpoint.length; ++j)
-                            object.endpoint[j] = $root.arrow.flight.protocol.FlightEndpoint.toObject(message.endpoint[j], options);
+                            object.endpoint[j] = $root.arrow.flight.protocol.FlightEndpoint.toObject(message.endpoint[j], options, _depth + 1);
                     }
-                    if (message.totalRecords != null && message.hasOwnProperty("totalRecords"))
-                        if (typeof message.totalRecords === "number")
-                            object.totalRecords = options.longs === String ? String(message.totalRecords) : message.totalRecords;
+                    if (message.totalRecords != null && $Object.hasOwnProperty.call(message, "totalRecords"))
+                        if (typeof $BigInt !== "undefined" && options.longs === $BigInt)
+                            object.totalRecords = typeof message.totalRecords === "number" ? $BigInt(message.totalRecords) : $util.Long.fromBits(message.totalRecords.low >>> 0, message.totalRecords.high >>> 0, false).toBigInt();
+                        else if (typeof message.totalRecords === "number")
+                            object.totalRecords = options.longs === $String ? $String(message.totalRecords) : message.totalRecords;
                         else
-                            object.totalRecords = options.longs === String ? $util.Long.prototype.toString.call(message.totalRecords) : options.longs === Number ? new $util.LongBits(message.totalRecords.low >>> 0, message.totalRecords.high >>> 0).toNumber() : message.totalRecords;
-                    if (message.totalBytes != null && message.hasOwnProperty("totalBytes"))
-                        if (typeof message.totalBytes === "number")
-                            object.totalBytes = options.longs === String ? String(message.totalBytes) : message.totalBytes;
+                            object.totalRecords = options.longs === $String ? $util.Long.prototype.toString.call(message.totalRecords) : options.longs === $Number ? new $util.LongBits(message.totalRecords.low >>> 0, message.totalRecords.high >>> 0).toNumber() : message.totalRecords;
+                    if (message.totalBytes != null && $Object.hasOwnProperty.call(message, "totalBytes"))
+                        if (typeof $BigInt !== "undefined" && options.longs === $BigInt)
+                            object.totalBytes = typeof message.totalBytes === "number" ? $BigInt(message.totalBytes) : $util.Long.fromBits(message.totalBytes.low >>> 0, message.totalBytes.high >>> 0, false).toBigInt();
+                        else if (typeof message.totalBytes === "number")
+                            object.totalBytes = options.longs === $String ? $String(message.totalBytes) : message.totalBytes;
                         else
-                            object.totalBytes = options.longs === String ? $util.Long.prototype.toString.call(message.totalBytes) : options.longs === Number ? new $util.LongBits(message.totalBytes.low >>> 0, message.totalBytes.high >>> 0).toNumber() : message.totalBytes;
-                    if (message.ordered != null && message.hasOwnProperty("ordered"))
+                            object.totalBytes = options.longs === $String ? $util.Long.prototype.toString.call(message.totalBytes) : options.longs === $Number ? new $util.LongBits(message.totalBytes.low >>> 0, message.totalBytes.high >>> 0).toNumber() : message.totalBytes;
+                    if (message.ordered != null && $Object.hasOwnProperty.call(message, "ordered"))
                         object.ordered = message.ordered;
-                    if (message.appMetadata != null && message.hasOwnProperty("appMetadata"))
-                        object.appMetadata = options.bytes === String ? $util.base64.encode(message.appMetadata, 0, message.appMetadata.length) : options.bytes === Array ? Array.prototype.slice.call(message.appMetadata) : message.appMetadata;
+                    if (message.appMetadata != null && $Object.hasOwnProperty.call(message, "appMetadata"))
+                        object.appMetadata = options.bytes === $String ? $util.base64.encode(message.appMetadata, 0, message.appMetadata.length) : options.bytes === $Array ? $Array.prototype.slice.call(message.appMetadata) : message.appMetadata;
                     return object;
                 };
 
@@ -3111,23 +4037,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                FlightInfo.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                FlightInfo.prototype.toJSON = function() {
+                    return FlightInfo.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for FlightInfo
+                 * Gets the type url for FlightInfo
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.FlightInfo
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                FlightInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.FlightInfo";
+                FlightInfo.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.FlightInfo";
                 };
 
                 return FlightInfo;
@@ -3137,32 +4062,45 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a PollInfo.
+                 * @typedef {Object} arrow.flight.protocol.PollInfo.$Properties
+                 * @property {arrow.flight.protocol.FlightInfo.$Properties|null} [info] PollInfo info
+                 * @property {arrow.flight.protocol.FlightDescriptor.$Properties|null} [flightDescriptor] PollInfo flightDescriptor
+                 * @property {number|null} [progress] PollInfo progress
+                 * @property {google.protobuf.Timestamp.$Properties|null} [expirationTime] PollInfo expirationTime
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a PollInfo.
                  * @memberof arrow.flight.protocol
                  * @interface IPollInfo
-                 * @property {arrow.flight.protocol.IFlightInfo|null} [info] PollInfo info
-                 * @property {arrow.flight.protocol.IFlightDescriptor|null} [flightDescriptor] PollInfo flightDescriptor
-                 * @property {number|null} [progress] PollInfo progress
-                 * @property {google.protobuf.ITimestamp|null} [expirationTime] PollInfo expirationTime
+                 * @augments arrow.flight.protocol.PollInfo.$Properties
+                 * @deprecated Use arrow.flight.protocol.PollInfo.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a PollInfo.
+                 * @typedef {arrow.flight.protocol.PollInfo.$Properties} arrow.flight.protocol.PollInfo.$Shape
                  */
 
                 /**
                  * Constructs a new PollInfo.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a PollInfo.
-                 * @implements IPollInfo
                  * @constructor
-                 * @param {arrow.flight.protocol.IPollInfo=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.PollInfo.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function PollInfo(properties) {
+                var PollInfo = function (properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * PollInfo info.
-                 * @member {arrow.flight.protocol.IFlightInfo|null|undefined} info
+                 * @member {arrow.flight.protocol.FlightInfo.$Properties|null|undefined} info
                  * @memberof arrow.flight.protocol.PollInfo
                  * @instance
                  */
@@ -3170,7 +4108,7 @@ $root.arrow = (function() {
 
                 /**
                  * PollInfo flightDescriptor.
-                 * @member {arrow.flight.protocol.IFlightDescriptor|null|undefined} flightDescriptor
+                 * @member {arrow.flight.protocol.FlightDescriptor.$Properties|null|undefined} flightDescriptor
                  * @memberof arrow.flight.protocol.PollInfo
                  * @instance
                  */
@@ -3186,7 +4124,7 @@ $root.arrow = (function() {
 
                 /**
                  * PollInfo expirationTime.
-                 * @member {google.protobuf.ITimestamp|null|undefined} expirationTime
+                 * @member {google.protobuf.Timestamp.$Properties|null|undefined} expirationTime
                  * @memberof arrow.flight.protocol.PollInfo
                  * @instance
                  */
@@ -3196,7 +4134,7 @@ $root.arrow = (function() {
                 var $oneOfFields;
 
                 // Virtual OneOf for proto3 optional field
-                Object.defineProperty(PollInfo.prototype, "_progress", {
+                $Object.defineProperty(PollInfo.prototype, "_progress", {
                     get: $util.oneOfGetter($oneOfFields = ["progress"]),
                     set: $util.oneOfSetter($oneOfFields)
                 });
@@ -3206,10 +4144,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.PollInfo
                  * @static
-                 * @param {arrow.flight.protocol.IPollInfo=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.PollInfo.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.PollInfo} PollInfo instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.PollInfo.$Shape): arrow.flight.protocol.PollInfo & arrow.flight.protocol.PollInfo.$Shape;
+                 *   (properties?: arrow.flight.protocol.PollInfo.$Properties): arrow.flight.protocol.PollInfo;
+                 * }}
                  */
-                PollInfo.create = function create(properties) {
+                PollInfo.create = function(properties) {
                     return new PollInfo(properties);
                 };
 
@@ -3218,21 +4160,28 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.PollInfo
                  * @static
-                 * @param {arrow.flight.protocol.IPollInfo} message PollInfo message or plain object to encode
+                 * @param {arrow.flight.protocol.PollInfo.$Properties} message PollInfo message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                PollInfo.encode = function encode(message, writer) {
+                PollInfo.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.info != null && Object.hasOwnProperty.call(message, "info"))
-                        $root.arrow.flight.protocol.FlightInfo.encode(message.info, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    if (message.flightDescriptor != null && Object.hasOwnProperty.call(message, "flightDescriptor"))
-                        $root.arrow.flight.protocol.FlightDescriptor.encode(message.flightDescriptor, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.progress != null && Object.hasOwnProperty.call(message, "progress"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.info != null && $Object.hasOwnProperty.call(message, "info"))
+                        $root.arrow.flight.protocol.FlightInfo.encode(message.info, writer.uint32(/* id 1, wireType 2 =*/10).fork(), _depth + 1).ldelim();
+                    if (message.flightDescriptor != null && $Object.hasOwnProperty.call(message, "flightDescriptor"))
+                        $root.arrow.flight.protocol.FlightDescriptor.encode(message.flightDescriptor, writer.uint32(/* id 2, wireType 2 =*/18).fork(), _depth + 1).ldelim();
+                    if (message.progress != null && $Object.hasOwnProperty.call(message, "progress"))
                         writer.uint32(/* id 3, wireType 1 =*/25).double(message.progress);
-                    if (message.expirationTime != null && Object.hasOwnProperty.call(message, "expirationTime"))
-                        $root.google.protobuf.Timestamp.encode(message.expirationTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.expirationTime != null && $Object.hasOwnProperty.call(message, "expirationTime"))
+                        $root.google.protobuf.Timestamp.encode(message.expirationTime, writer.uint32(/* id 4, wireType 2 =*/34).fork(), _depth + 1).ldelim();
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -3241,12 +4190,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.PollInfo
                  * @static
-                 * @param {arrow.flight.protocol.IPollInfo} message PollInfo message or plain object to encode
+                 * @param {arrow.flight.protocol.PollInfo.$Properties} message PollInfo message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                PollInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                PollInfo.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -3256,38 +4205,76 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.PollInfo} PollInfo
+                 * @returns {arrow.flight.protocol.PollInfo & arrow.flight.protocol.PollInfo.$Shape} PollInfo
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PollInfo.decode = function decode(reader, length) {
+                PollInfo.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.PollInfo();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.PollInfo();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.info = $root.arrow.flight.protocol.FlightInfo.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 2: {
-                                message.flightDescriptor = $root.arrow.flight.protocol.FlightDescriptor.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 3: {
-                                message.progress = reader.double();
-                                break;
-                            }
-                        case 4: {
-                                message.expirationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
+                        case 1: {
+                                if (wireType !== 2)
+                                    break;
+                                message.info = $root.arrow.flight.protocol.FlightInfo.decode(reader, reader.uint32(), $undefined, _depth + 1, message.info);
+                                continue;
+                            }
+                        case 2: {
+                                if (wireType !== 2)
+                                    break;
+                                message.flightDescriptor = $root.arrow.flight.protocol.FlightDescriptor.decode(reader, reader.uint32(), $undefined, _depth + 1, message.flightDescriptor);
+                                continue;
+                            }
+                        case 3: {
+                                if (wireType !== 1)
+                                    break;
+                                message.progress = reader.double();
+                                message._progress = "progress";
+                                continue;
+                            }
+                        case 4: {
+                                if (wireType !== 2)
+                                    break;
+                                message.expirationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), $undefined, _depth + 1, message.expirationTime);
+                                continue;
+                            }
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -3297,11 +4284,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.PollInfo
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.PollInfo} PollInfo
+                 * @returns {arrow.flight.protocol.PollInfo & arrow.flight.protocol.PollInfo.$Shape} PollInfo
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PollInfo.decodeDelimited = function decodeDelimited(reader) {
+                PollInfo.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -3315,27 +4302,31 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                PollInfo.verify = function verify(message) {
+                PollInfo.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
                     var properties = {};
-                    if (message.info != null && message.hasOwnProperty("info")) {
-                        var error = $root.arrow.flight.protocol.FlightInfo.verify(message.info);
+                    if (message.info != null && $Object.hasOwnProperty.call(message, "info")) {
+                        var error = $root.arrow.flight.protocol.FlightInfo.verify(message.info, _depth + 1);
                         if (error)
                             return "info." + error;
                     }
-                    if (message.flightDescriptor != null && message.hasOwnProperty("flightDescriptor")) {
-                        var error = $root.arrow.flight.protocol.FlightDescriptor.verify(message.flightDescriptor);
+                    if (message.flightDescriptor != null && $Object.hasOwnProperty.call(message, "flightDescriptor")) {
+                        var error = $root.arrow.flight.protocol.FlightDescriptor.verify(message.flightDescriptor, _depth + 1);
                         if (error)
                             return "flightDescriptor." + error;
                     }
-                    if (message.progress != null && message.hasOwnProperty("progress")) {
+                    if (message.progress != null && $Object.hasOwnProperty.call(message, "progress")) {
                         properties._progress = 1;
                         if (typeof message.progress !== "number")
                             return "progress: number expected";
                     }
-                    if (message.expirationTime != null && message.hasOwnProperty("expirationTime")) {
-                        var error = $root.google.protobuf.Timestamp.verify(message.expirationTime);
+                    if (message.expirationTime != null && $Object.hasOwnProperty.call(message, "expirationTime")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.expirationTime, _depth + 1);
                         if (error)
                             return "expirationTime." + error;
                     }
@@ -3350,26 +4341,32 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.PollInfo} PollInfo
                  */
-                PollInfo.fromObject = function fromObject(object) {
+                PollInfo.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.PollInfo)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.PollInfo: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.PollInfo();
                     if (object.info != null) {
-                        if (typeof object.info !== "object")
-                            throw TypeError(".arrow.flight.protocol.PollInfo.info: object expected");
-                        message.info = $root.arrow.flight.protocol.FlightInfo.fromObject(object.info);
+                        if (!$util.isObject(object.info))
+                            throw $TypeError(".arrow.flight.protocol.PollInfo.info: object expected");
+                        message.info = $root.arrow.flight.protocol.FlightInfo.fromObject(object.info, _depth + 1);
                     }
                     if (object.flightDescriptor != null) {
-                        if (typeof object.flightDescriptor !== "object")
-                            throw TypeError(".arrow.flight.protocol.PollInfo.flightDescriptor: object expected");
-                        message.flightDescriptor = $root.arrow.flight.protocol.FlightDescriptor.fromObject(object.flightDescriptor);
+                        if (!$util.isObject(object.flightDescriptor))
+                            throw $TypeError(".arrow.flight.protocol.PollInfo.flightDescriptor: object expected");
+                        message.flightDescriptor = $root.arrow.flight.protocol.FlightDescriptor.fromObject(object.flightDescriptor, _depth + 1);
                     }
                     if (object.progress != null)
-                        message.progress = Number(object.progress);
+                        message.progress = $Number(object.progress);
                     if (object.expirationTime != null) {
-                        if (typeof object.expirationTime !== "object")
-                            throw TypeError(".arrow.flight.protocol.PollInfo.expirationTime: object expected");
-                        message.expirationTime = $root.google.protobuf.Timestamp.fromObject(object.expirationTime);
+                        if (!$util.isObject(object.expirationTime))
+                            throw $TypeError(".arrow.flight.protocol.PollInfo.expirationTime: object expected");
+                        message.expirationTime = $root.google.protobuf.Timestamp.fromObject(object.expirationTime, _depth + 1);
                     }
                     return message;
                 };
@@ -3383,26 +4380,27 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                PollInfo.toObject = function toObject(message, options) {
+                PollInfo.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.info = null;
                         object.flightDescriptor = null;
                         object.expirationTime = null;
                     }
-                    if (message.info != null && message.hasOwnProperty("info"))
-                        object.info = $root.arrow.flight.protocol.FlightInfo.toObject(message.info, options);
-                    if (message.flightDescriptor != null && message.hasOwnProperty("flightDescriptor"))
-                        object.flightDescriptor = $root.arrow.flight.protocol.FlightDescriptor.toObject(message.flightDescriptor, options);
-                    if (message.progress != null && message.hasOwnProperty("progress")) {
-                        object.progress = options.json && !isFinite(message.progress) ? String(message.progress) : message.progress;
-                        if (options.oneofs)
-                            object._progress = "progress";
-                    }
-                    if (message.expirationTime != null && message.hasOwnProperty("expirationTime"))
-                        object.expirationTime = $root.google.protobuf.Timestamp.toObject(message.expirationTime, options);
+                    if (message.info != null && $Object.hasOwnProperty.call(message, "info"))
+                        object.info = $root.arrow.flight.protocol.FlightInfo.toObject(message.info, options, _depth + 1);
+                    if (message.flightDescriptor != null && $Object.hasOwnProperty.call(message, "flightDescriptor"))
+                        object.flightDescriptor = $root.arrow.flight.protocol.FlightDescriptor.toObject(message.flightDescriptor, options, _depth + 1);
+                    if (message.progress != null && $Object.hasOwnProperty.call(message, "progress"))
+                        object.progress = options.json && !$isFinite(message.progress) ? $String(message.progress) : message.progress;
+                    if (message.expirationTime != null && $Object.hasOwnProperty.call(message, "expirationTime"))
+                        object.expirationTime = $root.google.protobuf.Timestamp.toObject(message.expirationTime, options, _depth + 1);
                     return object;
                 };
 
@@ -3413,23 +4411,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                PollInfo.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                PollInfo.prototype.toJSON = function() {
+                    return PollInfo.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for PollInfo
+                 * Gets the type url for PollInfo
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.PollInfo
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                PollInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.PollInfo";
+                PollInfo.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.PollInfo";
                 };
 
                 return PollInfo;
@@ -3439,29 +4436,42 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a CancelFlightInfoRequest.
+                 * @typedef {Object} arrow.flight.protocol.CancelFlightInfoRequest.$Properties
+                 * @property {arrow.flight.protocol.FlightInfo.$Properties|null} [info] CancelFlightInfoRequest info
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a CancelFlightInfoRequest.
                  * @memberof arrow.flight.protocol
                  * @interface ICancelFlightInfoRequest
-                 * @property {arrow.flight.protocol.IFlightInfo|null} [info] CancelFlightInfoRequest info
+                 * @augments arrow.flight.protocol.CancelFlightInfoRequest.$Properties
+                 * @deprecated Use arrow.flight.protocol.CancelFlightInfoRequest.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a CancelFlightInfoRequest.
+                 * @typedef {arrow.flight.protocol.CancelFlightInfoRequest.$Properties} arrow.flight.protocol.CancelFlightInfoRequest.$Shape
                  */
 
                 /**
                  * Constructs a new CancelFlightInfoRequest.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a CancelFlightInfoRequest.
-                 * @implements ICancelFlightInfoRequest
                  * @constructor
-                 * @param {arrow.flight.protocol.ICancelFlightInfoRequest=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.CancelFlightInfoRequest.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function CancelFlightInfoRequest(properties) {
+                var CancelFlightInfoRequest = function (properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * CancelFlightInfoRequest info.
-                 * @member {arrow.flight.protocol.IFlightInfo|null|undefined} info
+                 * @member {arrow.flight.protocol.FlightInfo.$Properties|null|undefined} info
                  * @memberof arrow.flight.protocol.CancelFlightInfoRequest
                  * @instance
                  */
@@ -3472,10 +4482,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.CancelFlightInfoRequest
                  * @static
-                 * @param {arrow.flight.protocol.ICancelFlightInfoRequest=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.CancelFlightInfoRequest.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.CancelFlightInfoRequest} CancelFlightInfoRequest instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.CancelFlightInfoRequest.$Shape): arrow.flight.protocol.CancelFlightInfoRequest & arrow.flight.protocol.CancelFlightInfoRequest.$Shape;
+                 *   (properties?: arrow.flight.protocol.CancelFlightInfoRequest.$Properties): arrow.flight.protocol.CancelFlightInfoRequest;
+                 * }}
                  */
-                CancelFlightInfoRequest.create = function create(properties) {
+                CancelFlightInfoRequest.create = function(properties) {
                     return new CancelFlightInfoRequest(properties);
                 };
 
@@ -3484,15 +4498,22 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.CancelFlightInfoRequest
                  * @static
-                 * @param {arrow.flight.protocol.ICancelFlightInfoRequest} message CancelFlightInfoRequest message or plain object to encode
+                 * @param {arrow.flight.protocol.CancelFlightInfoRequest.$Properties} message CancelFlightInfoRequest message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                CancelFlightInfoRequest.encode = function encode(message, writer) {
+                CancelFlightInfoRequest.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.info != null && Object.hasOwnProperty.call(message, "info"))
-                        $root.arrow.flight.protocol.FlightInfo.encode(message.info, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.info != null && $Object.hasOwnProperty.call(message, "info"))
+                        $root.arrow.flight.protocol.FlightInfo.encode(message.info, writer.uint32(/* id 1, wireType 2 =*/10).fork(), _depth + 1).ldelim();
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -3501,12 +4522,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.CancelFlightInfoRequest
                  * @static
-                 * @param {arrow.flight.protocol.ICancelFlightInfoRequest} message CancelFlightInfoRequest message or plain object to encode
+                 * @param {arrow.flight.protocol.CancelFlightInfoRequest.$Properties} message CancelFlightInfoRequest message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                CancelFlightInfoRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                CancelFlightInfoRequest.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -3516,26 +4537,57 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.CancelFlightInfoRequest} CancelFlightInfoRequest
+                 * @returns {arrow.flight.protocol.CancelFlightInfoRequest & arrow.flight.protocol.CancelFlightInfoRequest.$Shape} CancelFlightInfoRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CancelFlightInfoRequest.decode = function decode(reader, length) {
+                CancelFlightInfoRequest.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.CancelFlightInfoRequest();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.CancelFlightInfoRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.info = $root.arrow.flight.protocol.FlightInfo.decode(reader, reader.uint32());
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
+                        case 1: {
+                                if (wireType !== 2)
+                                    break;
+                                message.info = $root.arrow.flight.protocol.FlightInfo.decode(reader, reader.uint32(), $undefined, _depth + 1, message.info);
+                                continue;
+                            }
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -3545,11 +4597,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.CancelFlightInfoRequest
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.CancelFlightInfoRequest} CancelFlightInfoRequest
+                 * @returns {arrow.flight.protocol.CancelFlightInfoRequest & arrow.flight.protocol.CancelFlightInfoRequest.$Shape} CancelFlightInfoRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CancelFlightInfoRequest.decodeDelimited = function decodeDelimited(reader) {
+                CancelFlightInfoRequest.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -3563,11 +4615,15 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                CancelFlightInfoRequest.verify = function verify(message) {
+                CancelFlightInfoRequest.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.info != null && message.hasOwnProperty("info")) {
-                        var error = $root.arrow.flight.protocol.FlightInfo.verify(message.info);
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
+                    if (message.info != null && $Object.hasOwnProperty.call(message, "info")) {
+                        var error = $root.arrow.flight.protocol.FlightInfo.verify(message.info, _depth + 1);
                         if (error)
                             return "info." + error;
                     }
@@ -3582,14 +4638,20 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.CancelFlightInfoRequest} CancelFlightInfoRequest
                  */
-                CancelFlightInfoRequest.fromObject = function fromObject(object) {
+                CancelFlightInfoRequest.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.CancelFlightInfoRequest)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.CancelFlightInfoRequest: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.CancelFlightInfoRequest();
                     if (object.info != null) {
-                        if (typeof object.info !== "object")
-                            throw TypeError(".arrow.flight.protocol.CancelFlightInfoRequest.info: object expected");
-                        message.info = $root.arrow.flight.protocol.FlightInfo.fromObject(object.info);
+                        if (!$util.isObject(object.info))
+                            throw $TypeError(".arrow.flight.protocol.CancelFlightInfoRequest.info: object expected");
+                        message.info = $root.arrow.flight.protocol.FlightInfo.fromObject(object.info, _depth + 1);
                     }
                     return message;
                 };
@@ -3603,14 +4665,18 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                CancelFlightInfoRequest.toObject = function toObject(message, options) {
+                CancelFlightInfoRequest.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.defaults)
                         object.info = null;
-                    if (message.info != null && message.hasOwnProperty("info"))
-                        object.info = $root.arrow.flight.protocol.FlightInfo.toObject(message.info, options);
+                    if (message.info != null && $Object.hasOwnProperty.call(message, "info"))
+                        object.info = $root.arrow.flight.protocol.FlightInfo.toObject(message.info, options, _depth + 1);
                     return object;
                 };
 
@@ -3621,23 +4687,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                CancelFlightInfoRequest.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                CancelFlightInfoRequest.prototype.toJSON = function() {
+                    return CancelFlightInfoRequest.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for CancelFlightInfoRequest
+                 * Gets the type url for CancelFlightInfoRequest
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.CancelFlightInfoRequest
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                CancelFlightInfoRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.CancelFlightInfoRequest";
+                CancelFlightInfoRequest.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.CancelFlightInfoRequest";
                 };
 
                 return CancelFlightInfoRequest;
@@ -3653,7 +4718,7 @@ $root.arrow = (function() {
              * @property {number} CANCEL_STATUS_NOT_CANCELLABLE=3 CANCEL_STATUS_NOT_CANCELLABLE value
              */
             protocol.CancelStatus = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
+                var valuesById = $Object.create(null), values = $Object.create(valuesById);
                 values[valuesById[0] = "CANCEL_STATUS_UNSPECIFIED"] = 0;
                 values[valuesById[1] = "CANCEL_STATUS_CANCELLED"] = 1;
                 values[valuesById[2] = "CANCEL_STATUS_CANCELLING"] = 2;
@@ -3665,25 +4730,38 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a CancelFlightInfoResult.
+                 * @typedef {Object} arrow.flight.protocol.CancelFlightInfoResult.$Properties
+                 * @property {arrow.flight.protocol.CancelStatus|null} [status] CancelFlightInfoResult status
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a CancelFlightInfoResult.
                  * @memberof arrow.flight.protocol
                  * @interface ICancelFlightInfoResult
-                 * @property {arrow.flight.protocol.CancelStatus|null} [status] CancelFlightInfoResult status
+                 * @augments arrow.flight.protocol.CancelFlightInfoResult.$Properties
+                 * @deprecated Use arrow.flight.protocol.CancelFlightInfoResult.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a CancelFlightInfoResult.
+                 * @typedef {arrow.flight.protocol.CancelFlightInfoResult.$Properties} arrow.flight.protocol.CancelFlightInfoResult.$Shape
                  */
 
                 /**
                  * Constructs a new CancelFlightInfoResult.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a CancelFlightInfoResult.
-                 * @implements ICancelFlightInfoResult
                  * @constructor
-                 * @param {arrow.flight.protocol.ICancelFlightInfoResult=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.CancelFlightInfoResult.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function CancelFlightInfoResult(properties) {
+                var CancelFlightInfoResult = function (properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * CancelFlightInfoResult status.
@@ -3698,10 +4776,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.CancelFlightInfoResult
                  * @static
-                 * @param {arrow.flight.protocol.ICancelFlightInfoResult=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.CancelFlightInfoResult.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.CancelFlightInfoResult} CancelFlightInfoResult instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.CancelFlightInfoResult.$Shape): arrow.flight.protocol.CancelFlightInfoResult & arrow.flight.protocol.CancelFlightInfoResult.$Shape;
+                 *   (properties?: arrow.flight.protocol.CancelFlightInfoResult.$Properties): arrow.flight.protocol.CancelFlightInfoResult;
+                 * }}
                  */
-                CancelFlightInfoResult.create = function create(properties) {
+                CancelFlightInfoResult.create = function(properties) {
                     return new CancelFlightInfoResult(properties);
                 };
 
@@ -3710,15 +4792,22 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.CancelFlightInfoResult
                  * @static
-                 * @param {arrow.flight.protocol.ICancelFlightInfoResult} message CancelFlightInfoResult message or plain object to encode
+                 * @param {arrow.flight.protocol.CancelFlightInfoResult.$Properties} message CancelFlightInfoResult message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                CancelFlightInfoResult.encode = function encode(message, writer) {
+                CancelFlightInfoResult.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.status != null && $Object.hasOwnProperty.call(message, "status") && message.status !== 0)
                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.status);
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -3727,12 +4816,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.CancelFlightInfoResult
                  * @static
-                 * @param {arrow.flight.protocol.ICancelFlightInfoResult} message CancelFlightInfoResult message or plain object to encode
+                 * @param {arrow.flight.protocol.CancelFlightInfoResult.$Properties} message CancelFlightInfoResult message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                CancelFlightInfoResult.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                CancelFlightInfoResult.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -3742,26 +4831,60 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.CancelFlightInfoResult} CancelFlightInfoResult
+                 * @returns {arrow.flight.protocol.CancelFlightInfoResult & arrow.flight.protocol.CancelFlightInfoResult.$Shape} CancelFlightInfoResult
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CancelFlightInfoResult.decode = function decode(reader, length) {
+                CancelFlightInfoResult.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.CancelFlightInfoResult();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.CancelFlightInfoResult();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.status = reader.int32();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
+                        case 1: {
+                                if (wireType !== 0)
+                                    break;
+                                if (value = reader.int32())
+                                    message.status = value;
+                                else
+                                    delete message.status;
+                                continue;
+                            }
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -3771,11 +4894,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.CancelFlightInfoResult
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.CancelFlightInfoResult} CancelFlightInfoResult
+                 * @returns {arrow.flight.protocol.CancelFlightInfoResult & arrow.flight.protocol.CancelFlightInfoResult.$Shape} CancelFlightInfoResult
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CancelFlightInfoResult.decodeDelimited = function decodeDelimited(reader) {
+                CancelFlightInfoResult.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -3789,19 +4912,16 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                CancelFlightInfoResult.verify = function verify(message) {
+                CancelFlightInfoResult.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.status != null && message.hasOwnProperty("status"))
-                        switch (message.status) {
-                        default:
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
+                    if (message.status != null && $Object.hasOwnProperty.call(message, "status"))
+                        if (typeof message.status !== "number" || (message.status | 0) !== message.status)
                             return "status: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                            break;
-                        }
                     return null;
                 };
 
@@ -3813,34 +4933,38 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.CancelFlightInfoResult} CancelFlightInfoResult
                  */
-                CancelFlightInfoResult.fromObject = function fromObject(object) {
+                CancelFlightInfoResult.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.CancelFlightInfoResult)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.CancelFlightInfoResult: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.CancelFlightInfoResult();
-                    switch (object.status) {
-                    default:
-                        if (typeof object.status === "number") {
-                            message.status = object.status;
+                    if (object.status !== 0 && (typeof object.status !== "string" || $root.arrow.flight.protocol.CancelStatus[object.status] !== 0))
+                        switch (object.status) {
+                        case "CANCEL_STATUS_UNSPECIFIED":
+                        case 0:
+                            message.status = 0;
                             break;
+                        case "CANCEL_STATUS_CANCELLED":
+                        case 1:
+                            message.status = 1;
+                            break;
+                        case "CANCEL_STATUS_CANCELLING":
+                        case 2:
+                            message.status = 2;
+                            break;
+                        case "CANCEL_STATUS_NOT_CANCELLABLE":
+                        case 3:
+                            message.status = 3;
+                            break;
+                        default:
+                            if (typeof object.status === "number" && (object.status | 0) === object.status)
+                                message.status = object.status;
                         }
-                        break;
-                    case "CANCEL_STATUS_UNSPECIFIED":
-                    case 0:
-                        message.status = 0;
-                        break;
-                    case "CANCEL_STATUS_CANCELLED":
-                    case 1:
-                        message.status = 1;
-                        break;
-                    case "CANCEL_STATUS_CANCELLING":
-                    case 2:
-                        message.status = 2;
-                        break;
-                    case "CANCEL_STATUS_NOT_CANCELLABLE":
-                    case 3:
-                        message.status = 3;
-                        break;
-                    }
                     return message;
                 };
 
@@ -3853,14 +4977,18 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                CancelFlightInfoResult.toObject = function toObject(message, options) {
+                CancelFlightInfoResult.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.defaults)
-                        object.status = options.enums === String ? "CANCEL_STATUS_UNSPECIFIED" : 0;
-                    if (message.status != null && message.hasOwnProperty("status"))
-                        object.status = options.enums === String ? $root.arrow.flight.protocol.CancelStatus[message.status] === undefined ? message.status : $root.arrow.flight.protocol.CancelStatus[message.status] : message.status;
+                        object.status = options.enums === $String ? "CANCEL_STATUS_UNSPECIFIED" : 0;
+                    if (message.status != null && $Object.hasOwnProperty.call(message, "status"))
+                        object.status = options.enums === $String ? $root.arrow.flight.protocol.CancelStatus[message.status] === $undefined ? message.status : $root.arrow.flight.protocol.CancelStatus[message.status] : message.status;
                     return object;
                 };
 
@@ -3871,23 +4999,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                CancelFlightInfoResult.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                CancelFlightInfoResult.prototype.toJSON = function() {
+                    return CancelFlightInfoResult.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for CancelFlightInfoResult
+                 * Gets the type url for CancelFlightInfoResult
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.CancelFlightInfoResult
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                CancelFlightInfoResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.CancelFlightInfoResult";
+                CancelFlightInfoResult.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.CancelFlightInfoResult";
                 };
 
                 return CancelFlightInfoResult;
@@ -3897,25 +5024,38 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a Ticket.
+                 * @typedef {Object} arrow.flight.protocol.Ticket.$Properties
+                 * @property {Uint8Array|null} [ticket] Ticket ticket
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a Ticket.
                  * @memberof arrow.flight.protocol
                  * @interface ITicket
-                 * @property {Uint8Array|null} [ticket] Ticket ticket
+                 * @augments arrow.flight.protocol.Ticket.$Properties
+                 * @deprecated Use arrow.flight.protocol.Ticket.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a Ticket.
+                 * @typedef {arrow.flight.protocol.Ticket.$Properties} arrow.flight.protocol.Ticket.$Shape
                  */
 
                 /**
                  * Constructs a new Ticket.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a Ticket.
-                 * @implements ITicket
                  * @constructor
-                 * @param {arrow.flight.protocol.ITicket=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.Ticket.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function Ticket(properties) {
+                var Ticket = function (properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * Ticket ticket.
@@ -3930,10 +5070,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.Ticket
                  * @static
-                 * @param {arrow.flight.protocol.ITicket=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.Ticket.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.Ticket} Ticket instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.Ticket.$Shape): arrow.flight.protocol.Ticket & arrow.flight.protocol.Ticket.$Shape;
+                 *   (properties?: arrow.flight.protocol.Ticket.$Properties): arrow.flight.protocol.Ticket;
+                 * }}
                  */
-                Ticket.create = function create(properties) {
+                Ticket.create = function(properties) {
                     return new Ticket(properties);
                 };
 
@@ -3942,15 +5086,22 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.Ticket
                  * @static
-                 * @param {arrow.flight.protocol.ITicket} message Ticket message or plain object to encode
+                 * @param {arrow.flight.protocol.Ticket.$Properties} message Ticket message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Ticket.encode = function encode(message, writer) {
+                Ticket.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.ticket != null && Object.hasOwnProperty.call(message, "ticket"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.ticket != null && $Object.hasOwnProperty.call(message, "ticket") && message.ticket.length)
                         writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.ticket);
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -3959,12 +5110,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.Ticket
                  * @static
-                 * @param {arrow.flight.protocol.ITicket} message Ticket message or plain object to encode
+                 * @param {arrow.flight.protocol.Ticket.$Properties} message Ticket message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Ticket.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                Ticket.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -3974,26 +5125,60 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.Ticket} Ticket
+                 * @returns {arrow.flight.protocol.Ticket & arrow.flight.protocol.Ticket.$Shape} Ticket
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Ticket.decode = function decode(reader, length) {
+                Ticket.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.Ticket();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.Ticket();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.ticket = reader.bytes();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
+                        case 1: {
+                                if (wireType !== 2)
+                                    break;
+                                if ((value = reader.bytes()).length)
+                                    message.ticket = value;
+                                else
+                                    delete message.ticket;
+                                continue;
+                            }
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -4003,11 +5188,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.Ticket
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.Ticket} Ticket
+                 * @returns {arrow.flight.protocol.Ticket & arrow.flight.protocol.Ticket.$Shape} Ticket
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Ticket.decodeDelimited = function decodeDelimited(reader) {
+                Ticket.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -4021,10 +5206,14 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Ticket.verify = function verify(message) {
+                Ticket.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.ticket != null && message.hasOwnProperty("ticket"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
+                    if (message.ticket != null && $Object.hasOwnProperty.call(message, "ticket"))
                         if (!(message.ticket && typeof message.ticket.length === "number" || $util.isString(message.ticket)))
                             return "ticket: buffer expected";
                     return null;
@@ -4038,15 +5227,22 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.Ticket} Ticket
                  */
-                Ticket.fromObject = function fromObject(object) {
+                Ticket.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.Ticket)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.Ticket: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.Ticket();
                     if (object.ticket != null)
-                        if (typeof object.ticket === "string")
-                            $util.base64.decode(object.ticket, message.ticket = $util.newBuffer($util.base64.length(object.ticket)), 0);
-                        else if (object.ticket.length >= 0)
-                            message.ticket = object.ticket;
+                        if (object.ticket.length)
+                            if (typeof object.ticket === "string")
+                                $util.base64.decode(object.ticket, message.ticket = $util.newBuffer($util.base64.length(object.ticket)), 0);
+                            else if (object.ticket.length >= 0)
+                                message.ticket = object.ticket;
                     return message;
                 };
 
@@ -4059,20 +5255,24 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Ticket.toObject = function toObject(message, options) {
+                Ticket.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.defaults)
-                        if (options.bytes === String)
+                        if (options.bytes === $String)
                             object.ticket = "";
                         else {
                             object.ticket = [];
-                            if (options.bytes !== Array)
+                            if (options.bytes !== $Array)
                                 object.ticket = $util.newBuffer(object.ticket);
                         }
-                    if (message.ticket != null && message.hasOwnProperty("ticket"))
-                        object.ticket = options.bytes === String ? $util.base64.encode(message.ticket, 0, message.ticket.length) : options.bytes === Array ? Array.prototype.slice.call(message.ticket) : message.ticket;
+                    if (message.ticket != null && $Object.hasOwnProperty.call(message, "ticket"))
+                        object.ticket = options.bytes === $String ? $util.base64.encode(message.ticket, 0, message.ticket.length) : options.bytes === $Array ? $Array.prototype.slice.call(message.ticket) : message.ticket;
                     return object;
                 };
 
@@ -4083,23 +5283,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                Ticket.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                Ticket.prototype.toJSON = function() {
+                    return Ticket.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for Ticket
+                 * Gets the type url for Ticket
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.Ticket
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                Ticket.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.Ticket";
+                Ticket.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.Ticket";
                 };
 
                 return Ticket;
@@ -4109,25 +5308,38 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a Location.
+                 * @typedef {Object} arrow.flight.protocol.Location.$Properties
+                 * @property {string|null} [uri] Location uri
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a Location.
                  * @memberof arrow.flight.protocol
                  * @interface ILocation
-                 * @property {string|null} [uri] Location uri
+                 * @augments arrow.flight.protocol.Location.$Properties
+                 * @deprecated Use arrow.flight.protocol.Location.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a Location.
+                 * @typedef {arrow.flight.protocol.Location.$Properties} arrow.flight.protocol.Location.$Shape
                  */
 
                 /**
                  * Constructs a new Location.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a Location.
-                 * @implements ILocation
                  * @constructor
-                 * @param {arrow.flight.protocol.ILocation=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.Location.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function Location(properties) {
+                var Location = function (properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * Location uri.
@@ -4142,10 +5354,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.Location
                  * @static
-                 * @param {arrow.flight.protocol.ILocation=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.Location.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.Location} Location instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.Location.$Shape): arrow.flight.protocol.Location & arrow.flight.protocol.Location.$Shape;
+                 *   (properties?: arrow.flight.protocol.Location.$Properties): arrow.flight.protocol.Location;
+                 * }}
                  */
-                Location.create = function create(properties) {
+                Location.create = function(properties) {
                     return new Location(properties);
                 };
 
@@ -4154,15 +5370,22 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.Location
                  * @static
-                 * @param {arrow.flight.protocol.ILocation} message Location message or plain object to encode
+                 * @param {arrow.flight.protocol.Location.$Properties} message Location message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Location.encode = function encode(message, writer) {
+                Location.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.uri != null && $Object.hasOwnProperty.call(message, "uri") && message.uri !== "")
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -4171,12 +5394,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.Location
                  * @static
-                 * @param {arrow.flight.protocol.ILocation} message Location message or plain object to encode
+                 * @param {arrow.flight.protocol.Location.$Properties} message Location message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Location.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                Location.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -4186,26 +5409,60 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.Location} Location
+                 * @returns {arrow.flight.protocol.Location & arrow.flight.protocol.Location.$Shape} Location
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Location.decode = function decode(reader, length) {
+                Location.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.Location();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.Location();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.uri = reader.string();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
+                        case 1: {
+                                if (wireType !== 2)
+                                    break;
+                                if ((value = reader.stringVerify()).length)
+                                    message.uri = value;
+                                else
+                                    delete message.uri;
+                                continue;
+                            }
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -4215,11 +5472,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.Location
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.Location} Location
+                 * @returns {arrow.flight.protocol.Location & arrow.flight.protocol.Location.$Shape} Location
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Location.decodeDelimited = function decodeDelimited(reader) {
+                Location.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -4233,10 +5490,14 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Location.verify = function verify(message) {
+                Location.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.uri != null && message.hasOwnProperty("uri"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
+                    if (message.uri != null && $Object.hasOwnProperty.call(message, "uri"))
                         if (!$util.isString(message.uri))
                             return "uri: string expected";
                     return null;
@@ -4250,12 +5511,19 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.Location} Location
                  */
-                Location.fromObject = function fromObject(object) {
+                Location.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.Location)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.Location: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.Location();
                     if (object.uri != null)
-                        message.uri = String(object.uri);
+                        if (typeof object.uri !== "string" || object.uri.length)
+                            message.uri = $String(object.uri);
                     return message;
                 };
 
@@ -4268,13 +5536,17 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Location.toObject = function toObject(message, options) {
+                Location.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.defaults)
                         object.uri = "";
-                    if (message.uri != null && message.hasOwnProperty("uri"))
+                    if (message.uri != null && $Object.hasOwnProperty.call(message, "uri"))
                         object.uri = message.uri;
                     return object;
                 };
@@ -4286,23 +5558,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                Location.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                Location.prototype.toJSON = function() {
+                    return Location.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for Location
+                 * Gets the type url for Location
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.Location
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                Location.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.Location";
+                Location.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.Location";
                 };
 
                 return Location;
@@ -4312,33 +5583,46 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a FlightEndpoint.
+                 * @typedef {Object} arrow.flight.protocol.FlightEndpoint.$Properties
+                 * @property {arrow.flight.protocol.Ticket.$Properties|null} [ticket] FlightEndpoint ticket
+                 * @property {Array.<arrow.flight.protocol.Location.$Properties>|null} [location] FlightEndpoint location
+                 * @property {google.protobuf.Timestamp.$Properties|null} [expirationTime] FlightEndpoint expirationTime
+                 * @property {Uint8Array|null} [appMetadata] FlightEndpoint appMetadata
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a FlightEndpoint.
                  * @memberof arrow.flight.protocol
                  * @interface IFlightEndpoint
-                 * @property {arrow.flight.protocol.ITicket|null} [ticket] FlightEndpoint ticket
-                 * @property {Array.<arrow.flight.protocol.ILocation>|null} [location] FlightEndpoint location
-                 * @property {google.protobuf.ITimestamp|null} [expirationTime] FlightEndpoint expirationTime
-                 * @property {Uint8Array|null} [appMetadata] FlightEndpoint appMetadata
+                 * @augments arrow.flight.protocol.FlightEndpoint.$Properties
+                 * @deprecated Use arrow.flight.protocol.FlightEndpoint.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a FlightEndpoint.
+                 * @typedef {arrow.flight.protocol.FlightEndpoint.$Properties} arrow.flight.protocol.FlightEndpoint.$Shape
                  */
 
                 /**
                  * Constructs a new FlightEndpoint.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a FlightEndpoint.
-                 * @implements IFlightEndpoint
                  * @constructor
-                 * @param {arrow.flight.protocol.IFlightEndpoint=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.FlightEndpoint.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function FlightEndpoint(properties) {
+                var FlightEndpoint = function (properties) {
                     this.location = [];
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * FlightEndpoint ticket.
-                 * @member {arrow.flight.protocol.ITicket|null|undefined} ticket
+                 * @member {arrow.flight.protocol.Ticket.$Properties|null|undefined} ticket
                  * @memberof arrow.flight.protocol.FlightEndpoint
                  * @instance
                  */
@@ -4346,7 +5630,7 @@ $root.arrow = (function() {
 
                 /**
                  * FlightEndpoint location.
-                 * @member {Array.<arrow.flight.protocol.ILocation>} location
+                 * @member {Array.<arrow.flight.protocol.Location.$Properties>} location
                  * @memberof arrow.flight.protocol.FlightEndpoint
                  * @instance
                  */
@@ -4354,7 +5638,7 @@ $root.arrow = (function() {
 
                 /**
                  * FlightEndpoint expirationTime.
-                 * @member {google.protobuf.ITimestamp|null|undefined} expirationTime
+                 * @member {google.protobuf.Timestamp.$Properties|null|undefined} expirationTime
                  * @memberof arrow.flight.protocol.FlightEndpoint
                  * @instance
                  */
@@ -4373,10 +5657,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.FlightEndpoint
                  * @static
-                 * @param {arrow.flight.protocol.IFlightEndpoint=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.FlightEndpoint.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.FlightEndpoint} FlightEndpoint instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.FlightEndpoint.$Shape): arrow.flight.protocol.FlightEndpoint & arrow.flight.protocol.FlightEndpoint.$Shape;
+                 *   (properties?: arrow.flight.protocol.FlightEndpoint.$Properties): arrow.flight.protocol.FlightEndpoint;
+                 * }}
                  */
-                FlightEndpoint.create = function create(properties) {
+                FlightEndpoint.create = function(properties) {
                     return new FlightEndpoint(properties);
                 };
 
@@ -4385,22 +5673,29 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.FlightEndpoint
                  * @static
-                 * @param {arrow.flight.protocol.IFlightEndpoint} message FlightEndpoint message or plain object to encode
+                 * @param {arrow.flight.protocol.FlightEndpoint.$Properties} message FlightEndpoint message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FlightEndpoint.encode = function encode(message, writer) {
+                FlightEndpoint.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.ticket != null && Object.hasOwnProperty.call(message, "ticket"))
-                        $root.arrow.flight.protocol.Ticket.encode(message.ticket, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.ticket != null && $Object.hasOwnProperty.call(message, "ticket"))
+                        $root.arrow.flight.protocol.Ticket.encode(message.ticket, writer.uint32(/* id 1, wireType 2 =*/10).fork(), _depth + 1).ldelim();
                     if (message.location != null && message.location.length)
                         for (var i = 0; i < message.location.length; ++i)
-                            $root.arrow.flight.protocol.Location.encode(message.location[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.expirationTime != null && Object.hasOwnProperty.call(message, "expirationTime"))
-                        $root.google.protobuf.Timestamp.encode(message.expirationTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                    if (message.appMetadata != null && Object.hasOwnProperty.call(message, "appMetadata"))
+                            $root.arrow.flight.protocol.Location.encode(message.location[i], writer.uint32(/* id 2, wireType 2 =*/18).fork(), _depth + 1).ldelim();
+                    if (message.expirationTime != null && $Object.hasOwnProperty.call(message, "expirationTime"))
+                        $root.google.protobuf.Timestamp.encode(message.expirationTime, writer.uint32(/* id 3, wireType 2 =*/26).fork(), _depth + 1).ldelim();
+                    if (message.appMetadata != null && $Object.hasOwnProperty.call(message, "appMetadata") && message.appMetadata.length)
                         writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.appMetadata);
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -4409,12 +5704,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.FlightEndpoint
                  * @static
-                 * @param {arrow.flight.protocol.IFlightEndpoint} message FlightEndpoint message or plain object to encode
+                 * @param {arrow.flight.protocol.FlightEndpoint.$Properties} message FlightEndpoint message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FlightEndpoint.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                FlightEndpoint.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -4424,40 +5719,80 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.FlightEndpoint} FlightEndpoint
+                 * @returns {arrow.flight.protocol.FlightEndpoint & arrow.flight.protocol.FlightEndpoint.$Shape} FlightEndpoint
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FlightEndpoint.decode = function decode(reader, length) {
+                FlightEndpoint.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.FlightEndpoint();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.FlightEndpoint();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.ticket = $root.arrow.flight.protocol.Ticket.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 2: {
-                                if (!(message.location && message.location.length))
-                                    message.location = [];
-                                message.location.push($root.arrow.flight.protocol.Location.decode(reader, reader.uint32()));
-                                break;
-                            }
-                        case 3: {
-                                message.expirationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 4: {
-                                message.appMetadata = reader.bytes();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
+                        case 1: {
+                                if (wireType !== 2)
+                                    break;
+                                message.ticket = $root.arrow.flight.protocol.Ticket.decode(reader, reader.uint32(), $undefined, _depth + 1, message.ticket);
+                                continue;
+                            }
+                        case 2: {
+                                if (wireType !== 2)
+                                    break;
+                                if (!(message.location && message.location.length))
+                                    message.location = [];
+                                message.location.push($root.arrow.flight.protocol.Location.decode(reader, reader.uint32(), $undefined, _depth + 1));
+                                continue;
+                            }
+                        case 3: {
+                                if (wireType !== 2)
+                                    break;
+                                message.expirationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), $undefined, _depth + 1, message.expirationTime);
+                                continue;
+                            }
+                        case 4: {
+                                if (wireType !== 2)
+                                    break;
+                                if ((value = reader.bytes()).length)
+                                    message.appMetadata = value;
+                                else
+                                    delete message.appMetadata;
+                                continue;
+                            }
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -4467,11 +5802,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.FlightEndpoint
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.FlightEndpoint} FlightEndpoint
+                 * @returns {arrow.flight.protocol.FlightEndpoint & arrow.flight.protocol.FlightEndpoint.$Shape} FlightEndpoint
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FlightEndpoint.decodeDelimited = function decodeDelimited(reader) {
+                FlightEndpoint.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -4485,29 +5820,33 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FlightEndpoint.verify = function verify(message) {
+                FlightEndpoint.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.ticket != null && message.hasOwnProperty("ticket")) {
-                        var error = $root.arrow.flight.protocol.Ticket.verify(message.ticket);
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
+                    if (message.ticket != null && $Object.hasOwnProperty.call(message, "ticket")) {
+                        var error = $root.arrow.flight.protocol.Ticket.verify(message.ticket, _depth + 1);
                         if (error)
                             return "ticket." + error;
                     }
-                    if (message.location != null && message.hasOwnProperty("location")) {
-                        if (!Array.isArray(message.location))
+                    if (message.location != null && $Object.hasOwnProperty.call(message, "location")) {
+                        if (!$Array.isArray(message.location))
                             return "location: array expected";
                         for (var i = 0; i < message.location.length; ++i) {
-                            var error = $root.arrow.flight.protocol.Location.verify(message.location[i]);
+                            var error = $root.arrow.flight.protocol.Location.verify(message.location[i], _depth + 1);
                             if (error)
                                 return "location." + error;
                         }
                     }
-                    if (message.expirationTime != null && message.hasOwnProperty("expirationTime")) {
-                        var error = $root.google.protobuf.Timestamp.verify(message.expirationTime);
+                    if (message.expirationTime != null && $Object.hasOwnProperty.call(message, "expirationTime")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.expirationTime, _depth + 1);
                         if (error)
                             return "expirationTime." + error;
                     }
-                    if (message.appMetadata != null && message.hasOwnProperty("appMetadata"))
+                    if (message.appMetadata != null && $Object.hasOwnProperty.call(message, "appMetadata"))
                         if (!(message.appMetadata && typeof message.appMetadata.length === "number" || $util.isString(message.appMetadata)))
                             return "appMetadata: buffer expected";
                     return null;
@@ -4521,35 +5860,42 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.FlightEndpoint} FlightEndpoint
                  */
-                FlightEndpoint.fromObject = function fromObject(object) {
+                FlightEndpoint.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.FlightEndpoint)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.FlightEndpoint: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.FlightEndpoint();
                     if (object.ticket != null) {
-                        if (typeof object.ticket !== "object")
-                            throw TypeError(".arrow.flight.protocol.FlightEndpoint.ticket: object expected");
-                        message.ticket = $root.arrow.flight.protocol.Ticket.fromObject(object.ticket);
+                        if (!$util.isObject(object.ticket))
+                            throw $TypeError(".arrow.flight.protocol.FlightEndpoint.ticket: object expected");
+                        message.ticket = $root.arrow.flight.protocol.Ticket.fromObject(object.ticket, _depth + 1);
                     }
                     if (object.location) {
-                        if (!Array.isArray(object.location))
-                            throw TypeError(".arrow.flight.protocol.FlightEndpoint.location: array expected");
-                        message.location = [];
+                        if (!$Array.isArray(object.location))
+                            throw $TypeError(".arrow.flight.protocol.FlightEndpoint.location: array expected");
+                        message.location = $Array(object.location.length);
                         for (var i = 0; i < object.location.length; ++i) {
-                            if (typeof object.location[i] !== "object")
-                                throw TypeError(".arrow.flight.protocol.FlightEndpoint.location: object expected");
-                            message.location[i] = $root.arrow.flight.protocol.Location.fromObject(object.location[i]);
+                            if (!$util.isObject(object.location[i]))
+                                throw $TypeError(".arrow.flight.protocol.FlightEndpoint.location: object expected");
+                            message.location[i] = $root.arrow.flight.protocol.Location.fromObject(object.location[i], _depth + 1);
                         }
                     }
                     if (object.expirationTime != null) {
-                        if (typeof object.expirationTime !== "object")
-                            throw TypeError(".arrow.flight.protocol.FlightEndpoint.expirationTime: object expected");
-                        message.expirationTime = $root.google.protobuf.Timestamp.fromObject(object.expirationTime);
+                        if (!$util.isObject(object.expirationTime))
+                            throw $TypeError(".arrow.flight.protocol.FlightEndpoint.expirationTime: object expected");
+                        message.expirationTime = $root.google.protobuf.Timestamp.fromObject(object.expirationTime, _depth + 1);
                     }
                     if (object.appMetadata != null)
-                        if (typeof object.appMetadata === "string")
-                            $util.base64.decode(object.appMetadata, message.appMetadata = $util.newBuffer($util.base64.length(object.appMetadata)), 0);
-                        else if (object.appMetadata.length >= 0)
-                            message.appMetadata = object.appMetadata;
+                        if (object.appMetadata.length)
+                            if (typeof object.appMetadata === "string")
+                                $util.base64.decode(object.appMetadata, message.appMetadata = $util.newBuffer($util.base64.length(object.appMetadata)), 0);
+                            else if (object.appMetadata.length >= 0)
+                                message.appMetadata = object.appMetadata;
                     return message;
                 };
 
@@ -4562,34 +5908,38 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                FlightEndpoint.toObject = function toObject(message, options) {
+                FlightEndpoint.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.location = [];
                     if (options.defaults) {
                         object.ticket = null;
                         object.expirationTime = null;
-                        if (options.bytes === String)
+                        if (options.bytes === $String)
                             object.appMetadata = "";
                         else {
                             object.appMetadata = [];
-                            if (options.bytes !== Array)
+                            if (options.bytes !== $Array)
                                 object.appMetadata = $util.newBuffer(object.appMetadata);
                         }
                     }
-                    if (message.ticket != null && message.hasOwnProperty("ticket"))
-                        object.ticket = $root.arrow.flight.protocol.Ticket.toObject(message.ticket, options);
+                    if (message.ticket != null && $Object.hasOwnProperty.call(message, "ticket"))
+                        object.ticket = $root.arrow.flight.protocol.Ticket.toObject(message.ticket, options, _depth + 1);
                     if (message.location && message.location.length) {
-                        object.location = [];
+                        object.location = $Array(message.location.length);
                         for (var j = 0; j < message.location.length; ++j)
-                            object.location[j] = $root.arrow.flight.protocol.Location.toObject(message.location[j], options);
+                            object.location[j] = $root.arrow.flight.protocol.Location.toObject(message.location[j], options, _depth + 1);
                     }
-                    if (message.expirationTime != null && message.hasOwnProperty("expirationTime"))
-                        object.expirationTime = $root.google.protobuf.Timestamp.toObject(message.expirationTime, options);
-                    if (message.appMetadata != null && message.hasOwnProperty("appMetadata"))
-                        object.appMetadata = options.bytes === String ? $util.base64.encode(message.appMetadata, 0, message.appMetadata.length) : options.bytes === Array ? Array.prototype.slice.call(message.appMetadata) : message.appMetadata;
+                    if (message.expirationTime != null && $Object.hasOwnProperty.call(message, "expirationTime"))
+                        object.expirationTime = $root.google.protobuf.Timestamp.toObject(message.expirationTime, options, _depth + 1);
+                    if (message.appMetadata != null && $Object.hasOwnProperty.call(message, "appMetadata"))
+                        object.appMetadata = options.bytes === $String ? $util.base64.encode(message.appMetadata, 0, message.appMetadata.length) : options.bytes === $Array ? $Array.prototype.slice.call(message.appMetadata) : message.appMetadata;
                     return object;
                 };
 
@@ -4600,23 +5950,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                FlightEndpoint.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                FlightEndpoint.prototype.toJSON = function() {
+                    return FlightEndpoint.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for FlightEndpoint
+                 * Gets the type url for FlightEndpoint
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.FlightEndpoint
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                FlightEndpoint.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.FlightEndpoint";
+                FlightEndpoint.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.FlightEndpoint";
                 };
 
                 return FlightEndpoint;
@@ -4626,29 +5975,42 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a RenewFlightEndpointRequest.
+                 * @typedef {Object} arrow.flight.protocol.RenewFlightEndpointRequest.$Properties
+                 * @property {arrow.flight.protocol.FlightEndpoint.$Properties|null} [endpoint] RenewFlightEndpointRequest endpoint
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a RenewFlightEndpointRequest.
                  * @memberof arrow.flight.protocol
                  * @interface IRenewFlightEndpointRequest
-                 * @property {arrow.flight.protocol.IFlightEndpoint|null} [endpoint] RenewFlightEndpointRequest endpoint
+                 * @augments arrow.flight.protocol.RenewFlightEndpointRequest.$Properties
+                 * @deprecated Use arrow.flight.protocol.RenewFlightEndpointRequest.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a RenewFlightEndpointRequest.
+                 * @typedef {arrow.flight.protocol.RenewFlightEndpointRequest.$Properties} arrow.flight.protocol.RenewFlightEndpointRequest.$Shape
                  */
 
                 /**
                  * Constructs a new RenewFlightEndpointRequest.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a RenewFlightEndpointRequest.
-                 * @implements IRenewFlightEndpointRequest
                  * @constructor
-                 * @param {arrow.flight.protocol.IRenewFlightEndpointRequest=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.RenewFlightEndpointRequest.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function RenewFlightEndpointRequest(properties) {
+                var RenewFlightEndpointRequest = function (properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * RenewFlightEndpointRequest endpoint.
-                 * @member {arrow.flight.protocol.IFlightEndpoint|null|undefined} endpoint
+                 * @member {arrow.flight.protocol.FlightEndpoint.$Properties|null|undefined} endpoint
                  * @memberof arrow.flight.protocol.RenewFlightEndpointRequest
                  * @instance
                  */
@@ -4659,10 +6021,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.RenewFlightEndpointRequest
                  * @static
-                 * @param {arrow.flight.protocol.IRenewFlightEndpointRequest=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.RenewFlightEndpointRequest.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.RenewFlightEndpointRequest} RenewFlightEndpointRequest instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.RenewFlightEndpointRequest.$Shape): arrow.flight.protocol.RenewFlightEndpointRequest & arrow.flight.protocol.RenewFlightEndpointRequest.$Shape;
+                 *   (properties?: arrow.flight.protocol.RenewFlightEndpointRequest.$Properties): arrow.flight.protocol.RenewFlightEndpointRequest;
+                 * }}
                  */
-                RenewFlightEndpointRequest.create = function create(properties) {
+                RenewFlightEndpointRequest.create = function(properties) {
                     return new RenewFlightEndpointRequest(properties);
                 };
 
@@ -4671,15 +6037,22 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.RenewFlightEndpointRequest
                  * @static
-                 * @param {arrow.flight.protocol.IRenewFlightEndpointRequest} message RenewFlightEndpointRequest message or plain object to encode
+                 * @param {arrow.flight.protocol.RenewFlightEndpointRequest.$Properties} message RenewFlightEndpointRequest message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                RenewFlightEndpointRequest.encode = function encode(message, writer) {
+                RenewFlightEndpointRequest.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.endpoint != null && Object.hasOwnProperty.call(message, "endpoint"))
-                        $root.arrow.flight.protocol.FlightEndpoint.encode(message.endpoint, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.endpoint != null && $Object.hasOwnProperty.call(message, "endpoint"))
+                        $root.arrow.flight.protocol.FlightEndpoint.encode(message.endpoint, writer.uint32(/* id 1, wireType 2 =*/10).fork(), _depth + 1).ldelim();
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -4688,12 +6061,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.RenewFlightEndpointRequest
                  * @static
-                 * @param {arrow.flight.protocol.IRenewFlightEndpointRequest} message RenewFlightEndpointRequest message or plain object to encode
+                 * @param {arrow.flight.protocol.RenewFlightEndpointRequest.$Properties} message RenewFlightEndpointRequest message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                RenewFlightEndpointRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                RenewFlightEndpointRequest.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -4703,26 +6076,57 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.RenewFlightEndpointRequest} RenewFlightEndpointRequest
+                 * @returns {arrow.flight.protocol.RenewFlightEndpointRequest & arrow.flight.protocol.RenewFlightEndpointRequest.$Shape} RenewFlightEndpointRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RenewFlightEndpointRequest.decode = function decode(reader, length) {
+                RenewFlightEndpointRequest.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.RenewFlightEndpointRequest();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.RenewFlightEndpointRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.endpoint = $root.arrow.flight.protocol.FlightEndpoint.decode(reader, reader.uint32());
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
+                        case 1: {
+                                if (wireType !== 2)
+                                    break;
+                                message.endpoint = $root.arrow.flight.protocol.FlightEndpoint.decode(reader, reader.uint32(), $undefined, _depth + 1, message.endpoint);
+                                continue;
+                            }
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -4732,11 +6136,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.RenewFlightEndpointRequest
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.RenewFlightEndpointRequest} RenewFlightEndpointRequest
+                 * @returns {arrow.flight.protocol.RenewFlightEndpointRequest & arrow.flight.protocol.RenewFlightEndpointRequest.$Shape} RenewFlightEndpointRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RenewFlightEndpointRequest.decodeDelimited = function decodeDelimited(reader) {
+                RenewFlightEndpointRequest.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -4750,11 +6154,15 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                RenewFlightEndpointRequest.verify = function verify(message) {
+                RenewFlightEndpointRequest.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.endpoint != null && message.hasOwnProperty("endpoint")) {
-                        var error = $root.arrow.flight.protocol.FlightEndpoint.verify(message.endpoint);
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
+                    if (message.endpoint != null && $Object.hasOwnProperty.call(message, "endpoint")) {
+                        var error = $root.arrow.flight.protocol.FlightEndpoint.verify(message.endpoint, _depth + 1);
                         if (error)
                             return "endpoint." + error;
                     }
@@ -4769,14 +6177,20 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.RenewFlightEndpointRequest} RenewFlightEndpointRequest
                  */
-                RenewFlightEndpointRequest.fromObject = function fromObject(object) {
+                RenewFlightEndpointRequest.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.RenewFlightEndpointRequest)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.RenewFlightEndpointRequest: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.RenewFlightEndpointRequest();
                     if (object.endpoint != null) {
-                        if (typeof object.endpoint !== "object")
-                            throw TypeError(".arrow.flight.protocol.RenewFlightEndpointRequest.endpoint: object expected");
-                        message.endpoint = $root.arrow.flight.protocol.FlightEndpoint.fromObject(object.endpoint);
+                        if (!$util.isObject(object.endpoint))
+                            throw $TypeError(".arrow.flight.protocol.RenewFlightEndpointRequest.endpoint: object expected");
+                        message.endpoint = $root.arrow.flight.protocol.FlightEndpoint.fromObject(object.endpoint, _depth + 1);
                     }
                     return message;
                 };
@@ -4790,14 +6204,18 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                RenewFlightEndpointRequest.toObject = function toObject(message, options) {
+                RenewFlightEndpointRequest.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.defaults)
                         object.endpoint = null;
-                    if (message.endpoint != null && message.hasOwnProperty("endpoint"))
-                        object.endpoint = $root.arrow.flight.protocol.FlightEndpoint.toObject(message.endpoint, options);
+                    if (message.endpoint != null && $Object.hasOwnProperty.call(message, "endpoint"))
+                        object.endpoint = $root.arrow.flight.protocol.FlightEndpoint.toObject(message.endpoint, options, _depth + 1);
                     return object;
                 };
 
@@ -4808,23 +6226,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                RenewFlightEndpointRequest.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                RenewFlightEndpointRequest.prototype.toJSON = function() {
+                    return RenewFlightEndpointRequest.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for RenewFlightEndpointRequest
+                 * Gets the type url for RenewFlightEndpointRequest
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.RenewFlightEndpointRequest
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                RenewFlightEndpointRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.RenewFlightEndpointRequest";
+                RenewFlightEndpointRequest.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.RenewFlightEndpointRequest";
                 };
 
                 return RenewFlightEndpointRequest;
@@ -4834,32 +6251,45 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a FlightData.
-                 * @memberof arrow.flight.protocol
-                 * @interface IFlightData
-                 * @property {arrow.flight.protocol.IFlightDescriptor|null} [flightDescriptor] FlightData flightDescriptor
+                 * @typedef {Object} arrow.flight.protocol.FlightData.$Properties
+                 * @property {arrow.flight.protocol.FlightDescriptor.$Properties|null} [flightDescriptor] FlightData flightDescriptor
                  * @property {Uint8Array|null} [dataHeader] FlightData dataHeader
                  * @property {Uint8Array|null} [appMetadata] FlightData appMetadata
                  * @property {Uint8Array|null} [dataBody] FlightData dataBody
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a FlightData.
+                 * @memberof arrow.flight.protocol
+                 * @interface IFlightData
+                 * @augments arrow.flight.protocol.FlightData.$Properties
+                 * @deprecated Use arrow.flight.protocol.FlightData.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a FlightData.
+                 * @typedef {arrow.flight.protocol.FlightData.$Properties} arrow.flight.protocol.FlightData.$Shape
                  */
 
                 /**
                  * Constructs a new FlightData.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a FlightData.
-                 * @implements IFlightData
                  * @constructor
-                 * @param {arrow.flight.protocol.IFlightData=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.FlightData.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function FlightData(properties) {
+                var FlightData = function (properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * FlightData flightDescriptor.
-                 * @member {arrow.flight.protocol.IFlightDescriptor|null|undefined} flightDescriptor
+                 * @member {arrow.flight.protocol.FlightDescriptor.$Properties|null|undefined} flightDescriptor
                  * @memberof arrow.flight.protocol.FlightData
                  * @instance
                  */
@@ -4894,10 +6324,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.FlightData
                  * @static
-                 * @param {arrow.flight.protocol.IFlightData=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.FlightData.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.FlightData} FlightData instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.FlightData.$Shape): arrow.flight.protocol.FlightData & arrow.flight.protocol.FlightData.$Shape;
+                 *   (properties?: arrow.flight.protocol.FlightData.$Properties): arrow.flight.protocol.FlightData;
+                 * }}
                  */
-                FlightData.create = function create(properties) {
+                FlightData.create = function(properties) {
                     return new FlightData(properties);
                 };
 
@@ -4906,21 +6340,28 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.FlightData
                  * @static
-                 * @param {arrow.flight.protocol.IFlightData} message FlightData message or plain object to encode
+                 * @param {arrow.flight.protocol.FlightData.$Properties} message FlightData message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FlightData.encode = function encode(message, writer) {
+                FlightData.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.flightDescriptor != null && Object.hasOwnProperty.call(message, "flightDescriptor"))
-                        $root.arrow.flight.protocol.FlightDescriptor.encode(message.flightDescriptor, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    if (message.dataHeader != null && Object.hasOwnProperty.call(message, "dataHeader"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.flightDescriptor != null && $Object.hasOwnProperty.call(message, "flightDescriptor"))
+                        $root.arrow.flight.protocol.FlightDescriptor.encode(message.flightDescriptor, writer.uint32(/* id 1, wireType 2 =*/10).fork(), _depth + 1).ldelim();
+                    if (message.dataHeader != null && $Object.hasOwnProperty.call(message, "dataHeader") && message.dataHeader.length)
                         writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.dataHeader);
-                    if (message.appMetadata != null && Object.hasOwnProperty.call(message, "appMetadata"))
+                    if (message.appMetadata != null && $Object.hasOwnProperty.call(message, "appMetadata") && message.appMetadata.length)
                         writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.appMetadata);
-                    if (message.dataBody != null && Object.hasOwnProperty.call(message, "dataBody"))
+                    if (message.dataBody != null && $Object.hasOwnProperty.call(message, "dataBody") && message.dataBody.length)
                         writer.uint32(/* id 1000, wireType 2 =*/8002).bytes(message.dataBody);
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -4929,12 +6370,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.FlightData
                  * @static
-                 * @param {arrow.flight.protocol.IFlightData} message FlightData message or plain object to encode
+                 * @param {arrow.flight.protocol.FlightData.$Properties} message FlightData message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                FlightData.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                FlightData.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -4944,38 +6385,84 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.FlightData} FlightData
+                 * @returns {arrow.flight.protocol.FlightData & arrow.flight.protocol.FlightData.$Shape} FlightData
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FlightData.decode = function decode(reader, length) {
+                FlightData.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.FlightData();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.FlightData();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.flightDescriptor = $root.arrow.flight.protocol.FlightDescriptor.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 2: {
-                                message.dataHeader = reader.bytes();
-                                break;
-                            }
-                        case 3: {
-                                message.appMetadata = reader.bytes();
-                                break;
-                            }
-                        case 1000: {
-                                message.dataBody = reader.bytes();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
+                        case 1: {
+                                if (wireType !== 2)
+                                    break;
+                                message.flightDescriptor = $root.arrow.flight.protocol.FlightDescriptor.decode(reader, reader.uint32(), $undefined, _depth + 1, message.flightDescriptor);
+                                continue;
+                            }
+                        case 2: {
+                                if (wireType !== 2)
+                                    break;
+                                if ((value = reader.bytes()).length)
+                                    message.dataHeader = value;
+                                else
+                                    delete message.dataHeader;
+                                continue;
+                            }
+                        case 3: {
+                                if (wireType !== 2)
+                                    break;
+                                if ((value = reader.bytes()).length)
+                                    message.appMetadata = value;
+                                else
+                                    delete message.appMetadata;
+                                continue;
+                            }
+                        case 1000: {
+                                if (wireType !== 2)
+                                    break;
+                                if ((value = reader.bytes()).length)
+                                    message.dataBody = value;
+                                else
+                                    delete message.dataBody;
+                                continue;
+                            }
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -4985,11 +6472,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.FlightData
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.FlightData} FlightData
+                 * @returns {arrow.flight.protocol.FlightData & arrow.flight.protocol.FlightData.$Shape} FlightData
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FlightData.decodeDelimited = function decodeDelimited(reader) {
+                FlightData.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -5003,21 +6490,25 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FlightData.verify = function verify(message) {
+                FlightData.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.flightDescriptor != null && message.hasOwnProperty("flightDescriptor")) {
-                        var error = $root.arrow.flight.protocol.FlightDescriptor.verify(message.flightDescriptor);
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
+                    if (message.flightDescriptor != null && $Object.hasOwnProperty.call(message, "flightDescriptor")) {
+                        var error = $root.arrow.flight.protocol.FlightDescriptor.verify(message.flightDescriptor, _depth + 1);
                         if (error)
                             return "flightDescriptor." + error;
                     }
-                    if (message.dataHeader != null && message.hasOwnProperty("dataHeader"))
+                    if (message.dataHeader != null && $Object.hasOwnProperty.call(message, "dataHeader"))
                         if (!(message.dataHeader && typeof message.dataHeader.length === "number" || $util.isString(message.dataHeader)))
                             return "dataHeader: buffer expected";
-                    if (message.appMetadata != null && message.hasOwnProperty("appMetadata"))
+                    if (message.appMetadata != null && $Object.hasOwnProperty.call(message, "appMetadata"))
                         if (!(message.appMetadata && typeof message.appMetadata.length === "number" || $util.isString(message.appMetadata)))
                             return "appMetadata: buffer expected";
-                    if (message.dataBody != null && message.hasOwnProperty("dataBody"))
+                    if (message.dataBody != null && $Object.hasOwnProperty.call(message, "dataBody"))
                         if (!(message.dataBody && typeof message.dataBody.length === "number" || $util.isString(message.dataBody)))
                             return "dataBody: buffer expected";
                     return null;
@@ -5031,30 +6522,39 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.FlightData} FlightData
                  */
-                FlightData.fromObject = function fromObject(object) {
+                FlightData.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.FlightData)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.FlightData: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.FlightData();
                     if (object.flightDescriptor != null) {
-                        if (typeof object.flightDescriptor !== "object")
-                            throw TypeError(".arrow.flight.protocol.FlightData.flightDescriptor: object expected");
-                        message.flightDescriptor = $root.arrow.flight.protocol.FlightDescriptor.fromObject(object.flightDescriptor);
+                        if (!$util.isObject(object.flightDescriptor))
+                            throw $TypeError(".arrow.flight.protocol.FlightData.flightDescriptor: object expected");
+                        message.flightDescriptor = $root.arrow.flight.protocol.FlightDescriptor.fromObject(object.flightDescriptor, _depth + 1);
                     }
                     if (object.dataHeader != null)
-                        if (typeof object.dataHeader === "string")
-                            $util.base64.decode(object.dataHeader, message.dataHeader = $util.newBuffer($util.base64.length(object.dataHeader)), 0);
-                        else if (object.dataHeader.length >= 0)
-                            message.dataHeader = object.dataHeader;
+                        if (object.dataHeader.length)
+                            if (typeof object.dataHeader === "string")
+                                $util.base64.decode(object.dataHeader, message.dataHeader = $util.newBuffer($util.base64.length(object.dataHeader)), 0);
+                            else if (object.dataHeader.length >= 0)
+                                message.dataHeader = object.dataHeader;
                     if (object.appMetadata != null)
-                        if (typeof object.appMetadata === "string")
-                            $util.base64.decode(object.appMetadata, message.appMetadata = $util.newBuffer($util.base64.length(object.appMetadata)), 0);
-                        else if (object.appMetadata.length >= 0)
-                            message.appMetadata = object.appMetadata;
+                        if (object.appMetadata.length)
+                            if (typeof object.appMetadata === "string")
+                                $util.base64.decode(object.appMetadata, message.appMetadata = $util.newBuffer($util.base64.length(object.appMetadata)), 0);
+                            else if (object.appMetadata.length >= 0)
+                                message.appMetadata = object.appMetadata;
                     if (object.dataBody != null)
-                        if (typeof object.dataBody === "string")
-                            $util.base64.decode(object.dataBody, message.dataBody = $util.newBuffer($util.base64.length(object.dataBody)), 0);
-                        else if (object.dataBody.length >= 0)
-                            message.dataBody = object.dataBody;
+                        if (object.dataBody.length)
+                            if (typeof object.dataBody === "string")
+                                $util.base64.decode(object.dataBody, message.dataBody = $util.newBuffer($util.base64.length(object.dataBody)), 0);
+                            else if (object.dataBody.length >= 0)
+                                message.dataBody = object.dataBody;
                     return message;
                 };
 
@@ -5067,42 +6567,46 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                FlightData.toObject = function toObject(message, options) {
+                FlightData.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.defaults) {
                         object.flightDescriptor = null;
-                        if (options.bytes === String)
+                        if (options.bytes === $String)
                             object.dataHeader = "";
                         else {
                             object.dataHeader = [];
-                            if (options.bytes !== Array)
+                            if (options.bytes !== $Array)
                                 object.dataHeader = $util.newBuffer(object.dataHeader);
                         }
-                        if (options.bytes === String)
+                        if (options.bytes === $String)
                             object.appMetadata = "";
                         else {
                             object.appMetadata = [];
-                            if (options.bytes !== Array)
+                            if (options.bytes !== $Array)
                                 object.appMetadata = $util.newBuffer(object.appMetadata);
                         }
-                        if (options.bytes === String)
+                        if (options.bytes === $String)
                             object.dataBody = "";
                         else {
                             object.dataBody = [];
-                            if (options.bytes !== Array)
+                            if (options.bytes !== $Array)
                                 object.dataBody = $util.newBuffer(object.dataBody);
                         }
                     }
-                    if (message.flightDescriptor != null && message.hasOwnProperty("flightDescriptor"))
-                        object.flightDescriptor = $root.arrow.flight.protocol.FlightDescriptor.toObject(message.flightDescriptor, options);
-                    if (message.dataHeader != null && message.hasOwnProperty("dataHeader"))
-                        object.dataHeader = options.bytes === String ? $util.base64.encode(message.dataHeader, 0, message.dataHeader.length) : options.bytes === Array ? Array.prototype.slice.call(message.dataHeader) : message.dataHeader;
-                    if (message.appMetadata != null && message.hasOwnProperty("appMetadata"))
-                        object.appMetadata = options.bytes === String ? $util.base64.encode(message.appMetadata, 0, message.appMetadata.length) : options.bytes === Array ? Array.prototype.slice.call(message.appMetadata) : message.appMetadata;
-                    if (message.dataBody != null && message.hasOwnProperty("dataBody"))
-                        object.dataBody = options.bytes === String ? $util.base64.encode(message.dataBody, 0, message.dataBody.length) : options.bytes === Array ? Array.prototype.slice.call(message.dataBody) : message.dataBody;
+                    if (message.flightDescriptor != null && $Object.hasOwnProperty.call(message, "flightDescriptor"))
+                        object.flightDescriptor = $root.arrow.flight.protocol.FlightDescriptor.toObject(message.flightDescriptor, options, _depth + 1);
+                    if (message.dataHeader != null && $Object.hasOwnProperty.call(message, "dataHeader"))
+                        object.dataHeader = options.bytes === $String ? $util.base64.encode(message.dataHeader, 0, message.dataHeader.length) : options.bytes === $Array ? $Array.prototype.slice.call(message.dataHeader) : message.dataHeader;
+                    if (message.appMetadata != null && $Object.hasOwnProperty.call(message, "appMetadata"))
+                        object.appMetadata = options.bytes === $String ? $util.base64.encode(message.appMetadata, 0, message.appMetadata.length) : options.bytes === $Array ? $Array.prototype.slice.call(message.appMetadata) : message.appMetadata;
+                    if (message.dataBody != null && $Object.hasOwnProperty.call(message, "dataBody"))
+                        object.dataBody = options.bytes === $String ? $util.base64.encode(message.dataBody, 0, message.dataBody.length) : options.bytes === $Array ? $Array.prototype.slice.call(message.dataBody) : message.dataBody;
                     return object;
                 };
 
@@ -5113,23 +6617,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                FlightData.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                FlightData.prototype.toJSON = function() {
+                    return FlightData.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for FlightData
+                 * Gets the type url for FlightData
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.FlightData
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                FlightData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.FlightData";
+                FlightData.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.FlightData";
                 };
 
                 return FlightData;
@@ -5139,25 +6642,38 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a PutResult.
+                 * @typedef {Object} arrow.flight.protocol.PutResult.$Properties
+                 * @property {Uint8Array|null} [appMetadata] PutResult appMetadata
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a PutResult.
                  * @memberof arrow.flight.protocol
                  * @interface IPutResult
-                 * @property {Uint8Array|null} [appMetadata] PutResult appMetadata
+                 * @augments arrow.flight.protocol.PutResult.$Properties
+                 * @deprecated Use arrow.flight.protocol.PutResult.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a PutResult.
+                 * @typedef {arrow.flight.protocol.PutResult.$Properties} arrow.flight.protocol.PutResult.$Shape
                  */
 
                 /**
                  * Constructs a new PutResult.
                  * @memberof arrow.flight.protocol
                  * @classdesc The response message associated with the submission of a DoPut.
-                 * @implements IPutResult
                  * @constructor
-                 * @param {arrow.flight.protocol.IPutResult=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.PutResult.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function PutResult(properties) {
+                var PutResult = function (properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * PutResult appMetadata.
@@ -5172,10 +6688,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.PutResult
                  * @static
-                 * @param {arrow.flight.protocol.IPutResult=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.PutResult.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.PutResult} PutResult instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.PutResult.$Shape): arrow.flight.protocol.PutResult & arrow.flight.protocol.PutResult.$Shape;
+                 *   (properties?: arrow.flight.protocol.PutResult.$Properties): arrow.flight.protocol.PutResult;
+                 * }}
                  */
-                PutResult.create = function create(properties) {
+                PutResult.create = function(properties) {
                     return new PutResult(properties);
                 };
 
@@ -5184,15 +6704,22 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.PutResult
                  * @static
-                 * @param {arrow.flight.protocol.IPutResult} message PutResult message or plain object to encode
+                 * @param {arrow.flight.protocol.PutResult.$Properties} message PutResult message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                PutResult.encode = function encode(message, writer) {
+                PutResult.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.appMetadata != null && Object.hasOwnProperty.call(message, "appMetadata"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.appMetadata != null && $Object.hasOwnProperty.call(message, "appMetadata") && message.appMetadata.length)
                         writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.appMetadata);
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -5201,12 +6728,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.PutResult
                  * @static
-                 * @param {arrow.flight.protocol.IPutResult} message PutResult message or plain object to encode
+                 * @param {arrow.flight.protocol.PutResult.$Properties} message PutResult message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                PutResult.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                PutResult.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -5216,26 +6743,60 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.PutResult} PutResult
+                 * @returns {arrow.flight.protocol.PutResult & arrow.flight.protocol.PutResult.$Shape} PutResult
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PutResult.decode = function decode(reader, length) {
+                PutResult.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.PutResult();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.PutResult();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.appMetadata = reader.bytes();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
+                        case 1: {
+                                if (wireType !== 2)
+                                    break;
+                                if ((value = reader.bytes()).length)
+                                    message.appMetadata = value;
+                                else
+                                    delete message.appMetadata;
+                                continue;
+                            }
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -5245,11 +6806,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.PutResult
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.PutResult} PutResult
+                 * @returns {arrow.flight.protocol.PutResult & arrow.flight.protocol.PutResult.$Shape} PutResult
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PutResult.decodeDelimited = function decodeDelimited(reader) {
+                PutResult.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -5263,10 +6824,14 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                PutResult.verify = function verify(message) {
+                PutResult.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.appMetadata != null && message.hasOwnProperty("appMetadata"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
+                    if (message.appMetadata != null && $Object.hasOwnProperty.call(message, "appMetadata"))
                         if (!(message.appMetadata && typeof message.appMetadata.length === "number" || $util.isString(message.appMetadata)))
                             return "appMetadata: buffer expected";
                     return null;
@@ -5280,15 +6845,22 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.PutResult} PutResult
                  */
-                PutResult.fromObject = function fromObject(object) {
+                PutResult.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.PutResult)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.PutResult: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.PutResult();
                     if (object.appMetadata != null)
-                        if (typeof object.appMetadata === "string")
-                            $util.base64.decode(object.appMetadata, message.appMetadata = $util.newBuffer($util.base64.length(object.appMetadata)), 0);
-                        else if (object.appMetadata.length >= 0)
-                            message.appMetadata = object.appMetadata;
+                        if (object.appMetadata.length)
+                            if (typeof object.appMetadata === "string")
+                                $util.base64.decode(object.appMetadata, message.appMetadata = $util.newBuffer($util.base64.length(object.appMetadata)), 0);
+                            else if (object.appMetadata.length >= 0)
+                                message.appMetadata = object.appMetadata;
                     return message;
                 };
 
@@ -5301,20 +6873,24 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                PutResult.toObject = function toObject(message, options) {
+                PutResult.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.defaults)
-                        if (options.bytes === String)
+                        if (options.bytes === $String)
                             object.appMetadata = "";
                         else {
                             object.appMetadata = [];
-                            if (options.bytes !== Array)
+                            if (options.bytes !== $Array)
                                 object.appMetadata = $util.newBuffer(object.appMetadata);
                         }
-                    if (message.appMetadata != null && message.hasOwnProperty("appMetadata"))
-                        object.appMetadata = options.bytes === String ? $util.base64.encode(message.appMetadata, 0, message.appMetadata.length) : options.bytes === Array ? Array.prototype.slice.call(message.appMetadata) : message.appMetadata;
+                    if (message.appMetadata != null && $Object.hasOwnProperty.call(message, "appMetadata"))
+                        object.appMetadata = options.bytes === $String ? $util.base64.encode(message.appMetadata, 0, message.appMetadata.length) : options.bytes === $Array ? $Array.prototype.slice.call(message.appMetadata) : message.appMetadata;
                     return object;
                 };
 
@@ -5325,23 +6901,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                PutResult.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                PutResult.prototype.toJSON = function() {
+                    return PutResult.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for PutResult
+                 * Gets the type url for PutResult
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.PutResult
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                PutResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.PutResult";
+                PutResult.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.PutResult";
                 };
 
                 return PutResult;
@@ -5351,29 +6926,52 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a SessionOptionValue.
-                 * @memberof arrow.flight.protocol
-                 * @interface ISessionOptionValue
+                 * @typedef {Object} arrow.flight.protocol.SessionOptionValue.$Properties
                  * @property {string|null} [stringValue] SessionOptionValue stringValue
                  * @property {boolean|null} [boolValue] SessionOptionValue boolValue
                  * @property {number|Long|null} [int64Value] SessionOptionValue int64Value
                  * @property {number|null} [doubleValue] SessionOptionValue doubleValue
-                 * @property {arrow.flight.protocol.SessionOptionValue.IStringListValue|null} [stringListValue] SessionOptionValue stringListValue
+                 * @property {arrow.flight.protocol.SessionOptionValue.StringListValue.$Properties|null} [stringListValue] SessionOptionValue stringListValue
+                 * @property {"stringValue"|"boolValue"|"int64Value"|"doubleValue"|"stringListValue"} [optionValue] SessionOptionValue optionValue
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a SessionOptionValue.
+                 * @memberof arrow.flight.protocol
+                 * @interface ISessionOptionValue
+                 * @augments arrow.flight.protocol.SessionOptionValue.$Properties
+                 * @deprecated Use arrow.flight.protocol.SessionOptionValue.$Properties instead.
+                 */
+
+                /**
+                 * Narrowed shape of a SessionOptionValue.
+                 * @typedef {{
+                 *   stringValue?: string|null;
+                 *   boolValue?: boolean|null;
+                 *   int64Value?: number|Long|null;
+                 *   doubleValue?: number|null;
+                 *   stringListValue?: arrow.flight.protocol.SessionOptionValue.StringListValue.$Shape|null;
+                 *   $unknowns?: Array.<Uint8Array>;
+                 * } & (
+                 *   ({ optionValue?: undefined; stringValue?: null; boolValue?: null; int64Value?: null; doubleValue?: null; stringListValue?: null }|{ optionValue?: "stringValue"; stringValue: string; boolValue?: null; int64Value?: null; doubleValue?: null; stringListValue?: null }|{ optionValue?: "boolValue"; stringValue?: null; boolValue: boolean; int64Value?: null; doubleValue?: null; stringListValue?: null }|{ optionValue?: "int64Value"; stringValue?: null; boolValue?: null; int64Value: number|Long; doubleValue?: null; stringListValue?: null }|{ optionValue?: "doubleValue"; stringValue?: null; boolValue?: null; int64Value?: null; doubleValue: number; stringListValue?: null }|{ optionValue?: "stringListValue"; stringValue?: null; boolValue?: null; int64Value?: null; doubleValue?: null; stringListValue: arrow.flight.protocol.SessionOptionValue.StringListValue.$Shape })
+                 * )} arrow.flight.protocol.SessionOptionValue.$Shape
                  */
 
                 /**
                  * Constructs a new SessionOptionValue.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a SessionOptionValue.
-                 * @implements ISessionOptionValue
                  * @constructor
-                 * @param {arrow.flight.protocol.ISessionOptionValue=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.SessionOptionValue.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function SessionOptionValue(properties) {
+                var SessionOptionValue = function (properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * SessionOptionValue stringValue.
@@ -5409,7 +7007,7 @@ $root.arrow = (function() {
 
                 /**
                  * SessionOptionValue stringListValue.
-                 * @member {arrow.flight.protocol.SessionOptionValue.IStringListValue|null|undefined} stringListValue
+                 * @member {arrow.flight.protocol.SessionOptionValue.StringListValue.$Properties|null|undefined} stringListValue
                  * @memberof arrow.flight.protocol.SessionOptionValue
                  * @instance
                  */
@@ -5424,7 +7022,7 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.SessionOptionValue
                  * @instance
                  */
-                Object.defineProperty(SessionOptionValue.prototype, "optionValue", {
+                $Object.defineProperty(SessionOptionValue.prototype, "optionValue", {
                     get: $util.oneOfGetter($oneOfFields = ["stringValue", "boolValue", "int64Value", "doubleValue", "stringListValue"]),
                     set: $util.oneOfSetter($oneOfFields)
                 });
@@ -5434,10 +7032,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.SessionOptionValue
                  * @static
-                 * @param {arrow.flight.protocol.ISessionOptionValue=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.SessionOptionValue.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.SessionOptionValue} SessionOptionValue instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.SessionOptionValue.$Shape): arrow.flight.protocol.SessionOptionValue & arrow.flight.protocol.SessionOptionValue.$Shape;
+                 *   (properties?: arrow.flight.protocol.SessionOptionValue.$Properties): arrow.flight.protocol.SessionOptionValue;
+                 * }}
                  */
-                SessionOptionValue.create = function create(properties) {
+                SessionOptionValue.create = function(properties) {
                     return new SessionOptionValue(properties);
                 };
 
@@ -5446,23 +7048,30 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.SessionOptionValue
                  * @static
-                 * @param {arrow.flight.protocol.ISessionOptionValue} message SessionOptionValue message or plain object to encode
+                 * @param {arrow.flight.protocol.SessionOptionValue.$Properties} message SessionOptionValue message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                SessionOptionValue.encode = function encode(message, writer) {
+                SessionOptionValue.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.stringValue != null && Object.hasOwnProperty.call(message, "stringValue"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.stringValue != null && $Object.hasOwnProperty.call(message, "stringValue"))
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.stringValue);
-                    if (message.boolValue != null && Object.hasOwnProperty.call(message, "boolValue"))
+                    if (message.boolValue != null && $Object.hasOwnProperty.call(message, "boolValue"))
                         writer.uint32(/* id 2, wireType 0 =*/16).bool(message.boolValue);
-                    if (message.int64Value != null && Object.hasOwnProperty.call(message, "int64Value"))
+                    if (message.int64Value != null && $Object.hasOwnProperty.call(message, "int64Value"))
                         writer.uint32(/* id 3, wireType 1 =*/25).sfixed64(message.int64Value);
-                    if (message.doubleValue != null && Object.hasOwnProperty.call(message, "doubleValue"))
+                    if (message.doubleValue != null && $Object.hasOwnProperty.call(message, "doubleValue"))
                         writer.uint32(/* id 4, wireType 1 =*/33).double(message.doubleValue);
-                    if (message.stringListValue != null && Object.hasOwnProperty.call(message, "stringListValue"))
-                        $root.arrow.flight.protocol.SessionOptionValue.StringListValue.encode(message.stringListValue, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    if (message.stringListValue != null && $Object.hasOwnProperty.call(message, "stringListValue"))
+                        $root.arrow.flight.protocol.SessionOptionValue.StringListValue.encode(message.stringListValue, writer.uint32(/* id 5, wireType 2 =*/42).fork(), _depth + 1).ldelim();
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -5471,12 +7080,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.SessionOptionValue
                  * @static
-                 * @param {arrow.flight.protocol.ISessionOptionValue} message SessionOptionValue message or plain object to encode
+                 * @param {arrow.flight.protocol.SessionOptionValue.$Properties} message SessionOptionValue message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                SessionOptionValue.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                SessionOptionValue.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -5486,42 +7095,86 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.SessionOptionValue} SessionOptionValue
+                 * @returns {arrow.flight.protocol.SessionOptionValue & arrow.flight.protocol.SessionOptionValue.$Shape} SessionOptionValue
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SessionOptionValue.decode = function decode(reader, length) {
+                SessionOptionValue.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.SessionOptionValue();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.SessionOptionValue();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.stringValue = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                message.boolValue = reader.bool();
-                                break;
-                            }
-                        case 3: {
-                                message.int64Value = reader.sfixed64();
-                                break;
-                            }
-                        case 4: {
-                                message.doubleValue = reader.double();
-                                break;
-                            }
-                        case 5: {
-                                message.stringListValue = $root.arrow.flight.protocol.SessionOptionValue.StringListValue.decode(reader, reader.uint32());
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
+                        case 1: {
+                                if (wireType !== 2)
+                                    break;
+                                message.stringValue = reader.stringVerify();
+                                message.optionValue = "stringValue";
+                                continue;
+                            }
+                        case 2: {
+                                if (wireType !== 0)
+                                    break;
+                                message.boolValue = reader.bool();
+                                message.optionValue = "boolValue";
+                                continue;
+                            }
+                        case 3: {
+                                if (wireType !== 1)
+                                    break;
+                                message.int64Value = reader.sfixed64();
+                                message.optionValue = "int64Value";
+                                continue;
+                            }
+                        case 4: {
+                                if (wireType !== 1)
+                                    break;
+                                message.doubleValue = reader.double();
+                                message.optionValue = "doubleValue";
+                                continue;
+                            }
+                        case 5: {
+                                if (wireType !== 2)
+                                    break;
+                                message.stringListValue = $root.arrow.flight.protocol.SessionOptionValue.StringListValue.decode(reader, reader.uint32(), $undefined, _depth + 1, message.stringListValue);
+                                message.optionValue = "stringListValue";
+                                continue;
+                            }
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -5531,11 +7184,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.SessionOptionValue
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.SessionOptionValue} SessionOptionValue
+                 * @returns {arrow.flight.protocol.SessionOptionValue & arrow.flight.protocol.SessionOptionValue.$Shape} SessionOptionValue
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SessionOptionValue.decodeDelimited = function decodeDelimited(reader) {
+                SessionOptionValue.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -5549,42 +7202,46 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                SessionOptionValue.verify = function verify(message) {
+                SessionOptionValue.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
                     var properties = {};
-                    if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                    if (message.stringValue != null && $Object.hasOwnProperty.call(message, "stringValue")) {
                         properties.optionValue = 1;
                         if (!$util.isString(message.stringValue))
                             return "stringValue: string expected";
                     }
-                    if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
+                    if (message.boolValue != null && $Object.hasOwnProperty.call(message, "boolValue")) {
                         if (properties.optionValue === 1)
                             return "optionValue: multiple values";
                         properties.optionValue = 1;
                         if (typeof message.boolValue !== "boolean")
                             return "boolValue: boolean expected";
                     }
-                    if (message.int64Value != null && message.hasOwnProperty("int64Value")) {
+                    if (message.int64Value != null && $Object.hasOwnProperty.call(message, "int64Value")) {
                         if (properties.optionValue === 1)
                             return "optionValue: multiple values";
                         properties.optionValue = 1;
                         if (!$util.isInteger(message.int64Value) && !(message.int64Value && $util.isInteger(message.int64Value.low) && $util.isInteger(message.int64Value.high)))
                             return "int64Value: integer|Long expected";
                     }
-                    if (message.doubleValue != null && message.hasOwnProperty("doubleValue")) {
+                    if (message.doubleValue != null && $Object.hasOwnProperty.call(message, "doubleValue")) {
                         if (properties.optionValue === 1)
                             return "optionValue: multiple values";
                         properties.optionValue = 1;
                         if (typeof message.doubleValue !== "number")
                             return "doubleValue: number expected";
                     }
-                    if (message.stringListValue != null && message.hasOwnProperty("stringListValue")) {
+                    if (message.stringListValue != null && $Object.hasOwnProperty.call(message, "stringListValue")) {
                         if (properties.optionValue === 1)
                             return "optionValue: multiple values";
                         properties.optionValue = 1;
                         {
-                            var error = $root.arrow.flight.protocol.SessionOptionValue.StringListValue.verify(message.stringListValue);
+                            var error = $root.arrow.flight.protocol.SessionOptionValue.StringListValue.verify(message.stringListValue, _depth + 1);
                             if (error)
                                 return "stringListValue." + error;
                         }
@@ -5600,29 +7257,35 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.SessionOptionValue} SessionOptionValue
                  */
-                SessionOptionValue.fromObject = function fromObject(object) {
+                SessionOptionValue.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.SessionOptionValue)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.SessionOptionValue: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.SessionOptionValue();
                     if (object.stringValue != null)
-                        message.stringValue = String(object.stringValue);
+                        message.stringValue = $String(object.stringValue);
                     if (object.boolValue != null)
-                        message.boolValue = Boolean(object.boolValue);
+                        message.boolValue = $Boolean(object.boolValue);
                     if (object.int64Value != null)
                         if ($util.Long)
-                            (message.int64Value = $util.Long.fromValue(object.int64Value)).unsigned = false;
+                            message.int64Value = $util.Long.fromValue(object.int64Value, false);
                         else if (typeof object.int64Value === "string")
-                            message.int64Value = parseInt(object.int64Value, 10);
+                            message.int64Value = $parseInt(object.int64Value, 10);
                         else if (typeof object.int64Value === "number")
                             message.int64Value = object.int64Value;
                         else if (typeof object.int64Value === "object")
                             message.int64Value = new $util.LongBits(object.int64Value.low >>> 0, object.int64Value.high >>> 0).toNumber();
                     if (object.doubleValue != null)
-                        message.doubleValue = Number(object.doubleValue);
+                        message.doubleValue = $Number(object.doubleValue);
                     if (object.stringListValue != null) {
-                        if (typeof object.stringListValue !== "object")
-                            throw TypeError(".arrow.flight.protocol.SessionOptionValue.stringListValue: object expected");
-                        message.stringListValue = $root.arrow.flight.protocol.SessionOptionValue.StringListValue.fromObject(object.stringListValue);
+                        if (!$util.isObject(object.stringListValue))
+                            throw $TypeError(".arrow.flight.protocol.SessionOptionValue.stringListValue: object expected");
+                        message.stringListValue = $root.arrow.flight.protocol.SessionOptionValue.StringListValue.fromObject(object.stringListValue, _depth + 1);
                     }
                     return message;
                 };
@@ -5636,35 +7299,41 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                SessionOptionValue.toObject = function toObject(message, options) {
+                SessionOptionValue.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
-                    if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                    if (message.stringValue != null && $Object.hasOwnProperty.call(message, "stringValue")) {
                         object.stringValue = message.stringValue;
                         if (options.oneofs)
                             object.optionValue = "stringValue";
                     }
-                    if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
+                    if (message.boolValue != null && $Object.hasOwnProperty.call(message, "boolValue")) {
                         object.boolValue = message.boolValue;
                         if (options.oneofs)
                             object.optionValue = "boolValue";
                     }
-                    if (message.int64Value != null && message.hasOwnProperty("int64Value")) {
-                        if (typeof message.int64Value === "number")
-                            object.int64Value = options.longs === String ? String(message.int64Value) : message.int64Value;
+                    if (message.int64Value != null && $Object.hasOwnProperty.call(message, "int64Value")) {
+                        if (typeof $BigInt !== "undefined" && options.longs === $BigInt)
+                            object.int64Value = typeof message.int64Value === "number" ? $BigInt(message.int64Value) : $util.Long.fromBits(message.int64Value.low >>> 0, message.int64Value.high >>> 0, false).toBigInt();
+                        else if (typeof message.int64Value === "number")
+                            object.int64Value = options.longs === $String ? $String(message.int64Value) : message.int64Value;
                         else
-                            object.int64Value = options.longs === String ? $util.Long.prototype.toString.call(message.int64Value) : options.longs === Number ? new $util.LongBits(message.int64Value.low >>> 0, message.int64Value.high >>> 0).toNumber() : message.int64Value;
+                            object.int64Value = options.longs === $String ? $util.Long.prototype.toString.call(message.int64Value) : options.longs === $Number ? new $util.LongBits(message.int64Value.low >>> 0, message.int64Value.high >>> 0).toNumber() : message.int64Value;
                         if (options.oneofs)
                             object.optionValue = "int64Value";
                     }
-                    if (message.doubleValue != null && message.hasOwnProperty("doubleValue")) {
-                        object.doubleValue = options.json && !isFinite(message.doubleValue) ? String(message.doubleValue) : message.doubleValue;
+                    if (message.doubleValue != null && $Object.hasOwnProperty.call(message, "doubleValue")) {
+                        object.doubleValue = options.json && !$isFinite(message.doubleValue) ? $String(message.doubleValue) : message.doubleValue;
                         if (options.oneofs)
                             object.optionValue = "doubleValue";
                     }
-                    if (message.stringListValue != null && message.hasOwnProperty("stringListValue")) {
-                        object.stringListValue = $root.arrow.flight.protocol.SessionOptionValue.StringListValue.toObject(message.stringListValue, options);
+                    if (message.stringListValue != null && $Object.hasOwnProperty.call(message, "stringListValue")) {
+                        object.stringListValue = $root.arrow.flight.protocol.SessionOptionValue.StringListValue.toObject(message.stringListValue, options, _depth + 1);
                         if (options.oneofs)
                             object.optionValue = "stringListValue";
                     }
@@ -5678,49 +7347,61 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                SessionOptionValue.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                SessionOptionValue.prototype.toJSON = function() {
+                    return SessionOptionValue.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for SessionOptionValue
+                 * Gets the type url for SessionOptionValue
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.SessionOptionValue
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                SessionOptionValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.SessionOptionValue";
+                SessionOptionValue.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.SessionOptionValue";
                 };
 
                 SessionOptionValue.StringListValue = (function() {
 
                     /**
                      * Properties of a StringListValue.
+                     * @typedef {Object} arrow.flight.protocol.SessionOptionValue.StringListValue.$Properties
+                     * @property {Array.<string>|null} [values] StringListValue values
+                     * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                     */
+
+                    /**
+                     * Properties of a StringListValue.
                      * @memberof arrow.flight.protocol.SessionOptionValue
                      * @interface IStringListValue
-                     * @property {Array.<string>|null} [values] StringListValue values
+                     * @augments arrow.flight.protocol.SessionOptionValue.StringListValue.$Properties
+                     * @deprecated Use arrow.flight.protocol.SessionOptionValue.StringListValue.$Properties instead.
+                     */
+
+                    /**
+                     * Shape of a StringListValue.
+                     * @typedef {arrow.flight.protocol.SessionOptionValue.StringListValue.$Properties} arrow.flight.protocol.SessionOptionValue.StringListValue.$Shape
                      */
 
                     /**
                      * Constructs a new StringListValue.
                      * @memberof arrow.flight.protocol.SessionOptionValue
                      * @classdesc Represents a StringListValue.
-                     * @implements IStringListValue
                      * @constructor
-                     * @param {arrow.flight.protocol.SessionOptionValue.IStringListValue=} [properties] Properties to set
+                     * @param {arrow.flight.protocol.SessionOptionValue.StringListValue.$Properties=} [properties] Properties to set
+                     * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                      */
-                    function StringListValue(properties) {
+                    var StringListValue = function (properties) {
                         this.values = [];
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                            for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
-                    }
+                    };
 
                     /**
                      * StringListValue values.
@@ -5735,10 +7416,14 @@ $root.arrow = (function() {
                      * @function create
                      * @memberof arrow.flight.protocol.SessionOptionValue.StringListValue
                      * @static
-                     * @param {arrow.flight.protocol.SessionOptionValue.IStringListValue=} [properties] Properties to set
+                     * @param {arrow.flight.protocol.SessionOptionValue.StringListValue.$Properties=} [properties] Properties to set
                      * @returns {arrow.flight.protocol.SessionOptionValue.StringListValue} StringListValue instance
+                     * @type {{
+                     *   (properties: arrow.flight.protocol.SessionOptionValue.StringListValue.$Shape): arrow.flight.protocol.SessionOptionValue.StringListValue & arrow.flight.protocol.SessionOptionValue.StringListValue.$Shape;
+                     *   (properties?: arrow.flight.protocol.SessionOptionValue.StringListValue.$Properties): arrow.flight.protocol.SessionOptionValue.StringListValue;
+                     * }}
                      */
-                    StringListValue.create = function create(properties) {
+                    StringListValue.create = function(properties) {
                         return new StringListValue(properties);
                     };
 
@@ -5747,16 +7432,23 @@ $root.arrow = (function() {
                      * @function encode
                      * @memberof arrow.flight.protocol.SessionOptionValue.StringListValue
                      * @static
-                     * @param {arrow.flight.protocol.SessionOptionValue.IStringListValue} message StringListValue message or plain object to encode
+                     * @param {arrow.flight.protocol.SessionOptionValue.StringListValue.$Properties} message StringListValue message or plain object to encode
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    StringListValue.encode = function encode(message, writer) {
+                    StringListValue.encode = function (message, writer, _depth) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (_depth === $undefined)
+                            _depth = 0;
+                        if (_depth > $util.recursionLimit)
+                            throw $Error("max depth exceeded");
                         if (message.values != null && message.values.length)
                             for (var i = 0; i < message.values.length; ++i)
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.values[i]);
+                        if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                            for (var i = 0; i < message.$unknowns.length; ++i)
+                                writer.raw(message.$unknowns[i]);
                         return writer;
                     };
 
@@ -5765,12 +7457,12 @@ $root.arrow = (function() {
                      * @function encodeDelimited
                      * @memberof arrow.flight.protocol.SessionOptionValue.StringListValue
                      * @static
-                     * @param {arrow.flight.protocol.SessionOptionValue.IStringListValue} message StringListValue message or plain object to encode
+                     * @param {arrow.flight.protocol.SessionOptionValue.StringListValue.$Properties} message StringListValue message or plain object to encode
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    StringListValue.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                    StringListValue.encodeDelimited = function(message, writer) {
+                        return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                     };
 
                     /**
@@ -5780,28 +7472,59 @@ $root.arrow = (function() {
                      * @static
                      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                      * @param {number} [length] Message length if known beforehand
-                     * @returns {arrow.flight.protocol.SessionOptionValue.StringListValue} StringListValue
+                     * @returns {arrow.flight.protocol.SessionOptionValue.StringListValue & arrow.flight.protocol.SessionOptionValue.StringListValue.$Shape} StringListValue
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    StringListValue.decode = function decode(reader, length) {
+                    StringListValue.decode = function (reader, length, _end, _depth, _target) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.SessionOptionValue.StringListValue();
+                        if (_depth === $undefined)
+                            _depth = 0;
+                        if (_depth > $Reader.recursionLimit)
+                            throw $Error("max depth exceeded");
+                        var end, message;
+                        if (length === $undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw $RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = _target || new $root.arrow.flight.protocol.SessionOptionValue.StringListValue();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    if (!(message.values && message.values.length))
-                                        message.values = [];
-                                    message.values.push(reader.string());
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
+                            var start = reader.pos;
+                            var tag = reader.tag();
+                            if (tag === _end) {
+                                _end = $undefined;
                                 break;
                             }
+                            var wireType = tag & 7;
+                            switch (tag >>>= 3) {
+                            case 1: {
+                                    if (wireType !== 2)
+                                        break;
+                                    if (!(message.values && message.values.length))
+                                        message.values = [];
+                                    message.values.push(reader.stringVerify());
+                                    continue;
+                                }
+                            }
+                            reader.skipType(wireType, _depth, tag);
+                            if (!reader.discardUnknown) {
+                                $util.makeProp(message, "$unknowns", false);
+                                (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                            }
                         }
+                        if (length !== $undefined) {
+                            if (reader.pos !== end)
+                                throw $RangeError("index out of range");
+                            reader.len = length;
+                        }
+                        if (_end !== $undefined)
+                            throw $Error("missing end group");
                         return message;
                     };
 
@@ -5811,11 +7534,11 @@ $root.arrow = (function() {
                      * @memberof arrow.flight.protocol.SessionOptionValue.StringListValue
                      * @static
                      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {arrow.flight.protocol.SessionOptionValue.StringListValue} StringListValue
+                     * @returns {arrow.flight.protocol.SessionOptionValue.StringListValue & arrow.flight.protocol.SessionOptionValue.StringListValue.$Shape} StringListValue
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    StringListValue.decodeDelimited = function decodeDelimited(reader) {
+                    StringListValue.decodeDelimited = function(reader) {
                         if (!(reader instanceof $Reader))
                             reader = new $Reader(reader);
                         return this.decode(reader, reader.uint32());
@@ -5829,11 +7552,15 @@ $root.arrow = (function() {
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    StringListValue.verify = function verify(message) {
+                    StringListValue.verify = function (message, _depth) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
-                        if (message.values != null && message.hasOwnProperty("values")) {
-                            if (!Array.isArray(message.values))
+                        if (_depth === $undefined)
+                            _depth = 0;
+                        if (_depth > $util.recursionLimit)
+                            return "max depth exceeded";
+                        if (message.values != null && $Object.hasOwnProperty.call(message, "values")) {
+                            if (!$Array.isArray(message.values))
                                 return "values: array expected";
                             for (var i = 0; i < message.values.length; ++i)
                                 if (!$util.isString(message.values[i]))
@@ -5850,16 +7577,22 @@ $root.arrow = (function() {
                      * @param {Object.<string,*>} object Plain object
                      * @returns {arrow.flight.protocol.SessionOptionValue.StringListValue} StringListValue
                      */
-                    StringListValue.fromObject = function fromObject(object) {
+                    StringListValue.fromObject = function (object, _depth) {
                         if (object instanceof $root.arrow.flight.protocol.SessionOptionValue.StringListValue)
                             return object;
+                        if (!$util.isObject(object))
+                            throw $TypeError(".arrow.flight.protocol.SessionOptionValue.StringListValue: object expected");
+                        if (_depth === $undefined)
+                            _depth = 0;
+                        if (_depth > $util.recursionLimit)
+                            throw $Error("max depth exceeded");
                         var message = new $root.arrow.flight.protocol.SessionOptionValue.StringListValue();
                         if (object.values) {
-                            if (!Array.isArray(object.values))
-                                throw TypeError(".arrow.flight.protocol.SessionOptionValue.StringListValue.values: array expected");
-                            message.values = [];
+                            if (!$Array.isArray(object.values))
+                                throw $TypeError(".arrow.flight.protocol.SessionOptionValue.StringListValue.values: array expected");
+                            message.values = $Array(object.values.length);
                             for (var i = 0; i < object.values.length; ++i)
-                                message.values[i] = String(object.values[i]);
+                                message.values[i] = $String(object.values[i]);
                         }
                         return message;
                     };
@@ -5873,14 +7606,18 @@ $root.arrow = (function() {
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    StringListValue.toObject = function toObject(message, options) {
+                    StringListValue.toObject = function (message, options, _depth) {
                         if (!options)
                             options = {};
+                        if (_depth === $undefined)
+                            _depth = 0;
+                        if (_depth > $util.recursionLimit)
+                            throw $Error("max depth exceeded");
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.values = [];
                         if (message.values && message.values.length) {
-                            object.values = [];
+                            object.values = $Array(message.values.length);
                             for (var j = 0; j < message.values.length; ++j)
                                 object.values[j] = message.values[j];
                         }
@@ -5894,23 +7631,22 @@ $root.arrow = (function() {
                      * @instance
                      * @returns {Object.<string,*>} JSON object
                      */
-                    StringListValue.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    StringListValue.prototype.toJSON = function() {
+                        return StringListValue.toObject(this, $protobuf.util.toJSONOptions);
                     };
 
                     /**
-                     * Gets the default type url for StringListValue
+                     * Gets the type url for StringListValue
                      * @function getTypeUrl
                      * @memberof arrow.flight.protocol.SessionOptionValue.StringListValue
                      * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
+                     * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                     * @returns {string} The type url
                      */
-                    StringListValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/arrow.flight.protocol.SessionOptionValue.StringListValue";
+                    StringListValue.getTypeUrl = function(prefix) {
+                        if (prefix === $undefined)
+                            prefix = "type.googleapis.com";
+                        return prefix + "/arrow.flight.protocol.SessionOptionValue.StringListValue";
                     };
 
                     return StringListValue;
@@ -5923,30 +7659,46 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a SetSessionOptionsRequest.
+                 * @typedef {Object} arrow.flight.protocol.SetSessionOptionsRequest.$Properties
+                 * @property {Object.<string,arrow.flight.protocol.SessionOptionValue.$Properties>|null} [sessionOptions] SetSessionOptionsRequest sessionOptions
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a SetSessionOptionsRequest.
                  * @memberof arrow.flight.protocol
                  * @interface ISetSessionOptionsRequest
-                 * @property {Object.<string,arrow.flight.protocol.ISessionOptionValue>|null} [sessionOptions] SetSessionOptionsRequest sessionOptions
+                 * @augments arrow.flight.protocol.SetSessionOptionsRequest.$Properties
+                 * @deprecated Use arrow.flight.protocol.SetSessionOptionsRequest.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a SetSessionOptionsRequest.
+                 * @typedef {{
+                 *   sessionOptions?: Object.<string,arrow.flight.protocol.SessionOptionValue.$Shape>|null;
+                 *   $unknowns?: Array.<Uint8Array>;
+                 * }} arrow.flight.protocol.SetSessionOptionsRequest.$Shape
                  */
 
                 /**
                  * Constructs a new SetSessionOptionsRequest.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a SetSessionOptionsRequest.
-                 * @implements ISetSessionOptionsRequest
                  * @constructor
-                 * @param {arrow.flight.protocol.ISetSessionOptionsRequest=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.SetSessionOptionsRequest.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function SetSessionOptionsRequest(properties) {
+                var SetSessionOptionsRequest = function (properties) {
                     this.sessionOptions = {};
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * SetSessionOptionsRequest sessionOptions.
-                 * @member {Object.<string,arrow.flight.protocol.ISessionOptionValue>} sessionOptions
+                 * @member {Object.<string,arrow.flight.protocol.SessionOptionValue.$Properties>} sessionOptions
                  * @memberof arrow.flight.protocol.SetSessionOptionsRequest
                  * @instance
                  */
@@ -5957,10 +7709,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.SetSessionOptionsRequest
                  * @static
-                 * @param {arrow.flight.protocol.ISetSessionOptionsRequest=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.SetSessionOptionsRequest.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.SetSessionOptionsRequest} SetSessionOptionsRequest instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.SetSessionOptionsRequest.$Shape): arrow.flight.protocol.SetSessionOptionsRequest & arrow.flight.protocol.SetSessionOptionsRequest.$Shape;
+                 *   (properties?: arrow.flight.protocol.SetSessionOptionsRequest.$Properties): arrow.flight.protocol.SetSessionOptionsRequest;
+                 * }}
                  */
-                SetSessionOptionsRequest.create = function create(properties) {
+                SetSessionOptionsRequest.create = function(properties) {
                     return new SetSessionOptionsRequest(properties);
                 };
 
@@ -5969,18 +7725,25 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.SetSessionOptionsRequest
                  * @static
-                 * @param {arrow.flight.protocol.ISetSessionOptionsRequest} message SetSessionOptionsRequest message or plain object to encode
+                 * @param {arrow.flight.protocol.SetSessionOptionsRequest.$Properties} message SetSessionOptionsRequest message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                SetSessionOptionsRequest.encode = function encode(message, writer) {
+                SetSessionOptionsRequest.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.sessionOptions != null && Object.hasOwnProperty.call(message, "sessionOptions"))
-                        for (var keys = Object.keys(message.sessionOptions), i = 0; i < keys.length; ++i) {
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.sessionOptions != null && $Object.hasOwnProperty.call(message, "sessionOptions"))
+                        for (var keys = $Object.keys(message.sessionOptions), i = 0; i < keys.length; ++i) {
                             writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
-                            $root.arrow.flight.protocol.SessionOptionValue.encode(message.sessionOptions[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                            $root.arrow.flight.protocol.SessionOptionValue.encode(message.sessionOptions[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork(), _depth + 1).ldelim().ldelim();
                         }
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -5989,12 +7752,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.SetSessionOptionsRequest
                  * @static
-                 * @param {arrow.flight.protocol.ISetSessionOptionsRequest} message SetSessionOptionsRequest message or plain object to encode
+                 * @param {arrow.flight.protocol.SetSessionOptionsRequest.$Properties} message SetSessionOptionsRequest message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                SetSessionOptionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                SetSessionOptionsRequest.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -6004,45 +7767,87 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.SetSessionOptionsRequest} SetSessionOptionsRequest
+                 * @returns {arrow.flight.protocol.SetSessionOptionsRequest & arrow.flight.protocol.SetSessionOptionsRequest.$Shape} SetSessionOptionsRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SetSessionOptionsRequest.decode = function decode(reader, length) {
+                SetSessionOptionsRequest.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.SetSessionOptionsRequest(), key, value;
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, key, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.SetSessionOptionsRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
+                            break;
+                        }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
                         case 1: {
+                                if (wireType !== 2)
+                                    break;
                                 if (message.sessionOptions === $util.emptyObject)
                                     message.sessionOptions = {};
                                 var end2 = reader.uint32() + reader.pos;
+                                if (end2 > reader.len)
+                                    throw $RangeError("index out of range");
+                                reader.len = end2;
                                 key = "";
                                 value = null;
                                 while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
+                                    var tag2 = reader.tag();
+                                    wireType = tag2 & 7;
+                                    switch (tag2 >>>= 3) {
                                     case 1:
-                                        key = reader.string();
-                                        break;
+                                        if (wireType !== 2)
+                                            break;
+                                        key = reader.stringVerify();
+                                        continue;
                                     case 2:
-                                        value = $root.arrow.flight.protocol.SessionOptionValue.decode(reader, reader.uint32());
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
+                                        if (wireType !== 2)
+                                            break;
+                                        value = $root.arrow.flight.protocol.SessionOptionValue.decode(reader, reader.uint32(), $undefined, _depth + 1, value);
+                                        continue;
                                     }
+                                    reader.skipType(wireType, _depth, tag2);
                                 }
-                                message.sessionOptions[key] = value;
-                                break;
+                                if (reader.pos !== end2)
+                                    throw $RangeError("index out of range");
+                                reader.len = end;
+                                if (key === "__proto__")
+                                    $util.makeProp(message.sessionOptions, key);
+                                message.sessionOptions[key] = value || new $root.arrow.flight.protocol.SessionOptionValue();
+                                continue;
                             }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
                         }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -6052,11 +7857,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.SetSessionOptionsRequest
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.SetSessionOptionsRequest} SetSessionOptionsRequest
+                 * @returns {arrow.flight.protocol.SetSessionOptionsRequest & arrow.flight.protocol.SetSessionOptionsRequest.$Shape} SetSessionOptionsRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SetSessionOptionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                SetSessionOptionsRequest.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -6070,15 +7875,19 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                SetSessionOptionsRequest.verify = function verify(message) {
+                SetSessionOptionsRequest.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.sessionOptions != null && message.hasOwnProperty("sessionOptions")) {
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
+                    if (message.sessionOptions != null && $Object.hasOwnProperty.call(message, "sessionOptions")) {
                         if (!$util.isObject(message.sessionOptions))
                             return "sessionOptions: object expected";
-                        var key = Object.keys(message.sessionOptions);
+                        var key = $Object.keys(message.sessionOptions);
                         for (var i = 0; i < key.length; ++i) {
-                            var error = $root.arrow.flight.protocol.SessionOptionValue.verify(message.sessionOptions[key[i]]);
+                            var error = $root.arrow.flight.protocol.SessionOptionValue.verify(message.sessionOptions[key[i]], _depth + 1);
                             if (error)
                                 return "sessionOptions." + error;
                         }
@@ -6094,18 +7903,26 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.SetSessionOptionsRequest} SetSessionOptionsRequest
                  */
-                SetSessionOptionsRequest.fromObject = function fromObject(object) {
+                SetSessionOptionsRequest.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.SetSessionOptionsRequest)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.SetSessionOptionsRequest: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.SetSessionOptionsRequest();
                     if (object.sessionOptions) {
-                        if (typeof object.sessionOptions !== "object")
-                            throw TypeError(".arrow.flight.protocol.SetSessionOptionsRequest.sessionOptions: object expected");
+                        if (!$util.isObject(object.sessionOptions))
+                            throw $TypeError(".arrow.flight.protocol.SetSessionOptionsRequest.sessionOptions: object expected");
                         message.sessionOptions = {};
-                        for (var keys = Object.keys(object.sessionOptions), i = 0; i < keys.length; ++i) {
-                            if (typeof object.sessionOptions[keys[i]] !== "object")
-                                throw TypeError(".arrow.flight.protocol.SetSessionOptionsRequest.sessionOptions: object expected");
-                            message.sessionOptions[keys[i]] = $root.arrow.flight.protocol.SessionOptionValue.fromObject(object.sessionOptions[keys[i]]);
+                        for (var keys = $Object.keys(object.sessionOptions), i = 0; i < keys.length; ++i) {
+                            if (keys[i] === "__proto__")
+                                $util.makeProp(message.sessionOptions, keys[i]);
+                            if (!$util.isObject(object.sessionOptions[keys[i]]))
+                                throw $TypeError(".arrow.flight.protocol.SetSessionOptionsRequest.sessionOptions: object expected");
+                            message.sessionOptions[keys[i]] = $root.arrow.flight.protocol.SessionOptionValue.fromObject(object.sessionOptions[keys[i]], _depth + 1);
                         }
                     }
                     return message;
@@ -6120,17 +7937,24 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                SetSessionOptionsRequest.toObject = function toObject(message, options) {
+                SetSessionOptionsRequest.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.objects || options.defaults)
                         object.sessionOptions = {};
                     var keys2;
-                    if (message.sessionOptions && (keys2 = Object.keys(message.sessionOptions)).length) {
+                    if (message.sessionOptions && (keys2 = $Object.keys(message.sessionOptions)).length) {
                         object.sessionOptions = {};
-                        for (var j = 0; j < keys2.length; ++j)
-                            object.sessionOptions[keys2[j]] = $root.arrow.flight.protocol.SessionOptionValue.toObject(message.sessionOptions[keys2[j]], options);
+                        for (var j = 0; j < keys2.length; ++j) {
+                            if (keys2[j] === "__proto__")
+                                $util.makeProp(object.sessionOptions, keys2[j]);
+                            object.sessionOptions[keys2[j]] = $root.arrow.flight.protocol.SessionOptionValue.toObject(message.sessionOptions[keys2[j]], options, _depth + 1);
+                        }
                     }
                     return object;
                 };
@@ -6142,23 +7966,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                SetSessionOptionsRequest.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                SetSessionOptionsRequest.prototype.toJSON = function() {
+                    return SetSessionOptionsRequest.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for SetSessionOptionsRequest
+                 * Gets the type url for SetSessionOptionsRequest
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.SetSessionOptionsRequest
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                SetSessionOptionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.SetSessionOptionsRequest";
+                SetSessionOptionsRequest.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.SetSessionOptionsRequest";
                 };
 
                 return SetSessionOptionsRequest;
@@ -6168,30 +7991,43 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a SetSessionOptionsResult.
+                 * @typedef {Object} arrow.flight.protocol.SetSessionOptionsResult.$Properties
+                 * @property {Object.<string,arrow.flight.protocol.SetSessionOptionsResult.Error.$Properties>|null} [errors] SetSessionOptionsResult errors
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a SetSessionOptionsResult.
                  * @memberof arrow.flight.protocol
                  * @interface ISetSessionOptionsResult
-                 * @property {Object.<string,arrow.flight.protocol.SetSessionOptionsResult.IError>|null} [errors] SetSessionOptionsResult errors
+                 * @augments arrow.flight.protocol.SetSessionOptionsResult.$Properties
+                 * @deprecated Use arrow.flight.protocol.SetSessionOptionsResult.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a SetSessionOptionsResult.
+                 * @typedef {arrow.flight.protocol.SetSessionOptionsResult.$Properties} arrow.flight.protocol.SetSessionOptionsResult.$Shape
                  */
 
                 /**
                  * Constructs a new SetSessionOptionsResult.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a SetSessionOptionsResult.
-                 * @implements ISetSessionOptionsResult
                  * @constructor
-                 * @param {arrow.flight.protocol.ISetSessionOptionsResult=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.SetSessionOptionsResult.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function SetSessionOptionsResult(properties) {
+                var SetSessionOptionsResult = function (properties) {
                     this.errors = {};
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * SetSessionOptionsResult errors.
-                 * @member {Object.<string,arrow.flight.protocol.SetSessionOptionsResult.IError>} errors
+                 * @member {Object.<string,arrow.flight.protocol.SetSessionOptionsResult.Error.$Properties>} errors
                  * @memberof arrow.flight.protocol.SetSessionOptionsResult
                  * @instance
                  */
@@ -6202,10 +8038,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.SetSessionOptionsResult
                  * @static
-                 * @param {arrow.flight.protocol.ISetSessionOptionsResult=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.SetSessionOptionsResult.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.SetSessionOptionsResult} SetSessionOptionsResult instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.SetSessionOptionsResult.$Shape): arrow.flight.protocol.SetSessionOptionsResult & arrow.flight.protocol.SetSessionOptionsResult.$Shape;
+                 *   (properties?: arrow.flight.protocol.SetSessionOptionsResult.$Properties): arrow.flight.protocol.SetSessionOptionsResult;
+                 * }}
                  */
-                SetSessionOptionsResult.create = function create(properties) {
+                SetSessionOptionsResult.create = function(properties) {
                     return new SetSessionOptionsResult(properties);
                 };
 
@@ -6214,18 +8054,25 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.SetSessionOptionsResult
                  * @static
-                 * @param {arrow.flight.protocol.ISetSessionOptionsResult} message SetSessionOptionsResult message or plain object to encode
+                 * @param {arrow.flight.protocol.SetSessionOptionsResult.$Properties} message SetSessionOptionsResult message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                SetSessionOptionsResult.encode = function encode(message, writer) {
+                SetSessionOptionsResult.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.errors != null && Object.hasOwnProperty.call(message, "errors"))
-                        for (var keys = Object.keys(message.errors), i = 0; i < keys.length; ++i) {
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.errors != null && $Object.hasOwnProperty.call(message, "errors"))
+                        for (var keys = $Object.keys(message.errors), i = 0; i < keys.length; ++i) {
                             writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
-                            $root.arrow.flight.protocol.SetSessionOptionsResult.Error.encode(message.errors[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                            $root.arrow.flight.protocol.SetSessionOptionsResult.Error.encode(message.errors[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork(), _depth + 1).ldelim().ldelim();
                         }
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -6234,12 +8081,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.SetSessionOptionsResult
                  * @static
-                 * @param {arrow.flight.protocol.ISetSessionOptionsResult} message SetSessionOptionsResult message or plain object to encode
+                 * @param {arrow.flight.protocol.SetSessionOptionsResult.$Properties} message SetSessionOptionsResult message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                SetSessionOptionsResult.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                SetSessionOptionsResult.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -6249,45 +8096,87 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.SetSessionOptionsResult} SetSessionOptionsResult
+                 * @returns {arrow.flight.protocol.SetSessionOptionsResult & arrow.flight.protocol.SetSessionOptionsResult.$Shape} SetSessionOptionsResult
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SetSessionOptionsResult.decode = function decode(reader, length) {
+                SetSessionOptionsResult.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.SetSessionOptionsResult(), key, value;
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, key, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.SetSessionOptionsResult();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
+                            break;
+                        }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
                         case 1: {
+                                if (wireType !== 2)
+                                    break;
                                 if (message.errors === $util.emptyObject)
                                     message.errors = {};
                                 var end2 = reader.uint32() + reader.pos;
+                                if (end2 > reader.len)
+                                    throw $RangeError("index out of range");
+                                reader.len = end2;
                                 key = "";
                                 value = null;
                                 while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
+                                    var tag2 = reader.tag();
+                                    wireType = tag2 & 7;
+                                    switch (tag2 >>>= 3) {
                                     case 1:
-                                        key = reader.string();
-                                        break;
+                                        if (wireType !== 2)
+                                            break;
+                                        key = reader.stringVerify();
+                                        continue;
                                     case 2:
-                                        value = $root.arrow.flight.protocol.SetSessionOptionsResult.Error.decode(reader, reader.uint32());
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
+                                        if (wireType !== 2)
+                                            break;
+                                        value = $root.arrow.flight.protocol.SetSessionOptionsResult.Error.decode(reader, reader.uint32(), $undefined, _depth + 1, value);
+                                        continue;
                                     }
+                                    reader.skipType(wireType, _depth, tag2);
                                 }
-                                message.errors[key] = value;
-                                break;
+                                if (reader.pos !== end2)
+                                    throw $RangeError("index out of range");
+                                reader.len = end;
+                                if (key === "__proto__")
+                                    $util.makeProp(message.errors, key);
+                                message.errors[key] = value || new $root.arrow.flight.protocol.SetSessionOptionsResult.Error();
+                                continue;
                             }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
                         }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -6297,11 +8186,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.SetSessionOptionsResult
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.SetSessionOptionsResult} SetSessionOptionsResult
+                 * @returns {arrow.flight.protocol.SetSessionOptionsResult & arrow.flight.protocol.SetSessionOptionsResult.$Shape} SetSessionOptionsResult
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SetSessionOptionsResult.decodeDelimited = function decodeDelimited(reader) {
+                SetSessionOptionsResult.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -6315,15 +8204,19 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                SetSessionOptionsResult.verify = function verify(message) {
+                SetSessionOptionsResult.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.errors != null && message.hasOwnProperty("errors")) {
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
+                    if (message.errors != null && $Object.hasOwnProperty.call(message, "errors")) {
                         if (!$util.isObject(message.errors))
                             return "errors: object expected";
-                        var key = Object.keys(message.errors);
+                        var key = $Object.keys(message.errors);
                         for (var i = 0; i < key.length; ++i) {
-                            var error = $root.arrow.flight.protocol.SetSessionOptionsResult.Error.verify(message.errors[key[i]]);
+                            var error = $root.arrow.flight.protocol.SetSessionOptionsResult.Error.verify(message.errors[key[i]], _depth + 1);
                             if (error)
                                 return "errors." + error;
                         }
@@ -6339,18 +8232,26 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.SetSessionOptionsResult} SetSessionOptionsResult
                  */
-                SetSessionOptionsResult.fromObject = function fromObject(object) {
+                SetSessionOptionsResult.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.SetSessionOptionsResult)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.SetSessionOptionsResult: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.SetSessionOptionsResult();
                     if (object.errors) {
-                        if (typeof object.errors !== "object")
-                            throw TypeError(".arrow.flight.protocol.SetSessionOptionsResult.errors: object expected");
+                        if (!$util.isObject(object.errors))
+                            throw $TypeError(".arrow.flight.protocol.SetSessionOptionsResult.errors: object expected");
                         message.errors = {};
-                        for (var keys = Object.keys(object.errors), i = 0; i < keys.length; ++i) {
-                            if (typeof object.errors[keys[i]] !== "object")
-                                throw TypeError(".arrow.flight.protocol.SetSessionOptionsResult.errors: object expected");
-                            message.errors[keys[i]] = $root.arrow.flight.protocol.SetSessionOptionsResult.Error.fromObject(object.errors[keys[i]]);
+                        for (var keys = $Object.keys(object.errors), i = 0; i < keys.length; ++i) {
+                            if (keys[i] === "__proto__")
+                                $util.makeProp(message.errors, keys[i]);
+                            if (!$util.isObject(object.errors[keys[i]]))
+                                throw $TypeError(".arrow.flight.protocol.SetSessionOptionsResult.errors: object expected");
+                            message.errors[keys[i]] = $root.arrow.flight.protocol.SetSessionOptionsResult.Error.fromObject(object.errors[keys[i]], _depth + 1);
                         }
                     }
                     return message;
@@ -6365,17 +8266,24 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                SetSessionOptionsResult.toObject = function toObject(message, options) {
+                SetSessionOptionsResult.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.objects || options.defaults)
                         object.errors = {};
                     var keys2;
-                    if (message.errors && (keys2 = Object.keys(message.errors)).length) {
+                    if (message.errors && (keys2 = $Object.keys(message.errors)).length) {
                         object.errors = {};
-                        for (var j = 0; j < keys2.length; ++j)
-                            object.errors[keys2[j]] = $root.arrow.flight.protocol.SetSessionOptionsResult.Error.toObject(message.errors[keys2[j]], options);
+                        for (var j = 0; j < keys2.length; ++j) {
+                            if (keys2[j] === "__proto__")
+                                $util.makeProp(object.errors, keys2[j]);
+                            object.errors[keys2[j]] = $root.arrow.flight.protocol.SetSessionOptionsResult.Error.toObject(message.errors[keys2[j]], options, _depth + 1);
+                        }
                     }
                     return object;
                 };
@@ -6387,23 +8295,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                SetSessionOptionsResult.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                SetSessionOptionsResult.prototype.toJSON = function() {
+                    return SetSessionOptionsResult.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for SetSessionOptionsResult
+                 * Gets the type url for SetSessionOptionsResult
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.SetSessionOptionsResult
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                SetSessionOptionsResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.SetSessionOptionsResult";
+                SetSessionOptionsResult.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.SetSessionOptionsResult";
                 };
 
                 /**
@@ -6416,7 +8323,7 @@ $root.arrow = (function() {
                  * @property {number} ERROR=3 ERROR value
                  */
                 SetSessionOptionsResult.ErrorValue = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
+                    var valuesById = $Object.create(null), values = $Object.create(valuesById);
                     values[valuesById[0] = "UNSPECIFIED"] = 0;
                     values[valuesById[1] = "INVALID_NAME"] = 1;
                     values[valuesById[2] = "INVALID_VALUE"] = 2;
@@ -6428,25 +8335,38 @@ $root.arrow = (function() {
 
                     /**
                      * Properties of an Error.
+                     * @typedef {Object} arrow.flight.protocol.SetSessionOptionsResult.Error.$Properties
+                     * @property {arrow.flight.protocol.SetSessionOptionsResult.ErrorValue|null} [value] Error value
+                     * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                     */
+
+                    /**
+                     * Properties of an Error.
                      * @memberof arrow.flight.protocol.SetSessionOptionsResult
                      * @interface IError
-                     * @property {arrow.flight.protocol.SetSessionOptionsResult.ErrorValue|null} [value] Error value
+                     * @augments arrow.flight.protocol.SetSessionOptionsResult.Error.$Properties
+                     * @deprecated Use arrow.flight.protocol.SetSessionOptionsResult.Error.$Properties instead.
+                     */
+
+                    /**
+                     * Shape of an Error.
+                     * @typedef {arrow.flight.protocol.SetSessionOptionsResult.Error.$Properties} arrow.flight.protocol.SetSessionOptionsResult.Error.$Shape
                      */
 
                     /**
                      * Constructs a new Error.
                      * @memberof arrow.flight.protocol.SetSessionOptionsResult
                      * @classdesc Represents an Error.
-                     * @implements IError
                      * @constructor
-                     * @param {arrow.flight.protocol.SetSessionOptionsResult.IError=} [properties] Properties to set
+                     * @param {arrow.flight.protocol.SetSessionOptionsResult.Error.$Properties=} [properties] Properties to set
+                     * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                      */
-                    function Error(properties) {
+                    var Error = function (properties) {
                         if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                            for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
-                    }
+                    };
 
                     /**
                      * Error value.
@@ -6461,10 +8381,14 @@ $root.arrow = (function() {
                      * @function create
                      * @memberof arrow.flight.protocol.SetSessionOptionsResult.Error
                      * @static
-                     * @param {arrow.flight.protocol.SetSessionOptionsResult.IError=} [properties] Properties to set
+                     * @param {arrow.flight.protocol.SetSessionOptionsResult.Error.$Properties=} [properties] Properties to set
                      * @returns {arrow.flight.protocol.SetSessionOptionsResult.Error} Error instance
+                     * @type {{
+                     *   (properties: arrow.flight.protocol.SetSessionOptionsResult.Error.$Shape): arrow.flight.protocol.SetSessionOptionsResult.Error & arrow.flight.protocol.SetSessionOptionsResult.Error.$Shape;
+                     *   (properties?: arrow.flight.protocol.SetSessionOptionsResult.Error.$Properties): arrow.flight.protocol.SetSessionOptionsResult.Error;
+                     * }}
                      */
-                    Error.create = function create(properties) {
+                    Error.create = function(properties) {
                         return new Error(properties);
                     };
 
@@ -6473,15 +8397,22 @@ $root.arrow = (function() {
                      * @function encode
                      * @memberof arrow.flight.protocol.SetSessionOptionsResult.Error
                      * @static
-                     * @param {arrow.flight.protocol.SetSessionOptionsResult.IError} message Error message or plain object to encode
+                     * @param {arrow.flight.protocol.SetSessionOptionsResult.Error.$Properties} message Error message or plain object to encode
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    Error.encode = function encode(message, writer) {
+                    Error.encode = function (message, writer, _depth) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        if (_depth === $undefined)
+                            _depth = 0;
+                        if (_depth > $util.recursionLimit)
+                            throw $Error("max depth exceeded");
+                        if (message.value != null && $Object.hasOwnProperty.call(message, "value") && message.value !== 0)
                             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.value);
+                        if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                            for (var i = 0; i < message.$unknowns.length; ++i)
+                                writer.raw(message.$unknowns[i]);
                         return writer;
                     };
 
@@ -6490,12 +8421,12 @@ $root.arrow = (function() {
                      * @function encodeDelimited
                      * @memberof arrow.flight.protocol.SetSessionOptionsResult.Error
                      * @static
-                     * @param {arrow.flight.protocol.SetSessionOptionsResult.IError} message Error message or plain object to encode
+                     * @param {arrow.flight.protocol.SetSessionOptionsResult.Error.$Properties} message Error message or plain object to encode
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    Error.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
+                    Error.encodeDelimited = function(message, writer) {
+                        return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                     };
 
                     /**
@@ -6505,26 +8436,60 @@ $root.arrow = (function() {
                      * @static
                      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                      * @param {number} [length] Message length if known beforehand
-                     * @returns {arrow.flight.protocol.SetSessionOptionsResult.Error} Error
+                     * @returns {arrow.flight.protocol.SetSessionOptionsResult.Error & arrow.flight.protocol.SetSessionOptionsResult.Error.$Shape} Error
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Error.decode = function decode(reader, length) {
+                    Error.decode = function (reader, length, _end, _depth, _target) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.SetSessionOptionsResult.Error();
+                        if (_depth === $undefined)
+                            _depth = 0;
+                        if (_depth > $Reader.recursionLimit)
+                            throw $Error("max depth exceeded");
+                        var end, message, value;
+                        if (length === $undefined)
+                            end = reader.len;
+                        else {
+                            end = reader.pos + length;
+                            if (end > reader.len)
+                                throw $RangeError("index out of range");
+                            length = reader.len;
+                            reader.len = end;
+                        }
+                        message = _target || new $root.arrow.flight.protocol.SetSessionOptionsResult.Error();
                         while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.value = reader.int32();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
+                            var start = reader.pos;
+                            var tag = reader.tag();
+                            if (tag === _end) {
+                                _end = $undefined;
                                 break;
                             }
+                            var wireType = tag & 7;
+                            switch (tag >>>= 3) {
+                            case 1: {
+                                    if (wireType !== 0)
+                                        break;
+                                    if (value = reader.int32())
+                                        message.value = value;
+                                    else
+                                        delete message.value;
+                                    continue;
+                                }
+                            }
+                            reader.skipType(wireType, _depth, tag);
+                            if (!reader.discardUnknown) {
+                                $util.makeProp(message, "$unknowns", false);
+                                (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                            }
                         }
+                        if (length !== $undefined) {
+                            if (reader.pos !== end)
+                                throw $RangeError("index out of range");
+                            reader.len = length;
+                        }
+                        if (_end !== $undefined)
+                            throw $Error("missing end group");
                         return message;
                     };
 
@@ -6534,11 +8499,11 @@ $root.arrow = (function() {
                      * @memberof arrow.flight.protocol.SetSessionOptionsResult.Error
                      * @static
                      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {arrow.flight.protocol.SetSessionOptionsResult.Error} Error
+                     * @returns {arrow.flight.protocol.SetSessionOptionsResult.Error & arrow.flight.protocol.SetSessionOptionsResult.Error.$Shape} Error
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Error.decodeDelimited = function decodeDelimited(reader) {
+                    Error.decodeDelimited = function(reader) {
                         if (!(reader instanceof $Reader))
                             reader = new $Reader(reader);
                         return this.decode(reader, reader.uint32());
@@ -6552,19 +8517,16 @@ $root.arrow = (function() {
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Error.verify = function verify(message) {
+                    Error.verify = function (message, _depth) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
-                        if (message.value != null && message.hasOwnProperty("value"))
-                            switch (message.value) {
-                            default:
+                        if (_depth === $undefined)
+                            _depth = 0;
+                        if (_depth > $util.recursionLimit)
+                            return "max depth exceeded";
+                        if (message.value != null && $Object.hasOwnProperty.call(message, "value"))
+                            if (typeof message.value !== "number" || (message.value | 0) !== message.value)
                                 return "value: enum value expected";
-                            case 0:
-                            case 1:
-                            case 2:
-                            case 3:
-                                break;
-                            }
                         return null;
                     };
 
@@ -6576,34 +8538,38 @@ $root.arrow = (function() {
                      * @param {Object.<string,*>} object Plain object
                      * @returns {arrow.flight.protocol.SetSessionOptionsResult.Error} Error
                      */
-                    Error.fromObject = function fromObject(object) {
+                    Error.fromObject = function (object, _depth) {
                         if (object instanceof $root.arrow.flight.protocol.SetSessionOptionsResult.Error)
                             return object;
+                        if (!$util.isObject(object))
+                            throw $TypeError(".arrow.flight.protocol.SetSessionOptionsResult.Error: object expected");
+                        if (_depth === $undefined)
+                            _depth = 0;
+                        if (_depth > $util.recursionLimit)
+                            throw $Error("max depth exceeded");
                         var message = new $root.arrow.flight.protocol.SetSessionOptionsResult.Error();
-                        switch (object.value) {
-                        default:
-                            if (typeof object.value === "number") {
-                                message.value = object.value;
+                        if (object.value !== 0 && (typeof object.value !== "string" || $root.arrow.flight.protocol.SetSessionOptionsResult.ErrorValue[object.value] !== 0))
+                            switch (object.value) {
+                            case "UNSPECIFIED":
+                            case 0:
+                                message.value = 0;
                                 break;
+                            case "INVALID_NAME":
+                            case 1:
+                                message.value = 1;
+                                break;
+                            case "INVALID_VALUE":
+                            case 2:
+                                message.value = 2;
+                                break;
+                            case "ERROR":
+                            case 3:
+                                message.value = 3;
+                                break;
+                            default:
+                                if (typeof object.value === "number" && (object.value | 0) === object.value)
+                                    message.value = object.value;
                             }
-                            break;
-                        case "UNSPECIFIED":
-                        case 0:
-                            message.value = 0;
-                            break;
-                        case "INVALID_NAME":
-                        case 1:
-                            message.value = 1;
-                            break;
-                        case "INVALID_VALUE":
-                        case 2:
-                            message.value = 2;
-                            break;
-                        case "ERROR":
-                        case 3:
-                            message.value = 3;
-                            break;
-                        }
                         return message;
                     };
 
@@ -6616,14 +8582,18 @@ $root.arrow = (function() {
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    Error.toObject = function toObject(message, options) {
+                    Error.toObject = function (message, options, _depth) {
                         if (!options)
                             options = {};
+                        if (_depth === $undefined)
+                            _depth = 0;
+                        if (_depth > $util.recursionLimit)
+                            throw $Error("max depth exceeded");
                         var object = {};
                         if (options.defaults)
-                            object.value = options.enums === String ? "UNSPECIFIED" : 0;
-                        if (message.value != null && message.hasOwnProperty("value"))
-                            object.value = options.enums === String ? $root.arrow.flight.protocol.SetSessionOptionsResult.ErrorValue[message.value] === undefined ? message.value : $root.arrow.flight.protocol.SetSessionOptionsResult.ErrorValue[message.value] : message.value;
+                            object.value = options.enums === $String ? "UNSPECIFIED" : 0;
+                        if (message.value != null && $Object.hasOwnProperty.call(message, "value"))
+                            object.value = options.enums === $String ? $root.arrow.flight.protocol.SetSessionOptionsResult.ErrorValue[message.value] === $undefined ? message.value : $root.arrow.flight.protocol.SetSessionOptionsResult.ErrorValue[message.value] : message.value;
                         return object;
                     };
 
@@ -6634,23 +8604,22 @@ $root.arrow = (function() {
                      * @instance
                      * @returns {Object.<string,*>} JSON object
                      */
-                    Error.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    Error.prototype.toJSON = function() {
+                        return Error.toObject(this, $protobuf.util.toJSONOptions);
                     };
 
                     /**
-                     * Gets the default type url for Error
+                     * Gets the type url for Error
                      * @function getTypeUrl
                      * @memberof arrow.flight.protocol.SetSessionOptionsResult.Error
                      * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
+                     * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                     * @returns {string} The type url
                      */
-                    Error.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/arrow.flight.protocol.SetSessionOptionsResult.Error";
+                    Error.getTypeUrl = function(prefix) {
+                        if (prefix === $undefined)
+                            prefix = "type.googleapis.com";
+                        return prefix + "/arrow.flight.protocol.SetSessionOptionsResult.Error";
                     };
 
                     return Error;
@@ -6663,34 +8632,51 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a GetSessionOptionsRequest.
+                 * @typedef {Object} arrow.flight.protocol.GetSessionOptionsRequest.$Properties
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a GetSessionOptionsRequest.
                  * @memberof arrow.flight.protocol
                  * @interface IGetSessionOptionsRequest
+                 * @augments arrow.flight.protocol.GetSessionOptionsRequest.$Properties
+                 * @deprecated Use arrow.flight.protocol.GetSessionOptionsRequest.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a GetSessionOptionsRequest.
+                 * @typedef {arrow.flight.protocol.GetSessionOptionsRequest.$Properties} arrow.flight.protocol.GetSessionOptionsRequest.$Shape
                  */
 
                 /**
                  * Constructs a new GetSessionOptionsRequest.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a GetSessionOptionsRequest.
-                 * @implements IGetSessionOptionsRequest
                  * @constructor
-                 * @param {arrow.flight.protocol.IGetSessionOptionsRequest=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.GetSessionOptionsRequest.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function GetSessionOptionsRequest(properties) {
+                var GetSessionOptionsRequest = function (properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * Creates a new GetSessionOptionsRequest instance using the specified properties.
                  * @function create
                  * @memberof arrow.flight.protocol.GetSessionOptionsRequest
                  * @static
-                 * @param {arrow.flight.protocol.IGetSessionOptionsRequest=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.GetSessionOptionsRequest.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.GetSessionOptionsRequest} GetSessionOptionsRequest instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.GetSessionOptionsRequest.$Shape): arrow.flight.protocol.GetSessionOptionsRequest & arrow.flight.protocol.GetSessionOptionsRequest.$Shape;
+                 *   (properties?: arrow.flight.protocol.GetSessionOptionsRequest.$Properties): arrow.flight.protocol.GetSessionOptionsRequest;
+                 * }}
                  */
-                GetSessionOptionsRequest.create = function create(properties) {
+                GetSessionOptionsRequest.create = function(properties) {
                     return new GetSessionOptionsRequest(properties);
                 };
 
@@ -6699,13 +8685,20 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.GetSessionOptionsRequest
                  * @static
-                 * @param {arrow.flight.protocol.IGetSessionOptionsRequest} message GetSessionOptionsRequest message or plain object to encode
+                 * @param {arrow.flight.protocol.GetSessionOptionsRequest.$Properties} message GetSessionOptionsRequest message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                GetSessionOptionsRequest.encode = function encode(message, writer) {
+                GetSessionOptionsRequest.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -6714,12 +8707,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.GetSessionOptionsRequest
                  * @static
-                 * @param {arrow.flight.protocol.IGetSessionOptionsRequest} message GetSessionOptionsRequest message or plain object to encode
+                 * @param {arrow.flight.protocol.GetSessionOptionsRequest.$Properties} message GetSessionOptionsRequest message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                GetSessionOptionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                GetSessionOptionsRequest.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -6729,22 +8722,48 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.GetSessionOptionsRequest} GetSessionOptionsRequest
+                 * @returns {arrow.flight.protocol.GetSessionOptionsRequest & arrow.flight.protocol.GetSessionOptionsRequest.$Shape} GetSessionOptionsRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GetSessionOptionsRequest.decode = function decode(reader, length) {
+                GetSessionOptionsRequest.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.GetSessionOptionsRequest();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.GetSessionOptionsRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        reader.skipType(tag & 7, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -6754,11 +8773,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.GetSessionOptionsRequest
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.GetSessionOptionsRequest} GetSessionOptionsRequest
+                 * @returns {arrow.flight.protocol.GetSessionOptionsRequest & arrow.flight.protocol.GetSessionOptionsRequest.$Shape} GetSessionOptionsRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GetSessionOptionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                GetSessionOptionsRequest.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -6772,9 +8791,13 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                GetSessionOptionsRequest.verify = function verify(message) {
+                GetSessionOptionsRequest.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
                     return null;
                 };
 
@@ -6786,9 +8809,15 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.GetSessionOptionsRequest} GetSessionOptionsRequest
                  */
-                GetSessionOptionsRequest.fromObject = function fromObject(object) {
+                GetSessionOptionsRequest.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.GetSessionOptionsRequest)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.GetSessionOptionsRequest: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     return new $root.arrow.flight.protocol.GetSessionOptionsRequest();
                 };
 
@@ -6801,7 +8830,7 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                GetSessionOptionsRequest.toObject = function toObject() {
+                GetSessionOptionsRequest.toObject = function () {
                     return {};
                 };
 
@@ -6812,23 +8841,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                GetSessionOptionsRequest.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                GetSessionOptionsRequest.prototype.toJSON = function() {
+                    return GetSessionOptionsRequest.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for GetSessionOptionsRequest
+                 * Gets the type url for GetSessionOptionsRequest
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.GetSessionOptionsRequest
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                GetSessionOptionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.GetSessionOptionsRequest";
+                GetSessionOptionsRequest.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.GetSessionOptionsRequest";
                 };
 
                 return GetSessionOptionsRequest;
@@ -6838,30 +8866,46 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a GetSessionOptionsResult.
+                 * @typedef {Object} arrow.flight.protocol.GetSessionOptionsResult.$Properties
+                 * @property {Object.<string,arrow.flight.protocol.SessionOptionValue.$Properties>|null} [sessionOptions] GetSessionOptionsResult sessionOptions
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a GetSessionOptionsResult.
                  * @memberof arrow.flight.protocol
                  * @interface IGetSessionOptionsResult
-                 * @property {Object.<string,arrow.flight.protocol.ISessionOptionValue>|null} [sessionOptions] GetSessionOptionsResult sessionOptions
+                 * @augments arrow.flight.protocol.GetSessionOptionsResult.$Properties
+                 * @deprecated Use arrow.flight.protocol.GetSessionOptionsResult.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a GetSessionOptionsResult.
+                 * @typedef {{
+                 *   sessionOptions?: Object.<string,arrow.flight.protocol.SessionOptionValue.$Shape>|null;
+                 *   $unknowns?: Array.<Uint8Array>;
+                 * }} arrow.flight.protocol.GetSessionOptionsResult.$Shape
                  */
 
                 /**
                  * Constructs a new GetSessionOptionsResult.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a GetSessionOptionsResult.
-                 * @implements IGetSessionOptionsResult
                  * @constructor
-                 * @param {arrow.flight.protocol.IGetSessionOptionsResult=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.GetSessionOptionsResult.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function GetSessionOptionsResult(properties) {
+                var GetSessionOptionsResult = function (properties) {
                     this.sessionOptions = {};
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * GetSessionOptionsResult sessionOptions.
-                 * @member {Object.<string,arrow.flight.protocol.ISessionOptionValue>} sessionOptions
+                 * @member {Object.<string,arrow.flight.protocol.SessionOptionValue.$Properties>} sessionOptions
                  * @memberof arrow.flight.protocol.GetSessionOptionsResult
                  * @instance
                  */
@@ -6872,10 +8916,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.GetSessionOptionsResult
                  * @static
-                 * @param {arrow.flight.protocol.IGetSessionOptionsResult=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.GetSessionOptionsResult.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.GetSessionOptionsResult} GetSessionOptionsResult instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.GetSessionOptionsResult.$Shape): arrow.flight.protocol.GetSessionOptionsResult & arrow.flight.protocol.GetSessionOptionsResult.$Shape;
+                 *   (properties?: arrow.flight.protocol.GetSessionOptionsResult.$Properties): arrow.flight.protocol.GetSessionOptionsResult;
+                 * }}
                  */
-                GetSessionOptionsResult.create = function create(properties) {
+                GetSessionOptionsResult.create = function(properties) {
                     return new GetSessionOptionsResult(properties);
                 };
 
@@ -6884,18 +8932,25 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.GetSessionOptionsResult
                  * @static
-                 * @param {arrow.flight.protocol.IGetSessionOptionsResult} message GetSessionOptionsResult message or plain object to encode
+                 * @param {arrow.flight.protocol.GetSessionOptionsResult.$Properties} message GetSessionOptionsResult message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                GetSessionOptionsResult.encode = function encode(message, writer) {
+                GetSessionOptionsResult.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.sessionOptions != null && Object.hasOwnProperty.call(message, "sessionOptions"))
-                        for (var keys = Object.keys(message.sessionOptions), i = 0; i < keys.length; ++i) {
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.sessionOptions != null && $Object.hasOwnProperty.call(message, "sessionOptions"))
+                        for (var keys = $Object.keys(message.sessionOptions), i = 0; i < keys.length; ++i) {
                             writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
-                            $root.arrow.flight.protocol.SessionOptionValue.encode(message.sessionOptions[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                            $root.arrow.flight.protocol.SessionOptionValue.encode(message.sessionOptions[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork(), _depth + 1).ldelim().ldelim();
                         }
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -6904,12 +8959,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.GetSessionOptionsResult
                  * @static
-                 * @param {arrow.flight.protocol.IGetSessionOptionsResult} message GetSessionOptionsResult message or plain object to encode
+                 * @param {arrow.flight.protocol.GetSessionOptionsResult.$Properties} message GetSessionOptionsResult message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                GetSessionOptionsResult.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                GetSessionOptionsResult.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -6919,45 +8974,87 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.GetSessionOptionsResult} GetSessionOptionsResult
+                 * @returns {arrow.flight.protocol.GetSessionOptionsResult & arrow.flight.protocol.GetSessionOptionsResult.$Shape} GetSessionOptionsResult
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GetSessionOptionsResult.decode = function decode(reader, length) {
+                GetSessionOptionsResult.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.GetSessionOptionsResult(), key, value;
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, key, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.GetSessionOptionsResult();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
+                            break;
+                        }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
                         case 1: {
+                                if (wireType !== 2)
+                                    break;
                                 if (message.sessionOptions === $util.emptyObject)
                                     message.sessionOptions = {};
                                 var end2 = reader.uint32() + reader.pos;
+                                if (end2 > reader.len)
+                                    throw $RangeError("index out of range");
+                                reader.len = end2;
                                 key = "";
                                 value = null;
                                 while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
+                                    var tag2 = reader.tag();
+                                    wireType = tag2 & 7;
+                                    switch (tag2 >>>= 3) {
                                     case 1:
-                                        key = reader.string();
-                                        break;
+                                        if (wireType !== 2)
+                                            break;
+                                        key = reader.stringVerify();
+                                        continue;
                                     case 2:
-                                        value = $root.arrow.flight.protocol.SessionOptionValue.decode(reader, reader.uint32());
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
+                                        if (wireType !== 2)
+                                            break;
+                                        value = $root.arrow.flight.protocol.SessionOptionValue.decode(reader, reader.uint32(), $undefined, _depth + 1, value);
+                                        continue;
                                     }
+                                    reader.skipType(wireType, _depth, tag2);
                                 }
-                                message.sessionOptions[key] = value;
-                                break;
+                                if (reader.pos !== end2)
+                                    throw $RangeError("index out of range");
+                                reader.len = end;
+                                if (key === "__proto__")
+                                    $util.makeProp(message.sessionOptions, key);
+                                message.sessionOptions[key] = value || new $root.arrow.flight.protocol.SessionOptionValue();
+                                continue;
                             }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
                         }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -6967,11 +9064,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.GetSessionOptionsResult
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.GetSessionOptionsResult} GetSessionOptionsResult
+                 * @returns {arrow.flight.protocol.GetSessionOptionsResult & arrow.flight.protocol.GetSessionOptionsResult.$Shape} GetSessionOptionsResult
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GetSessionOptionsResult.decodeDelimited = function decodeDelimited(reader) {
+                GetSessionOptionsResult.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -6985,15 +9082,19 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                GetSessionOptionsResult.verify = function verify(message) {
+                GetSessionOptionsResult.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.sessionOptions != null && message.hasOwnProperty("sessionOptions")) {
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
+                    if (message.sessionOptions != null && $Object.hasOwnProperty.call(message, "sessionOptions")) {
                         if (!$util.isObject(message.sessionOptions))
                             return "sessionOptions: object expected";
-                        var key = Object.keys(message.sessionOptions);
+                        var key = $Object.keys(message.sessionOptions);
                         for (var i = 0; i < key.length; ++i) {
-                            var error = $root.arrow.flight.protocol.SessionOptionValue.verify(message.sessionOptions[key[i]]);
+                            var error = $root.arrow.flight.protocol.SessionOptionValue.verify(message.sessionOptions[key[i]], _depth + 1);
                             if (error)
                                 return "sessionOptions." + error;
                         }
@@ -7009,18 +9110,26 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.GetSessionOptionsResult} GetSessionOptionsResult
                  */
-                GetSessionOptionsResult.fromObject = function fromObject(object) {
+                GetSessionOptionsResult.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.GetSessionOptionsResult)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.GetSessionOptionsResult: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.GetSessionOptionsResult();
                     if (object.sessionOptions) {
-                        if (typeof object.sessionOptions !== "object")
-                            throw TypeError(".arrow.flight.protocol.GetSessionOptionsResult.sessionOptions: object expected");
+                        if (!$util.isObject(object.sessionOptions))
+                            throw $TypeError(".arrow.flight.protocol.GetSessionOptionsResult.sessionOptions: object expected");
                         message.sessionOptions = {};
-                        for (var keys = Object.keys(object.sessionOptions), i = 0; i < keys.length; ++i) {
-                            if (typeof object.sessionOptions[keys[i]] !== "object")
-                                throw TypeError(".arrow.flight.protocol.GetSessionOptionsResult.sessionOptions: object expected");
-                            message.sessionOptions[keys[i]] = $root.arrow.flight.protocol.SessionOptionValue.fromObject(object.sessionOptions[keys[i]]);
+                        for (var keys = $Object.keys(object.sessionOptions), i = 0; i < keys.length; ++i) {
+                            if (keys[i] === "__proto__")
+                                $util.makeProp(message.sessionOptions, keys[i]);
+                            if (!$util.isObject(object.sessionOptions[keys[i]]))
+                                throw $TypeError(".arrow.flight.protocol.GetSessionOptionsResult.sessionOptions: object expected");
+                            message.sessionOptions[keys[i]] = $root.arrow.flight.protocol.SessionOptionValue.fromObject(object.sessionOptions[keys[i]], _depth + 1);
                         }
                     }
                     return message;
@@ -7035,17 +9144,24 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                GetSessionOptionsResult.toObject = function toObject(message, options) {
+                GetSessionOptionsResult.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.objects || options.defaults)
                         object.sessionOptions = {};
                     var keys2;
-                    if (message.sessionOptions && (keys2 = Object.keys(message.sessionOptions)).length) {
+                    if (message.sessionOptions && (keys2 = $Object.keys(message.sessionOptions)).length) {
                         object.sessionOptions = {};
-                        for (var j = 0; j < keys2.length; ++j)
-                            object.sessionOptions[keys2[j]] = $root.arrow.flight.protocol.SessionOptionValue.toObject(message.sessionOptions[keys2[j]], options);
+                        for (var j = 0; j < keys2.length; ++j) {
+                            if (keys2[j] === "__proto__")
+                                $util.makeProp(object.sessionOptions, keys2[j]);
+                            object.sessionOptions[keys2[j]] = $root.arrow.flight.protocol.SessionOptionValue.toObject(message.sessionOptions[keys2[j]], options, _depth + 1);
+                        }
                     }
                     return object;
                 };
@@ -7057,23 +9173,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                GetSessionOptionsResult.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                GetSessionOptionsResult.prototype.toJSON = function() {
+                    return GetSessionOptionsResult.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for GetSessionOptionsResult
+                 * Gets the type url for GetSessionOptionsResult
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.GetSessionOptionsResult
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                GetSessionOptionsResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.GetSessionOptionsResult";
+                GetSessionOptionsResult.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.GetSessionOptionsResult";
                 };
 
                 return GetSessionOptionsResult;
@@ -7083,34 +9198,51 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a CloseSessionRequest.
+                 * @typedef {Object} arrow.flight.protocol.CloseSessionRequest.$Properties
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a CloseSessionRequest.
                  * @memberof arrow.flight.protocol
                  * @interface ICloseSessionRequest
+                 * @augments arrow.flight.protocol.CloseSessionRequest.$Properties
+                 * @deprecated Use arrow.flight.protocol.CloseSessionRequest.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a CloseSessionRequest.
+                 * @typedef {arrow.flight.protocol.CloseSessionRequest.$Properties} arrow.flight.protocol.CloseSessionRequest.$Shape
                  */
 
                 /**
                  * Constructs a new CloseSessionRequest.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a CloseSessionRequest.
-                 * @implements ICloseSessionRequest
                  * @constructor
-                 * @param {arrow.flight.protocol.ICloseSessionRequest=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.CloseSessionRequest.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function CloseSessionRequest(properties) {
+                var CloseSessionRequest = function (properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * Creates a new CloseSessionRequest instance using the specified properties.
                  * @function create
                  * @memberof arrow.flight.protocol.CloseSessionRequest
                  * @static
-                 * @param {arrow.flight.protocol.ICloseSessionRequest=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.CloseSessionRequest.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.CloseSessionRequest} CloseSessionRequest instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.CloseSessionRequest.$Shape): arrow.flight.protocol.CloseSessionRequest & arrow.flight.protocol.CloseSessionRequest.$Shape;
+                 *   (properties?: arrow.flight.protocol.CloseSessionRequest.$Properties): arrow.flight.protocol.CloseSessionRequest;
+                 * }}
                  */
-                CloseSessionRequest.create = function create(properties) {
+                CloseSessionRequest.create = function(properties) {
                     return new CloseSessionRequest(properties);
                 };
 
@@ -7119,13 +9251,20 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.CloseSessionRequest
                  * @static
-                 * @param {arrow.flight.protocol.ICloseSessionRequest} message CloseSessionRequest message or plain object to encode
+                 * @param {arrow.flight.protocol.CloseSessionRequest.$Properties} message CloseSessionRequest message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                CloseSessionRequest.encode = function encode(message, writer) {
+                CloseSessionRequest.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -7134,12 +9273,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.CloseSessionRequest
                  * @static
-                 * @param {arrow.flight.protocol.ICloseSessionRequest} message CloseSessionRequest message or plain object to encode
+                 * @param {arrow.flight.protocol.CloseSessionRequest.$Properties} message CloseSessionRequest message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                CloseSessionRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                CloseSessionRequest.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -7149,22 +9288,48 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.CloseSessionRequest} CloseSessionRequest
+                 * @returns {arrow.flight.protocol.CloseSessionRequest & arrow.flight.protocol.CloseSessionRequest.$Shape} CloseSessionRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CloseSessionRequest.decode = function decode(reader, length) {
+                CloseSessionRequest.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.CloseSessionRequest();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.CloseSessionRequest();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        reader.skipType(tag & 7, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -7174,11 +9339,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.CloseSessionRequest
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.CloseSessionRequest} CloseSessionRequest
+                 * @returns {arrow.flight.protocol.CloseSessionRequest & arrow.flight.protocol.CloseSessionRequest.$Shape} CloseSessionRequest
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CloseSessionRequest.decodeDelimited = function decodeDelimited(reader) {
+                CloseSessionRequest.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -7192,9 +9357,13 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                CloseSessionRequest.verify = function verify(message) {
+                CloseSessionRequest.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
                     return null;
                 };
 
@@ -7206,9 +9375,15 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.CloseSessionRequest} CloseSessionRequest
                  */
-                CloseSessionRequest.fromObject = function fromObject(object) {
+                CloseSessionRequest.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.CloseSessionRequest)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.CloseSessionRequest: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     return new $root.arrow.flight.protocol.CloseSessionRequest();
                 };
 
@@ -7221,7 +9396,7 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                CloseSessionRequest.toObject = function toObject() {
+                CloseSessionRequest.toObject = function () {
                     return {};
                 };
 
@@ -7232,23 +9407,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                CloseSessionRequest.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                CloseSessionRequest.prototype.toJSON = function() {
+                    return CloseSessionRequest.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for CloseSessionRequest
+                 * Gets the type url for CloseSessionRequest
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.CloseSessionRequest
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                CloseSessionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.CloseSessionRequest";
+                CloseSessionRequest.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.CloseSessionRequest";
                 };
 
                 return CloseSessionRequest;
@@ -7258,25 +9432,38 @@ $root.arrow = (function() {
 
                 /**
                  * Properties of a CloseSessionResult.
+                 * @typedef {Object} arrow.flight.protocol.CloseSessionResult.$Properties
+                 * @property {arrow.flight.protocol.CloseSessionResult.Status|null} [status] CloseSessionResult status
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+                 */
+
+                /**
+                 * Properties of a CloseSessionResult.
                  * @memberof arrow.flight.protocol
                  * @interface ICloseSessionResult
-                 * @property {arrow.flight.protocol.CloseSessionResult.Status|null} [status] CloseSessionResult status
+                 * @augments arrow.flight.protocol.CloseSessionResult.$Properties
+                 * @deprecated Use arrow.flight.protocol.CloseSessionResult.$Properties instead.
+                 */
+
+                /**
+                 * Shape of a CloseSessionResult.
+                 * @typedef {arrow.flight.protocol.CloseSessionResult.$Properties} arrow.flight.protocol.CloseSessionResult.$Shape
                  */
 
                 /**
                  * Constructs a new CloseSessionResult.
                  * @memberof arrow.flight.protocol
                  * @classdesc Represents a CloseSessionResult.
-                 * @implements ICloseSessionResult
                  * @constructor
-                 * @param {arrow.flight.protocol.ICloseSessionResult=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.CloseSessionResult.$Properties=} [properties] Properties to set
+                 * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
                  */
-                function CloseSessionResult(properties) {
+                var CloseSessionResult = function (properties) {
                     if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                        for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
-                }
+                };
 
                 /**
                  * CloseSessionResult status.
@@ -7291,10 +9478,14 @@ $root.arrow = (function() {
                  * @function create
                  * @memberof arrow.flight.protocol.CloseSessionResult
                  * @static
-                 * @param {arrow.flight.protocol.ICloseSessionResult=} [properties] Properties to set
+                 * @param {arrow.flight.protocol.CloseSessionResult.$Properties=} [properties] Properties to set
                  * @returns {arrow.flight.protocol.CloseSessionResult} CloseSessionResult instance
+                 * @type {{
+                 *   (properties: arrow.flight.protocol.CloseSessionResult.$Shape): arrow.flight.protocol.CloseSessionResult & arrow.flight.protocol.CloseSessionResult.$Shape;
+                 *   (properties?: arrow.flight.protocol.CloseSessionResult.$Properties): arrow.flight.protocol.CloseSessionResult;
+                 * }}
                  */
-                CloseSessionResult.create = function create(properties) {
+                CloseSessionResult.create = function(properties) {
                     return new CloseSessionResult(properties);
                 };
 
@@ -7303,15 +9494,22 @@ $root.arrow = (function() {
                  * @function encode
                  * @memberof arrow.flight.protocol.CloseSessionResult
                  * @static
-                 * @param {arrow.flight.protocol.ICloseSessionResult} message CloseSessionResult message or plain object to encode
+                 * @param {arrow.flight.protocol.CloseSessionResult.$Properties} message CloseSessionResult message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                CloseSessionResult.encode = function encode(message, writer) {
+                CloseSessionResult.encode = function (message, writer, _depth) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    if (message.status != null && $Object.hasOwnProperty.call(message, "status") && message.status !== 0)
                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.status);
+                    if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                        for (var i = 0; i < message.$unknowns.length; ++i)
+                            writer.raw(message.$unknowns[i]);
                     return writer;
                 };
 
@@ -7320,12 +9518,12 @@ $root.arrow = (function() {
                  * @function encodeDelimited
                  * @memberof arrow.flight.protocol.CloseSessionResult
                  * @static
-                 * @param {arrow.flight.protocol.ICloseSessionResult} message CloseSessionResult message or plain object to encode
+                 * @param {arrow.flight.protocol.CloseSessionResult.$Properties} message CloseSessionResult message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                CloseSessionResult.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
+                CloseSessionResult.encodeDelimited = function(message, writer) {
+                    return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
                 };
 
                 /**
@@ -7335,26 +9533,60 @@ $root.arrow = (function() {
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {arrow.flight.protocol.CloseSessionResult} CloseSessionResult
+                 * @returns {arrow.flight.protocol.CloseSessionResult & arrow.flight.protocol.CloseSessionResult.$Shape} CloseSessionResult
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CloseSessionResult.decode = function decode(reader, length) {
+                CloseSessionResult.decode = function (reader, length, _end, _depth, _target) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.arrow.flight.protocol.CloseSessionResult();
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $Reader.recursionLimit)
+                        throw $Error("max depth exceeded");
+                    var end, message, value;
+                    if (length === $undefined)
+                        end = reader.len;
+                    else {
+                        end = reader.pos + length;
+                        if (end > reader.len)
+                            throw $RangeError("index out of range");
+                        length = reader.len;
+                        reader.len = end;
+                    }
+                    message = _target || new $root.arrow.flight.protocol.CloseSessionResult();
                     while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.status = reader.int32();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
+                        var start = reader.pos;
+                        var tag = reader.tag();
+                        if (tag === _end) {
+                            _end = $undefined;
                             break;
                         }
+                        var wireType = tag & 7;
+                        switch (tag >>>= 3) {
+                        case 1: {
+                                if (wireType !== 0)
+                                    break;
+                                if (value = reader.int32())
+                                    message.status = value;
+                                else
+                                    delete message.status;
+                                continue;
+                            }
+                        }
+                        reader.skipType(wireType, _depth, tag);
+                        if (!reader.discardUnknown) {
+                            $util.makeProp(message, "$unknowns", false);
+                            (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                        }
                     }
+                    if (length !== $undefined) {
+                        if (reader.pos !== end)
+                            throw $RangeError("index out of range");
+                        reader.len = length;
+                    }
+                    if (_end !== $undefined)
+                        throw $Error("missing end group");
                     return message;
                 };
 
@@ -7364,11 +9596,11 @@ $root.arrow = (function() {
                  * @memberof arrow.flight.protocol.CloseSessionResult
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {arrow.flight.protocol.CloseSessionResult} CloseSessionResult
+                 * @returns {arrow.flight.protocol.CloseSessionResult & arrow.flight.protocol.CloseSessionResult.$Shape} CloseSessionResult
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CloseSessionResult.decodeDelimited = function decodeDelimited(reader) {
+                CloseSessionResult.decodeDelimited = function(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
@@ -7382,19 +9614,16 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                CloseSessionResult.verify = function verify(message) {
+                CloseSessionResult.verify = function (message, _depth) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.status != null && message.hasOwnProperty("status"))
-                        switch (message.status) {
-                        default:
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        return "max depth exceeded";
+                    if (message.status != null && $Object.hasOwnProperty.call(message, "status"))
+                        if (typeof message.status !== "number" || (message.status | 0) !== message.status)
                             return "status: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                            break;
-                        }
                     return null;
                 };
 
@@ -7406,34 +9635,38 @@ $root.arrow = (function() {
                  * @param {Object.<string,*>} object Plain object
                  * @returns {arrow.flight.protocol.CloseSessionResult} CloseSessionResult
                  */
-                CloseSessionResult.fromObject = function fromObject(object) {
+                CloseSessionResult.fromObject = function (object, _depth) {
                     if (object instanceof $root.arrow.flight.protocol.CloseSessionResult)
                         return object;
+                    if (!$util.isObject(object))
+                        throw $TypeError(".arrow.flight.protocol.CloseSessionResult: object expected");
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var message = new $root.arrow.flight.protocol.CloseSessionResult();
-                    switch (object.status) {
-                    default:
-                        if (typeof object.status === "number") {
-                            message.status = object.status;
+                    if (object.status !== 0 && (typeof object.status !== "string" || $root.arrow.flight.protocol.CloseSessionResult.Status[object.status] !== 0))
+                        switch (object.status) {
+                        case "UNSPECIFIED":
+                        case 0:
+                            message.status = 0;
                             break;
+                        case "CLOSED":
+                        case 1:
+                            message.status = 1;
+                            break;
+                        case "CLOSING":
+                        case 2:
+                            message.status = 2;
+                            break;
+                        case "NOT_CLOSEABLE":
+                        case 3:
+                            message.status = 3;
+                            break;
+                        default:
+                            if (typeof object.status === "number" && (object.status | 0) === object.status)
+                                message.status = object.status;
                         }
-                        break;
-                    case "UNSPECIFIED":
-                    case 0:
-                        message.status = 0;
-                        break;
-                    case "CLOSED":
-                    case 1:
-                        message.status = 1;
-                        break;
-                    case "CLOSING":
-                    case 2:
-                        message.status = 2;
-                        break;
-                    case "NOT_CLOSEABLE":
-                    case 3:
-                        message.status = 3;
-                        break;
-                    }
                     return message;
                 };
 
@@ -7446,14 +9679,18 @@ $root.arrow = (function() {
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                CloseSessionResult.toObject = function toObject(message, options) {
+                CloseSessionResult.toObject = function (message, options, _depth) {
                     if (!options)
                         options = {};
+                    if (_depth === $undefined)
+                        _depth = 0;
+                    if (_depth > $util.recursionLimit)
+                        throw $Error("max depth exceeded");
                     var object = {};
                     if (options.defaults)
-                        object.status = options.enums === String ? "UNSPECIFIED" : 0;
-                    if (message.status != null && message.hasOwnProperty("status"))
-                        object.status = options.enums === String ? $root.arrow.flight.protocol.CloseSessionResult.Status[message.status] === undefined ? message.status : $root.arrow.flight.protocol.CloseSessionResult.Status[message.status] : message.status;
+                        object.status = options.enums === $String ? "UNSPECIFIED" : 0;
+                    if (message.status != null && $Object.hasOwnProperty.call(message, "status"))
+                        object.status = options.enums === $String ? $root.arrow.flight.protocol.CloseSessionResult.Status[message.status] === $undefined ? message.status : $root.arrow.flight.protocol.CloseSessionResult.Status[message.status] : message.status;
                     return object;
                 };
 
@@ -7464,23 +9701,22 @@ $root.arrow = (function() {
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                CloseSessionResult.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                CloseSessionResult.prototype.toJSON = function() {
+                    return CloseSessionResult.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
                 /**
-                 * Gets the default type url for CloseSessionResult
+                 * Gets the type url for CloseSessionResult
                  * @function getTypeUrl
                  * @memberof arrow.flight.protocol.CloseSessionResult
                  * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
+                 * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+                 * @returns {string} The type url
                  */
-                CloseSessionResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/arrow.flight.protocol.CloseSessionResult";
+                CloseSessionResult.getTypeUrl = function(prefix) {
+                    if (prefix === $undefined)
+                        prefix = "type.googleapis.com";
+                    return prefix + "/arrow.flight.protocol.CloseSessionResult";
                 };
 
                 /**
@@ -7493,7 +9729,7 @@ $root.arrow = (function() {
                  * @property {number} NOT_CLOSEABLE=3 NOT_CLOSEABLE value
                  */
                 CloseSessionResult.Status = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
+                    var valuesById = $Object.create(null), values = $Object.create(valuesById);
                     values[valuesById[0] = "UNSPECIFIED"] = 0;
                     values[valuesById[1] = "CLOSED"] = 1;
                     values[valuesById[2] = "CLOSING"] = 2;
@@ -7535,26 +9771,39 @@ $root.google = (function() {
 
             /**
              * Properties of a Timestamp.
-             * @memberof google.protobuf
-             * @interface ITimestamp
+             * @typedef {Object} google.protobuf.Timestamp.$Properties
              * @property {number|Long|null} [seconds] Timestamp seconds
              * @property {number|null} [nanos] Timestamp nanos
+             * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
+             */
+
+            /**
+             * Properties of a Timestamp.
+             * @memberof google.protobuf
+             * @interface ITimestamp
+             * @augments google.protobuf.Timestamp.$Properties
+             * @deprecated Use google.protobuf.Timestamp.$Properties instead.
+             */
+
+            /**
+             * Shape of a Timestamp.
+             * @typedef {google.protobuf.Timestamp.$Properties} google.protobuf.Timestamp.$Shape
              */
 
             /**
              * Constructs a new Timestamp.
              * @memberof google.protobuf
              * @classdesc Represents a Timestamp.
-             * @implements ITimestamp
              * @constructor
-             * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+             * @param {google.protobuf.Timestamp.$Properties=} [properties] Properties to set
+             * @property {Array.<Uint8Array>} [$unknowns] Unknown fields preserved while decoding when enabled
              */
-            function Timestamp(properties) {
+            var Timestamp = function (properties) {
                 if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
+                    for (var keys = $Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                             this[keys[i]] = properties[keys[i]];
-            }
+            };
 
             /**
              * Timestamp seconds.
@@ -7577,10 +9826,14 @@ $root.google = (function() {
              * @function create
              * @memberof google.protobuf.Timestamp
              * @static
-             * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+             * @param {google.protobuf.Timestamp.$Properties=} [properties] Properties to set
              * @returns {google.protobuf.Timestamp} Timestamp instance
+             * @type {{
+             *   (properties: google.protobuf.Timestamp.$Shape): google.protobuf.Timestamp & google.protobuf.Timestamp.$Shape;
+             *   (properties?: google.protobuf.Timestamp.$Properties): google.protobuf.Timestamp;
+             * }}
              */
-            Timestamp.create = function create(properties) {
+            Timestamp.create = function(properties) {
                 return new Timestamp(properties);
             };
 
@@ -7589,17 +9842,24 @@ $root.google = (function() {
              * @function encode
              * @memberof google.protobuf.Timestamp
              * @static
-             * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+             * @param {google.protobuf.Timestamp.$Properties} message Timestamp message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            Timestamp.encode = function encode(message, writer) {
+            Timestamp.encode = function (message, writer, _depth) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                if (_depth === $undefined)
+                    _depth = 0;
+                if (_depth > $util.recursionLimit)
+                    throw $Error("max depth exceeded");
+                if (message.seconds != null && $Object.hasOwnProperty.call(message, "seconds") && (typeof message.seconds === "object" ? message.seconds.low || message.seconds.high : message.seconds !== 0))
                     writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
-                if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                if (message.nanos != null && $Object.hasOwnProperty.call(message, "nanos") && message.nanos !== 0)
                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
+                if (message.$unknowns != null && $Object.hasOwnProperty.call(message, "$unknowns"))
+                    for (var i = 0; i < message.$unknowns.length; ++i)
+                        writer.raw(message.$unknowns[i]);
                 return writer;
             };
 
@@ -7608,12 +9868,12 @@ $root.google = (function() {
              * @function encodeDelimited
              * @memberof google.protobuf.Timestamp
              * @static
-             * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+             * @param {google.protobuf.Timestamp.$Properties} message Timestamp message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
+            Timestamp.encodeDelimited = function(message, writer) {
+                return this.encode(message, (writer || $Writer.create()).fork()).ldelim();
             };
 
             /**
@@ -7623,30 +9883,69 @@ $root.google = (function() {
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
              * @param {number} [length] Message length if known beforehand
-             * @returns {google.protobuf.Timestamp} Timestamp
+             * @returns {google.protobuf.Timestamp & google.protobuf.Timestamp.$Shape} Timestamp
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            Timestamp.decode = function decode(reader, length) {
+            Timestamp.decode = function (reader, length, _end, _depth, _target) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
+                if (_depth === $undefined)
+                    _depth = 0;
+                if (_depth > $Reader.recursionLimit)
+                    throw $Error("max depth exceeded");
+                var end, message, value;
+                if (length === $undefined)
+                    end = reader.len;
+                else {
+                    end = reader.pos + length;
+                    if (end > reader.len)
+                        throw $RangeError("index out of range");
+                    length = reader.len;
+                    reader.len = end;
+                }
+                message = _target || new $root.google.protobuf.Timestamp();
                 while (reader.pos < end) {
-                    var tag = reader.uint32();
-                    switch (tag >>> 3) {
-                    case 1: {
-                            message.seconds = reader.int64();
-                            break;
-                        }
-                    case 2: {
-                            message.nanos = reader.int32();
-                            break;
-                        }
-                    default:
-                        reader.skipType(tag & 7);
+                    var start = reader.pos;
+                    var tag = reader.tag();
+                    if (tag === _end) {
+                        _end = $undefined;
                         break;
                     }
+                    var wireType = tag & 7;
+                    switch (tag >>>= 3) {
+                    case 1: {
+                            if (wireType !== 0)
+                                break;
+                            if (typeof (value = reader.int64()) === "object" ? value.low || value.high : value !== 0)
+                                message.seconds = value;
+                            else
+                                delete message.seconds;
+                            continue;
+                        }
+                    case 2: {
+                            if (wireType !== 0)
+                                break;
+                            if (value = reader.int32())
+                                message.nanos = value;
+                            else
+                                delete message.nanos;
+                            continue;
+                        }
+                    }
+                    reader.skipType(wireType, _depth, tag);
+                    if (!reader.discardUnknown) {
+                        $util.makeProp(message, "$unknowns", false);
+                        (message.$unknowns || (message.$unknowns = [])).push(reader.raw(start, reader.pos));
+                    }
                 }
+                if (length !== $undefined) {
+                    if (reader.pos !== end)
+                        throw $RangeError("index out of range");
+                    reader.len = length;
+                }
+                if (_end !== $undefined)
+                    throw $Error("missing end group");
                 return message;
             };
 
@@ -7656,11 +9955,11 @@ $root.google = (function() {
              * @memberof google.protobuf.Timestamp
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {google.protobuf.Timestamp} Timestamp
+             * @returns {google.protobuf.Timestamp & google.protobuf.Timestamp.$Shape} Timestamp
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            Timestamp.decodeDelimited = function decodeDelimited(reader) {
+            Timestamp.decodeDelimited = function(reader) {
                 if (!(reader instanceof $Reader))
                     reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
@@ -7674,13 +9973,17 @@ $root.google = (function() {
              * @param {Object.<string,*>} message Plain object to verify
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
-            Timestamp.verify = function verify(message) {
+            Timestamp.verify = function (message, _depth) {
                 if (typeof message !== "object" || message === null)
                     return "object expected";
-                if (message.seconds != null && message.hasOwnProperty("seconds"))
+                if (_depth === $undefined)
+                    _depth = 0;
+                if (_depth > $util.recursionLimit)
+                    return "max depth exceeded";
+                if (message.seconds != null && $Object.hasOwnProperty.call(message, "seconds"))
                     if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
                         return "seconds: integer|Long expected";
-                if (message.nanos != null && message.hasOwnProperty("nanos"))
+                if (message.nanos != null && $Object.hasOwnProperty.call(message, "nanos"))
                     if (!$util.isInteger(message.nanos))
                         return "nanos: integer expected";
                 return null;
@@ -7694,21 +9997,29 @@ $root.google = (function() {
              * @param {Object.<string,*>} object Plain object
              * @returns {google.protobuf.Timestamp} Timestamp
              */
-            Timestamp.fromObject = function fromObject(object) {
+            Timestamp.fromObject = function (object, _depth) {
                 if (object instanceof $root.google.protobuf.Timestamp)
                     return object;
+                if (!$util.isObject(object))
+                    throw $TypeError(".google.protobuf.Timestamp: object expected");
+                if (_depth === $undefined)
+                    _depth = 0;
+                if (_depth > $util.recursionLimit)
+                    throw $Error("max depth exceeded");
                 var message = new $root.google.protobuf.Timestamp();
                 if (object.seconds != null)
-                    if ($util.Long)
-                        (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
-                    else if (typeof object.seconds === "string")
-                        message.seconds = parseInt(object.seconds, 10);
-                    else if (typeof object.seconds === "number")
-                        message.seconds = object.seconds;
-                    else if (typeof object.seconds === "object")
-                        message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
+                    if (typeof object.seconds === "object" ? object.seconds.low || object.seconds.high : $Number(object.seconds) !== 0)
+                        if ($util.Long)
+                            message.seconds = $util.Long.fromValue(object.seconds, false);
+                        else if (typeof object.seconds === "string")
+                            message.seconds = $parseInt(object.seconds, 10);
+                        else if (typeof object.seconds === "number")
+                            message.seconds = object.seconds;
+                        else if (typeof object.seconds === "object")
+                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
                 if (object.nanos != null)
-                    message.nanos = object.nanos | 0;
+                    if ($Number(object.nanos) !== 0)
+                        message.nanos = object.nanos | 0;
                 return message;
             };
 
@@ -7721,24 +10032,30 @@ $root.google = (function() {
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            Timestamp.toObject = function toObject(message, options) {
+            Timestamp.toObject = function (message, options, _depth) {
                 if (!options)
                     options = {};
+                if (_depth === $undefined)
+                    _depth = 0;
+                if (_depth > $util.recursionLimit)
+                    throw $Error("max depth exceeded");
                 var object = {};
                 if (options.defaults) {
                     if ($util.Long) {
                         var long = new $util.Long(0, 0, false);
-                        object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        object.seconds = options.longs === $String ? long.toString() : options.longs === $Number ? long.toNumber() : typeof $BigInt !== "undefined" && options.longs === $BigInt ? long.toBigInt() : long;
                     } else
-                        object.seconds = options.longs === String ? "0" : 0;
+                        object.seconds = options.longs === $String ? "0" : typeof $BigInt !== "undefined" && options.longs === $BigInt ? $BigInt("0") : 0;
                     object.nanos = 0;
                 }
-                if (message.seconds != null && message.hasOwnProperty("seconds"))
-                    if (typeof message.seconds === "number")
-                        object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
+                if (message.seconds != null && $Object.hasOwnProperty.call(message, "seconds"))
+                    if (typeof $BigInt !== "undefined" && options.longs === $BigInt)
+                        object.seconds = typeof message.seconds === "number" ? $BigInt(message.seconds) : $util.Long.fromBits(message.seconds.low >>> 0, message.seconds.high >>> 0, false).toBigInt();
+                    else if (typeof message.seconds === "number")
+                        object.seconds = options.longs === $String ? $String(message.seconds) : message.seconds;
                     else
-                        object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
-                if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.seconds = options.longs === $String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === $Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
+                if (message.nanos != null && $Object.hasOwnProperty.call(message, "nanos"))
                     object.nanos = message.nanos;
                 return object;
             };
@@ -7750,23 +10067,22 @@ $root.google = (function() {
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            Timestamp.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            Timestamp.prototype.toJSON = function() {
+                return Timestamp.toObject(this, $protobuf.util.toJSONOptions);
             };
 
             /**
-             * Gets the default type url for Timestamp
+             * Gets the type url for Timestamp
              * @function getTypeUrl
              * @memberof google.protobuf.Timestamp
              * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
+             * @param {string} [prefix] Custom type url prefix, defaults to `"type.googleapis.com"`
+             * @returns {string} The type url
              */
-            Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/google.protobuf.Timestamp";
+            Timestamp.getTypeUrl = function(prefix) {
+                if (prefix === $undefined)
+                    prefix = "type.googleapis.com";
+                return prefix + "/google.protobuf.Timestamp";
             };
 
             return Timestamp;
