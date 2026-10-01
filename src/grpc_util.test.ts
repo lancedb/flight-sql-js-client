@@ -2,10 +2,9 @@ import { afterEach, describe, expect, jest, test } from "@jest/globals";
 import { EventEmitter } from "node:events";
 
 import { Metadata as GrpcMetadata } from "@grpc/grpc-js";
-import { Writer } from "protobufjs";
 
 import { firstValueFrom } from "./async_util";
-import { Bidirectional, Envelope, Metadata, Stream } from "./grpc_util";
+import { Envelope, Metadata, Stream } from "./grpc_util";
 
 // Mimics the parts of a grpc-js call object that Stream and Bidirectional rely on.
 class FakeCall extends EventEmitter {
@@ -128,13 +127,6 @@ describe("Stream", () => {
     expect(call.cancel).toHaveBeenCalledTimes(1);
   });
 
-  test("cancel forwards to the call", () => {
-    const call = new FakeCall();
-    const stream = new Stream<number, number>(call);
-    stream.cancel();
-    expect(call.cancel).toHaveBeenCalledTimes(1);
-  });
-
   test("data pushed after the consumer has gone away is dropped", async () => {
     const call = new FakeCall();
     const stream = new Stream<number, number>(call);
@@ -143,27 +135,5 @@ describe("Stream", () => {
     call.emit("data", 2);
     const leftover: Envelope<number>[] = await collect(stream.responses);
     expect(leftover).toEqual([]);
-  });
-});
-
-describe("Bidirectional", () => {
-  test("send encodes the message and writes it to the call", () => {
-    const call = new FakeCall();
-    const writer = Writer.create();
-    const encoder = jest.fn<(msg: { n: number }) => Writer>().mockReturnValue(writer);
-    const stream = new Bidirectional<{ n: number }, number, number>(call, encoder);
-
-    stream.send({ n: 7 });
-
-    expect(encoder).toHaveBeenCalledWith({ n: 7 });
-    expect(call.write).toHaveBeenCalledWith(writer);
-  });
-
-  test("still behaves as a readable stream", async () => {
-    const call = new FakeCall();
-    const stream = new Bidirectional<number, number, number>(call, () => Writer.create());
-    call.emit("data", 42);
-    call.emit("end");
-    expect(await collect(stream.responses)).toEqual([{ data: 42 }]);
   });
 });

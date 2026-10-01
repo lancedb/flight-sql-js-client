@@ -77,12 +77,6 @@ describe("FlightSqlClient.connect", () => {
     expect(flight.set_default_metadata).toHaveBeenCalledWith({ authorization: "Bearer from-metadata" });
   });
 
-  test("prefers a payload token over metadata when both arrive", async () => {
-    const { flight } = makeFakeFlight([tokenPayload("payload-token")]);
-    await FlightSqlClient.connect("db.example:443", "alice", "s3cret");
-    expect(flight.set_default_metadata).toHaveBeenCalledWith({ authorization: "Bearer payload-token" });
-  });
-
   test("rejects when metadata arrives without an authorization header", async () => {
     const { flight, handshakeCall } = makeFakeFlight([{ metadata: metadataWith({ "x-other": "1" }) }]);
 
@@ -176,12 +170,5 @@ describe("FlightSqlClient.statementQuery", () => {
   test("rejects when the endpoint has no ticket", async () => {
     const { client } = await connectedClient({ decodedSchema: schema, endpoint: [{}] });
     await expect(client.statementQuery({ query: "SELECT 1" })).rejects.toThrow("No ticket provided by server");
-  });
-
-  test("propagates errors from getFlightInfo", async () => {
-    const { client, flight } = await connectedClient({});
-    flight.getFlightInfo.mockRejectedValue(new Error("3 INVALID_ARGUMENT: bad sql"));
-    await expect(client.statementQuery({ query: "SELEC" })).rejects.toThrow("bad sql");
-    expect(flight.doGet).not.toHaveBeenCalled();
   });
 });

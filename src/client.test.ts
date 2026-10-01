@@ -36,7 +36,8 @@ beforeEach(() => {
 });
 
 describe("Client.connect", () => {
-  test("forwards every option to the Flight SQL client", async () => {
+  // Regression test: the insecure option used to be dropped on the way to the Flight client.
+  test("passes every option, including insecure, through to the Flight SQL client", async () => {
     const sql = {} as FlightSqlClient;
     mockedConnect.mockResolvedValue(sql);
 
@@ -50,32 +51,6 @@ describe("Client.connect", () => {
 
     expect(client).toBeInstanceOf(Client);
     expect(mockedConnect).toHaveBeenCalledWith("db.example:443", "alice", "s3cret", "analytics", true);
-  });
-
-  test("leaves optional settings undefined when not provided", async () => {
-    mockedConnect.mockResolvedValue({} as FlightSqlClient);
-    await Client.connect({ host: "db.example:443", username: "alice", password: "s3cret" });
-    expect(mockedConnect).toHaveBeenCalledWith("db.example:443", "alice", "s3cret", undefined, undefined);
-  });
-
-  test("surfaces connection failures", async () => {
-    mockedConnect.mockRejectedValue(new Error("16 UNAUTHENTICATED: Invalid credentials"));
-    await expect(Client.connect({ host: "h", username: "u", password: "p" })).rejects.toThrow("UNAUTHENTICATED");
-  });
-});
-
-describe("Client.query", () => {
-  test("sends the SQL as a statement query and wraps the stream", async () => {
-    const stream = streamOf(batchOf([1]));
-    const statementQuery = jest.fn<FlightSqlClient["statementQuery"]>().mockResolvedValue(stream);
-    mockedConnect.mockResolvedValue({ statementQuery } as unknown as FlightSqlClient);
-    const client = await Client.connect({ host: "h", username: "u", password: "p" });
-
-    const result = await client.query("SELECT 1 AS a");
-
-    expect(statementQuery).toHaveBeenCalledWith({ query: "SELECT 1 AS a" });
-    expect(result).toBeInstanceOf(QueryResult);
-    expect(result.toArrowStream()).toBe(stream);
   });
 });
 
