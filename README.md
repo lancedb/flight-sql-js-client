@@ -29,6 +29,8 @@ const client = await Client.connect({
 });
 ```
 
+Connections use TLS by default. If your server does not use TLS, pass `insecure: true` in the connection options.
+
 Once you have connected to your database, you can run queries:
 
 ```javascript
