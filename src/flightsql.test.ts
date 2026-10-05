@@ -104,14 +104,14 @@ describe("FlightSqlClient.connect", () => {
     expect(flight.set_default_metadata).toHaveBeenCalledWith({ database: "analytics", authorization: "Bearer tok" });
   });
 
-  test("uses TLS by default and plaintext only when insecure is set", async () => {
+  test("uses plaintext by default and TLS only when insecure is false", async () => {
     makeFakeFlight([tokenPayload("tok")]);
-    await FlightSqlClient.connect("db.example:443", "alice", "s3cret");
-    expect(MockedFlightClient).toHaveBeenLastCalledWith("db.example:443", false);
+    await FlightSqlClient.connect("localhost:31337", "alice", "s3cret");
+    expect(MockedFlightClient).toHaveBeenLastCalledWith("localhost:31337", true);
 
     makeFakeFlight([tokenPayload("tok")]);
-    await FlightSqlClient.connect("localhost:31337", "alice", "s3cret", undefined, true);
-    expect(MockedFlightClient).toHaveBeenLastCalledWith("localhost:31337", true);
+    await FlightSqlClient.connect("db.example:443", "alice", "s3cret", undefined, false);
+    expect(MockedFlightClient).toHaveBeenLastCalledWith("db.example:443", false);
   });
 });
 

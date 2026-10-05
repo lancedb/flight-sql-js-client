@@ -25,9 +25,13 @@ export interface ClientOptions {
    */
   defaultDatabase?: string;
   /**
-   * Is the server using TLS?  If not, this must be set to true.
+   * Is the server using TLS?  If so, this must be set to false.
    *
-   * Defaults to false, meaning the connection is made with TLS.
+   * Defaults to true, meaning the connection is made without TLS.  This matches the behavior of
+   * earlier releases, which always connected without TLS.
+   *
+   * The default will change to false (TLS) in a future release.  Set this option explicitly to
+   * avoid a warning and to keep your connection behavior stable across that change.
    */
   insecure?: boolean;
 }
@@ -124,6 +128,13 @@ export class Client {
    * @returns A client that can be used to execute queries
    */
   public static async connect(options: ClientOptions): Promise<Client> {
+    if (options.insecure === undefined) {
+      console.warn(
+        "@lancedb/arrow-flight-sql-client: the `insecure` option was not set, so the connection will be made without TLS. " +
+          "This default will change to TLS (`insecure: false`) in a future release. " +
+          "Set `insecure` explicitly to silence this warning.",
+      );
+    }
     const sql = await FlightSqlClient.connect(
       options.host,
       options.username,

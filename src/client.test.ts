@@ -46,11 +46,34 @@ describe("Client.connect", () => {
       username: "alice",
       password: "s3cret",
       defaultDatabase: "analytics",
-      insecure: true,
+      insecure: false,
     });
 
     expect(client).toBeInstanceOf(Client);
-    expect(mockedConnect).toHaveBeenCalledWith("db.example:443", "alice", "s3cret", "analytics", true);
+    expect(mockedConnect).toHaveBeenCalledWith("db.example:443", "alice", "s3cret", "analytics", false);
+  });
+
+  test("warns about the upcoming default change when insecure is not set", async () => {
+    mockedConnect.mockResolvedValue({} as FlightSqlClient);
+    const warn = jest.spyOn(console, "warn").mockImplementation(() => {});
+
+    await Client.connect({ host: "localhost:31337", username: "alice", password: "s3cret" });
+
+    expect(warn).toHaveBeenCalledTimes(1);
+    expect(warn.mock.calls[0][0]).toMatch(/insecure/);
+    expect(mockedConnect).toHaveBeenCalledWith("localhost:31337", "alice", "s3cret", undefined, undefined);
+    warn.mockRestore();
+  });
+
+  test("does not warn when insecure is set explicitly", async () => {
+    mockedConnect.mockResolvedValue({} as FlightSqlClient);
+    const warn = jest.spyOn(console, "warn").mockImplementation(() => {});
+
+    await Client.connect({ host: "localhost:31337", username: "alice", password: "s3cret", insecure: true });
+    await Client.connect({ host: "db.example:443", username: "alice", password: "s3cret", insecure: false });
+
+    expect(warn).not.toHaveBeenCalled();
+    warn.mockRestore();
   });
 });
 

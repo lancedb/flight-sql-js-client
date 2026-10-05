@@ -117,9 +117,10 @@ export class FlightClient {
    * No actual messages are sent yet.
    *
    * @param host The hostname / port of the server, separated by a colon
-   * @param insecure If true, connect without TLS.  Defaults to false (TLS is used).
+   * @param insecure If true, connect without TLS.  Defaults to true (no TLS), matching the behavior of
+   *   earlier releases.  Set to false to connect with TLS.
    */
-  public constructor(host: string, insecure: boolean = false) {
+  public constructor(host: string, insecure: boolean = true) {
     const packageDefinition = loadSync("Flight.proto", {
       longs: String,
       enums: String,

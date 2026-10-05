@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   lint:
-    name: Lint & Formatting
+    name: Lint, Formatting & Unit Tests
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -27,6 +27,8 @@ jobs:
       - run: npm ci
       - run: npx eslint
       - run: npx prettier --check src
+      - run: npx tsc --noEmit
+      - run: npm test
   test:
     name: Integration tests
     runs-on: ubuntu-latest
