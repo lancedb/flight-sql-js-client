@@ -1,1 +1,2 @@
-export { Client, ClientOptions, QueryResult } from "./client";
+export { Client, QueryResult } from "./client";
+export type { ClientOptions } from "./client";

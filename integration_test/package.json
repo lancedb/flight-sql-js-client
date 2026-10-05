@@ -1,13 +1,10 @@
 {
-    "name": "do-not-publish",
-    "version": "0.1.0",
-    "description": "Dummy package.json for integration testing",
-    "devDependencies": {
-      "jest": "^29.7.0",
-      "ts-jest": "^29.2.5"
-    },
-    "dependencies": {
-        
-    }
-  }
-  
+  "name": "do-not-publish",
+  "version": "0.1.0",
+  "description": "Dummy package.json for integration testing",
+  "devDependencies": {
+    "jest": "^30.5.2",
+    "ts-jest": "^29.4.14"
+  },
+  "dependencies": {}
+}
