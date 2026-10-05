@@ -107,5 +107,7 @@
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
-  }
+  },
+  /* integration_test/ imports the published package and has its own package.json, so it is not part of this program. */
+  "exclude": ["node_modules", "dist", "integration_test"]
 }

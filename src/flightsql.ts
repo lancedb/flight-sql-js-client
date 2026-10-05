@@ -92,6 +92,9 @@ export class FlightSqlClient {
    * @param host The hostname / port of the server, separated by a colon
    * @param username The username to use for the handshake
    * @param password The password to use for the handshake
+   * @param defaultDatabase The default database to use, if the server supports it
+   * @param insecure If true, connect without TLS.  Defaults to true (no TLS), matching the behavior of
+   *   earlier releases.  Set to false to connect with TLS.
    * @returns A client that can be used to execute queries
    */
   public static async connect(
@@ -99,8 +102,9 @@ export class FlightSqlClient {
     username: string,
     password: string,
     defaultDatabase?: string,
+    insecure?: boolean,
   ): Promise<FlightSqlClient> {
-    const sql = new FlightClient(host);
+    const sql = new FlightClient(host, insecure ?? true);
     const client = new FlightSqlClient(sql);
     await client.login(username, password, defaultDatabase);
     return client;

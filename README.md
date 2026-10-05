@@ -29,6 +29,10 @@ const client = await Client.connect({
 });
 ```
 
+Connections do not use TLS by default. If your server uses TLS, pass `insecure: false` in the connection options.
+The default will change to TLS in a future release, so the client logs a warning when `insecure` is not set.
+Set it explicitly (`insecure: true` for plaintext servers) to keep your behavior stable and silence the warning.
+
 Once you have connected to your database, you can run queries:
 
 ```javascript
