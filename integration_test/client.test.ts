@@ -1,3 +1,4 @@
+import { tableFromIPC } from "apache-arrow";
 import { connect } from "node:net";
 import { describe, expect, test, beforeEach } from "@jest/globals";
 
@@ -67,6 +68,14 @@ describe("with a client we can", () => {
 
     expect(result[0].l_orderkey).toBeGreaterThan(0);
     expect(result[1].l_returnflag.length).toBeGreaterThan(0);
+  });
+
+  test("read IPC results with the application's Arrow version", async () => {
+    const queryResult = await client.query("SELECT * FROM lineitem LIMIT 10");
+    const table = tableFromIPC(await queryResult.collectToIpc());
+    expect(table.numRows).toBe(10);
+    expect(table.getChild("l_orderkey")?.get(0)).toBeGreaterThan(0);
+    expect(table.getChild("l_returnflag")?.get(1)).toBeTruthy();
   });
 
   test("return query results as an Arrow table", async () => {

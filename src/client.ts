@@ -65,7 +65,7 @@ export class QueryResult {
    * used by this package.  In addition, the Arrow package must be loaded in the same context as this package.
    * This process can often fail in the presence of bundlers like Webpack or Rollup.
    *
-   * If you are using a bundler, it is recommended to use `collectToObjects` instead.
+   * Use `collectToIpc` to decode the result with a separately loaded Arrow package.
    *
    * @returns a stream of Arrow record batches
    */
@@ -83,6 +83,15 @@ export class QueryResult {
   public async collectToArrow(): Promise<RecordBatch[]> {
     const batches = await pipe(this.raw, toArray()).first;
     return batches ?? [];
+  }
+
+  /**
+   * Collect one Arrow IPC stream as ordered byte chunks. Pass the array directly to
+   * your Arrow package's `tableFromIPC`. The chunks reference the Flight message
+   * bodies, so collecting retains the whole result in memory. Consumes the result.
+   */
+  public collectToIpc(): Promise<Uint8Array[]> {
+    return this.raw.collectToIpc();
   }
 
   /**

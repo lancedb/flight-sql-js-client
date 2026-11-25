@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "description": "Dummy package.json for integration testing",
   "devDependencies": {
+    "apache-arrow": "17.0.0",
     "jest": "^30.5.2",
     "ts-jest": "^29.4.14"
-  },
-  "dependencies": {}
+  }
 }
