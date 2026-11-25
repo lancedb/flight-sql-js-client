@@ -55,7 +55,15 @@ these to work correctly, the Arrow package your application is using must be the
 used by this package. In addition, the Arrow package must be loaded in the same context as this package.
 This process can often fail in the presence of bundlers like Webpack or Rollup.
 
-If you are using a bundler, it is recommended to use `collectToObjects` instead.
+To use a separately installed or bundled copy of Arrow, collect the IPC stream and
+pass its chunks directly to your application's Arrow reader:
 
-If you would like to improve this situation I encourage you to make a stab at
-[this Github issue](https://github.com/lancedb/flight-sql-js-client/issues/11).
+```typescript
+import { tableFromIPC } from "apache-arrow";
+
+const result = await client.query("SELECT * FROM flights");
+const table = tableFromIPC(await result.collectToIpc());
+```
+
+The array contains one complete stream in wire order. It retains the Flight data
+buffers in memory without copying them into a single buffer or converting rows to objects.
